@@ -21,7 +21,7 @@ timezone: Asia/Riyadh
 title: Ahmad Alkaf # the main title
 
 # it will display as the sub-title
-tagline: "Note: This site is a work in progress..." #todo: Software Engineer
+tagline: "This site is a work in progress..." #todo: Software Engineer
 description: >- # used by seo meta and the atom feed
   A Blog, Resume, CV, and Portfolio of Ahmad Alkaf.
 
