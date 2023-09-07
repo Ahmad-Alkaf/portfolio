@@ -13,20 +13,20 @@ baseurl: ""
 lang: en
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone:
+timezone: Asia/Riyadh
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
 
-title: Chirpy # the main title
+title: Ahmad Alkaf # the main title
 
-tagline: A text-focused Jekyll theme # it will display as the sub-title
-
+# it will display as the sub-title
+tagline: "Note: This site is a work in progress..." #todo: Software Engineer
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  A Blog, Resume, CV, and Portfolio of Ahmad Alkaf.
 
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
-url: ""
+url: "https://ahmad.alkaf.org"
 
 github:
   username: github_username # change to your github username
