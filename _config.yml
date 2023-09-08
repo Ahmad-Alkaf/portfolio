@@ -114,6 +114,11 @@ pwa:
 
 paginate: 10
 
+plugins:
+  - jekyll-target-blank
+
+
+
 # ------------ The following options are not recommended to be modified ------------------
 
 kramdown:
