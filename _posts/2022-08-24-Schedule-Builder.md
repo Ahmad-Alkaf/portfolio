@@ -1,7 +1,7 @@
 ---
 title: Schedule Builder
 date: 2022-08-24
-categories: [Projects]
+categories: [Projects, Schedule Builder]
 tags: [angular, scss, problem solving, human computer interaction, angular material, html, css, asp.net, c#] # Tag names should be lowercase
 img_path: ../../assets/img
 ---
