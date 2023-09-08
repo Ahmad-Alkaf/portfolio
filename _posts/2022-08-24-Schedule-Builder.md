@@ -30,7 +30,7 @@ You can run the project easily in a development server following the [Angular in
 {: .prompt-warning}
 
 
-There are many features such as Print a schedule, Copy / cut / paste a lecture within a schedule or between different schedules, and more... But I will let the reader find out these and other features by using the app [here](https://schedule-builder.alkaf.org).
+There are many features such as **Print a schedule**, **Copy** / **cut** / **paste** a lecture within a schedule or between different schedules, and more... But I will let the reader find out these and other features by using the app [here](https://schedule-builder.alkaf.org).
 
 ## Screenshots
 
