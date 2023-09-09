@@ -4,11 +4,10 @@ date: 2022-08-24
 categories: [Projects, Schedule Builder]
 tags: [angular, scss, problem solving, human computer interaction, angular material, html, css, asp.net, c#, typescript, javascript] # Tag names should be lowercase
 img_path: ../../assets/img/Projects
+image: 
+  path: /Schedule Maker/schedule maker icon 40;21.png
+  alt: Schedule builder icon
 ---
-
-![Schedule builder logo](/Schedule%20Maker/schedule%20maker%20icon.png){: w="120"}
-
-## Description
 
 Design and edit schedules without worrying about collisions between rooms or teachers. Also, you can build a schedule from scratch by generating lectures automatically you just have to provide the essential information such as how many hours in a week a subject needs to be lectured. However, you can add a subject in a pre-built schedule so that the lectures generator can place your lectures in collision-free places.
 
