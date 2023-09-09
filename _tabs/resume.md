@@ -2,7 +2,9 @@
 # the default layout is 'page'
 icon: fas fa-info-circle
 order: 4
+title: Resume
 img_path: ../../assets/img/resume
+toc: true
 ---
 
 <div class="d-flex justify-content-center">
