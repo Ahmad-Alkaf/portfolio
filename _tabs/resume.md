@@ -7,8 +7,8 @@ img_path: ../../assets/img/resume
 toc: true
 ---
 
-<div class="d-flex justify-content-center">
-    <img class="border border-success rounded-3 overflow-hidden" width="250px" src="University personal photo 6x6 (HD).jpg" alt="Graduation Avatar" />
+<div class="d-flex justify-content-center mb-2">
+    <img class="border border-success rounded-circle overflow-hidden" width="250px" src="University personal photo 6x6 (HD).jpg" alt="Graduation Avatar" />
 </div>
 
 I'm Ahmad Hashem Alkaf Alhashemi. A recent graduate of **Computer Information Systems** with experience working across the full stack of software development. Excited to learn and innovate, and I always strive to improve my skills and experiences as a programmer. I have skills in problem-solving, communication, and teamwork. I participated in several projects including developing a system for a charity organization.
