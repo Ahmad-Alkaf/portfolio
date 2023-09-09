@@ -29,10 +29,10 @@ communication, and teamwork to create innovative solutions. Looking for a role w
 
 ## Projects
 
-- [Autism Children Technical System (ACTS)](../../../posts/ACTS)
-- [Schedule Builder](../../../posts/Schedule-Builder)
-- [Check Tasks](../../../posts/Check-Tasks)
-- [Alhajarayn Guide Transactions](../../../posts/Alhajarayn-Guide-Transactions)
-- [Laptop Accounting](../../../posts/Laptop-Accounting)
+- [Autism Children Technical System (ACTS)](/posts/ACTS)
+- [Schedule Builder](/posts/Schedule-Builder)
+- [Check Tasks](/posts/Check-Tasks)
+- [Alhajarayn Guide Transactions](/posts/Alhajarayn-Guide-Transactions)
+- [Laptop Accounting](/posts/Laptop-Accounting)
 
 ## skills
