@@ -33,51 +33,33 @@ There are many features such as **Print a schedule**, **Copy** / **cut** / **pas
 
 ## Screenshots
 
+![App interface showing Level 4 schedule with left side tools](/Schedule%20Maker/Level%204%20table.png)
+_App interface showing Level 4 schedule with left side tools_
 
-<div align="center">
-  <img src="/Schedule%20Maker/Level%204%20table.png" />
-    <p>App interface showing Level 4 schedule with left side tools</p>
-</div>
+![Generate lectures dialog form, filled as an example](/Schedule%20Maker/generate%20lectures%20dialog.png)
+_Generate lectures dialog form, filled as an example_
 
-<div id="generate-lectures-dialog" align="center">
-  <img src="/Schedule%20Maker/generate%20lectures%20dialog.png" />
-  <p>Generate lectures dialog form, filled as an example</p>
-</div>
+![Example: Collision detected interface, between Level 4 and Level 1 schedules in Teacher and room. (i.e., teacher and room are busy on Wednesday between 9 - 12 O'Clock](/Schedule%20Maker/conflict%20lectures%20warning.png)
+_Example: Collision detected interface, between Level 4 and Level 1 schedules in Teacher and room. (i.e., teacher and room are busy on Wednesday between 9 - 12 O'Clock_
 
-<div align="center">
-  <img src="/Schedule%20Maker/conflict%20lectures%20warning.png" />
-  <p>Example: Collision detected interface, between Level 4 and Level 1 schedules in Teacher and room. (i.e., teacher and room are busy on Wednesday between 9 - 12 O'Clock</p>
-</div>
+![Adding a subject. Same process for room and teacher](/Schedule%20Maker/adding%20subject.png)
+_Adding a subject. Same process for room and teacher_
 
-<div align="center">
-  <img src="/Schedule%20Maker/adding%20subject.png" />
-  <p>Adding a subject. Same process for room and teacher</p>
-</div>
+![Create a new lecture dialog form. The created lecture will be placed on the left side container so that you can drag or copy it into any schedule](/Schedule%20Maker/create%20new%20lecture%20dialog.png)
+_Create a new lecture dialog form. The created lecture will be placed on the left side container so that you can drag or copy it into any schedule_
 
-<div align="center">
-  <img src="/Schedule%20Maker/create%20new%20lecture%20dialog.png" />
-  <p>Create a new lecture dialog form. The created lecture will be placed on the left side container so that you can drag or copy it into any schedule</p>
-</div>
+![User preferences are a priority (at least in HCI). Dark mode and different themes are supported](/Schedule%20Maker/dark%20mode%20and%20themes.png)
+_User preferences are a priority (at least in HCI). Dark mode and different themes are supported_
 
-<div align="center">
-  <img src="/Schedule%20Maker/dark%20mode%20and%20themes.png" />
-  <p>User preferences are a priority (at least in HCI). Dark mode and different themes are supported</p>
-</div>
+![Usability is present with drag and drop capability](/Schedule%20Maker/drag%20and%20drop%20lectures.png)
+_Usability is present with drag and drop capability_
 
-<div align="center">
-  <img src="/Schedule%20Maker/drag%20and%20drop%20lectures.png" />
-  <p>Usability is present with drag and drop capability</p>
-</div>
+![The generated lectures on an empty schedule from the previous generate lectures dialog image](/Schedule%20Maker/generated%20lectures.png)
+_The generated lectures on an empty schedule from the previous generate lectures dialog image_
 
-<div align="center">
-  <img src="/Schedule%20Maker/generated%20lectures.png" />
-  <p>The generated lectures on an empty schedule from the previous generate lectures dialog image</p>
-</div>
+![Create new schedule dialog](/Schedule%20Maker/new%20table%20dialog.png)
+_Create new schedule dialog_
 
-<div align="center">
-  <img src="/Schedule%20Maker/new%20table%20dialog.png" />
-  <p>Create new schedule dialog</p>
-</div>
 
 ## Summary
 
