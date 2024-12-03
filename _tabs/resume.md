@@ -33,7 +33,7 @@ communication, and teamwork to create innovative solutions. Looking for a role w
 - [Schedule Builder](/posts/Schedule-Builder)
 - [Check Tasks](/posts/Check-Tasks)
 - [Alhajarayn Guide Transactions](/posts/Alhajarayn-Guide-Transactions)
-- [Laptop Accounting](/posts/Laptop-Accounting)
+- [Laptop POS](/posts/Laptop-POS)
 
 ## Skills
 
