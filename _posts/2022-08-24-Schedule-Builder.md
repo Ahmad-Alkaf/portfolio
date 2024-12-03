@@ -3,7 +3,7 @@ title: Schedule Builder
 date: 2022-08-24
 categories: [Projects, Schedule Builder]
 tags: [angular, scss, problem solving, human computer interaction, angular material, html, css, asp.net, c#, typescript, javascript] # Tag names should be lowercase
-img_path: ../../assets/img/Projects
+img_path: /assets/img/Projects
 image: 
   path: /Schedule Maker/schedule maker icon 40-21.png
   alt: Schedule builder icon
