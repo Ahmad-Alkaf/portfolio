@@ -34,6 +34,10 @@ if ($LASTEXITCODE -ne 0) {
     bundle install
 }
 
+# Clear stale build output so a fresh, complete site is generated.
+Write-Host "Cleaning previous build (_site, .jekyll-cache)..." -ForegroundColor Cyan
+bundle exec jekyll clean
+
 Write-Host "Starting Jekyll dev server with live reload (Ctrl+C to stop)..." -ForegroundColor Green
-# s = serve, -l = livereload, -o = open browser, --incremental = faster rebuilds
-bundle exec jekyll s -l -o --incremental
+# s = serve, -l = livereload, -o = open browser
+bundle exec jekyll s -l -o
