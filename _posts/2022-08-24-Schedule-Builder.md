@@ -33,31 +33,31 @@ There are many features such as **Print a schedule**, **Copy** / **cut** / **pas
 
 ## Screenshots
 
-![App interface showing Level 4 schedule with left side tools](/Schedule%20Maker/Level%204%20table.png)
+![App interface showing Level 4 schedule with left side tools](/Schedule%20Maker/Level%204%20table.webp)
 _App interface showing Level 4 schedule with left side tools_
 
-![Generate lectures dialog form, filled as an example](/Schedule%20Maker/generate%20lectures%20dialog.png)
+![Generate lectures dialog form, filled as an example](/Schedule%20Maker/generate%20lectures%20dialog.webp)
 _Generate lectures dialog form, filled as an example_
 
-![Example: Collision detected interface, between Level 4 and Level 1 schedules in Teacher and room. (i.e., teacher and room are busy on Wednesday between 9 - 12 O'Clock](/Schedule%20Maker/conflict%20lectures%20warning.png)
+![Example: Collision detected interface, between Level 4 and Level 1 schedules in Teacher and room. (i.e., teacher and room are busy on Wednesday between 9 - 12 O'Clock](/Schedule%20Maker/conflict%20lectures%20warning.webp)
 _Example: Collision detected interface, between Level 4 and Level 1 schedules in Teacher and room. (i.e., teacher and room are busy on Wednesday between 9 - 12 O'Clock_
 
-![Adding a subject. Same process for room and teacher](/Schedule%20Maker/adding%20subject.png)
+![Adding a subject. Same process for room and teacher](/Schedule%20Maker/adding%20subject.webp)
 _Adding a subject. Same process for room and teacher_
 
-![Create a new lecture dialog form. The created lecture will be placed on the left side container so that you can drag or copy it into any schedule](/Schedule%20Maker/create%20new%20lecture%20dialog.png)
+![Create a new lecture dialog form. The created lecture will be placed on the left side container so that you can drag or copy it into any schedule](/Schedule%20Maker/create%20new%20lecture%20dialog.webp)
 _Create a new lecture dialog form. The created lecture will be placed on the left side container so that you can drag or copy it into any schedule_
 
-![User preferences are a priority (at least in HCI). Dark mode and different themes are supported](/Schedule%20Maker/dark%20mode%20and%20themes.png)
+![User preferences are a priority (at least in HCI). Dark mode and different themes are supported](/Schedule%20Maker/dark%20mode%20and%20themes.webp)
 _User preferences are a priority (at least in HCI). Dark mode and different themes are supported_
 
-![Usability is present with drag and drop capability](/Schedule%20Maker/drag%20and%20drop%20lectures.png)
+![Usability is present with drag and drop capability](/Schedule%20Maker/drag%20and%20drop%20lectures.webp)
 _Usability is present with drag and drop capability_
 
-![The generated lectures on an empty schedule from the previous generate lectures dialog image](/Schedule%20Maker/generated%20lectures.png)
+![The generated lectures on an empty schedule from the previous generate lectures dialog image](/Schedule%20Maker/generated%20lectures.webp)
 _The generated lectures on an empty schedule from the previous generate lectures dialog image_
 
-![Create new schedule dialog](/Schedule%20Maker/new%20table%20dialog.png)
+![Create new schedule dialog](/Schedule%20Maker/new%20table%20dialog.webp)
 _Create new schedule dialog_
 
 
