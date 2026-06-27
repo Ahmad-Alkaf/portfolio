@@ -3,7 +3,7 @@ title: Schedule Builder
 date: 2022-08-24
 categories: [Projects, Schedule Builder]
 tags: [angular, scss, problem solving, human computer interaction, angular material, html, css, asp.net, c#, typescript, javascript] # Tag names should be lowercase
-img_path: /assets/img/Projects
+media_subpath: /assets/img/Projects
 image: 
   path: /Schedule Maker/schedule maker icon 40-21.png
   alt: Schedule builder icon
@@ -20,7 +20,7 @@ We often need to change a lecture place from time to time, (teachers or students
 
 
 
-> This project is made as a project for [Human-Computer Interaction (HCI)](https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction) subject at [Al-Ahgaff University](http://ahgaff.edu).
+> This project is made as a project for [Human-Computer Interaction (HCI)](https://en.wikipedia.org/wiki/Human%E2%80%93computer_interaction) subject at [Al-Ahgaff University](https://ahgaff.edu).
 {: .prompt-info}
 
 You can run the project easily in a development server following the [Angular instructions](#angular-development-environment) at the end of this file. 
