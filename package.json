@@ -18,9 +18,11 @@
     "prewatch": "npx rimraf assets/js/dist",
     "watch": "npx rollup -c --bundleConfigAsCjs -w",
     "test": "npx stylelint _sass/**/*.scss",
-    "fixlint": "npm run test -- --fix"
+    "fixlint": "npm run test -- --fix",
+    "optimize-images": "node tools/optimize-images.mjs"
   },
   "devDependencies": {
+    "sharp": "^0.33.5",
     "@babel/core": "^7.21.3",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/preset-env": "^7.20.2",
