@@ -47,13 +47,36 @@ social:
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
 
-google_site_verification: # fill in to your verification string
-
 # ↑ --------------------------
 # The end of `jekyll-seo-tag` settings
 
-google_analytics:
-  id: # fill in your Google Analytics ID
+# Webmaster verification codes (Chirpy v7 replaces the old `google_site_verification`)
+webmaster_verifications:
+  google: # fill in your Google Search Console verification code
+  bing: # fill in your Bing verification code
+  alexa: # fill in your Alexa verification code
+  yandex: # fill in your Yandex verification code
+  baidu: # fill in your Baidu verification code
+  facebook: # fill in your Facebook verification code
+
+# Web Analytics Settings (Chirpy v7 consolidates all providers under `analytics`).
+# Only ONE id needs to be filled. GoatCounter is recommended: free, privacy-first,
+# no cookies, no consent banner. Builds must run with JEKYLL_ENV=production (CI already does).
+analytics:
+  google:
+    id: # fill in your Google Analytics 4 measurement ID (G-XXXXXXXXXX)
+  goatcounter:
+    id: # fill in your GoatCounter code (the subdomain, e.g. 'ahmadalkaf' for ahmadalkaf.goatcounter.com)
+  umami:
+    id:
+    domain:
+  matomo:
+    id:
+    domain:
+  cloudflare:
+    id:
+  fathom:
+    id:
 
 # Prefer color scheme setting.
 #
@@ -82,8 +105,10 @@ avatar: "assets/img/avatar.jpg"
 toc: true
 
 comments:
-  active: # The global switch for posts comments, e.g., 'disqus'.  Keep it empty means disable
-  # The active options are as follows:
+  # Global switch for the post-comment system (Chirpy v7 renamed `active` → `provider`).
+  # Keeping it empty means disabled. Recommended: 'giscus' (free, backed by GitHub Discussions).
+  provider: # [disqus | utterances | giscus]
+  # The provider options are as follows:
   disqus:
     shortname: # fill with the Disqus shortname. › https://help.disqus.com/en/articles/1717111-what-s-a-shortname
   # utterances settings › https://utteranc.es/
@@ -92,11 +117,12 @@ comments:
     issue_term: # < url | pathname | title | ...>
   # Giscus options › https://giscus.app
   giscus:
-    repo: # <gh-username>/<repo>
+    repo: # <gh-username>/<repo>  e.g. Ahmad-Alkaf/Ahmad-Alkaf.github.io
     repo_id:
     category:
     category_id:
     mapping: # optional, default to 'pathname'
+    strict: # optional, default to '0'
     input_position: # optional, default to 'bottom'
     lang: # optional, default to the value of `site.lang`
     reactions_enabled: # optional, default to the value of `1`
