@@ -1,0 +1,25 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#0D1117"/>
+
+  <!-- icon tile -->
+  <rect x="180" y="175" width="280" height="280" rx="62" fill="#C2541F"/>
+
+  <!-- open book (guide) -->
+  <g>
+    <path d="M320 268 L228 250 L228 360 L320 376 Z" fill="#FAFAFA"/>
+    <path d="M320 268 L412 250 L412 360 L320 376 Z" fill="#FAFAFA"/>
+    <rect x="316" y="268" width="8" height="108" fill="#C2541F"/>
+    <g stroke="#C2541F" stroke-width="9" stroke-linecap="round">
+      <line x1="252" y1="288" x2="300" y2="295"/>
+      <line x1="252" y1="312" x2="300" y2="319"/>
+      <line x1="252" y1="336" x2="300" y2="343"/>
+      <line x1="340" y1="295" x2="388" y2="288"/>
+      <line x1="340" y1="319" x2="388" y2="312"/>
+      <line x1="340" y1="343" x2="388" y2="336"/>
+    </g>
+  </g>
+
+  <!-- wordmark -->
+  <text x="528" y="298" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="98" fill="#C2541F">Alhajarayn</text>
+  <text x="528" y="420" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="98" fill="#FAFAFA">Guide</text>
+</svg>
