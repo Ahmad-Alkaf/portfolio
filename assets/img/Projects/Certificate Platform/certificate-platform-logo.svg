@@ -1,0 +1,46 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="28%" cy="38%" r="95%">
+      <stop offset="0%" stop-color="#1B2A57"/>
+      <stop offset="55%" stop-color="#131D40"/>
+      <stop offset="100%" stop-color="#0C1430"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F6D578"/>
+      <stop offset="48%" stop-color="#E2B349"/>
+      <stop offset="100%" stop-color="#BC8B2C"/>
+    </linearGradient>
+    <linearGradient id="goldText" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F4CF6E"/>
+      <stop offset="100%" stop-color="#D2A23C"/>
+    </linearGradient>
+    <linearGradient id="ribbon" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D7A53B"/>
+      <stop offset="100%" stop-color="#A9781F"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <!-- ribbon tails behind the medallion -->
+  <g fill="url(#ribbon)">
+    <path d="M300 385 l-34 150 46 -26 30 40 24 -150 z"/>
+    <path d="M380 385 l34 150 -46 -26 -30 40 -24 -150 z"/>
+  </g>
+
+  <!-- scalloped seal -->
+  <g>
+    <circle cx="472.00" cy="315.00" r="26" fill="url(#gold)"/><circle cx="464.04" cy="360.15" r="26" fill="url(#gold)"/><circle cx="441.12" cy="399.85" r="26" fill="url(#gold)"/><circle cx="406.00" cy="429.32" r="26" fill="url(#gold)"/><circle cx="362.92" cy="444.99" r="26" fill="url(#gold)"/><circle cx="317.08" cy="444.99" r="26" fill="url(#gold)"/><circle cx="274.00" cy="429.32" r="26" fill="url(#gold)"/><circle cx="238.88" cy="399.85" r="26" fill="url(#gold)"/><circle cx="215.96" cy="360.15" r="26" fill="url(#gold)"/><circle cx="208.00" cy="315.00" r="26" fill="url(#gold)"/><circle cx="215.96" cy="269.85" r="26" fill="url(#gold)"/><circle cx="238.88" cy="230.15" r="26" fill="url(#gold)"/><circle cx="274.00" cy="200.68" r="26" fill="url(#gold)"/><circle cx="317.08" cy="185.01" r="26" fill="url(#gold)"/><circle cx="362.92" cy="185.01" r="26" fill="url(#gold)"/><circle cx="406.00" cy="200.68" r="26" fill="url(#gold)"/><circle cx="441.12" cy="230.15" r="26" fill="url(#gold)"/><circle cx="464.04" cy="269.85" r="26" fill="url(#gold)"/>
+    <circle cx="340" cy="315" r="138" fill="url(#gold)"/>
+    <circle cx="340" cy="315" r="122" fill="#101A3C"/>
+    <circle cx="340" cy="315" r="122" fill="none" stroke="url(#gold)" stroke-width="5"/>
+    <circle cx="340" cy="315" r="102" fill="none" stroke="url(#gold)" stroke-width="2.5" stroke-dasharray="3 7"/>
+    <!-- check mark -->
+    <polyline points="284,317 322,357 402,269"
+      fill="none" stroke="url(#gold)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="540" y="296" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="104" fill="url(#goldText)">Certificate</text>
+  <text x="540" y="424" font-family="Georgia, 'Times New Roman', serif" font-weight="700" font-size="104" fill="#F3EFE3">Platform</text>
+</svg>
