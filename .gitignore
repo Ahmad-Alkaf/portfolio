@@ -20,3 +20,7 @@ package-lock.json
 
 # Misc
 assets/js/dist
+
+# Local browser-session artifacts (Playwright MCP, ad-hoc screenshots)
+.playwright-mcp/
+/home.png
