@@ -13,3 +13,13 @@
   object-fit: cover;
   object-position: center 40%;
 }
+
+/* Home-page project cards: show the whole logo instead of cropping it.
+   Chirpy locks .preview-img to a 40:21 box with object-fit: cover, which
+   center-crops wide/square logos (e.g. the QRForge wordmark). Switch the home
+   list to object-fit: contain so each logo fits fully inside the frame, on the
+   theme's --img-bg band, with a little breathing room. */
+#post-list .preview-img img {
+  object-fit: contain;
+  padding: 0.75rem;
+}
