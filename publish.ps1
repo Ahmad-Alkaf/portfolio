@@ -103,4 +103,4 @@ npx --yes wrangler@latest pages deploy $site --project-name $ProjectName --branc
 Assert-LastExit "wrangler deploy"
 
 Write-Host ""
-Write-Host "Published. Live at https://ahmad.alkaf.org  (preview: https://$ProjectName.pages.dev)" -ForegroundColor Green
+Write-Host "Published. Live at https://ahmed.kaflabs.com  (preview: https://$ProjectName.pages.dev)" -ForegroundColor Green
