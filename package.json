@@ -1,12 +1,12 @@
 {
-  "name": "blog-ahmad-alkaf",
+  "name": "blog-ahmed-alkaf",
   "version": "6.1.0",
-  "description": "A Blog, Resume, CV, and Portfolio of Ahmad Alkaf.",
+  "description": "A Blog, Resume, CV, and Portfolio of Ahmed Alkaf.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cotes2020/jekyll-theme-chirpy.git"
   },
-  "author": "Ahmad Alkaf",
+  "author": "Ahmed Alkaf",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Ahmad-Alkaf/Ahmad-Alkaf.github.io/issues"
