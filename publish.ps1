@@ -10,6 +10,7 @@
 # Usage:
 #   .\publish.ps1            # build (with html-proofer link check) and deploy
 #   .\publish.ps1 -SkipTest  # build without html-proofer, then deploy (faster)
+#   .\publish.ps1 -SkipDeploy  # build only (into _site); do not deploy
 #
 # Requirements: Docker Desktop (running) and Node.js on PATH.
 # One-time Cloudflare login (opens a browser):  npx --yes wrangler@latest login
@@ -18,7 +19,7 @@
 # skip re-downloading. For a clean rebuild: docker volume rm ahmad-alkaf-bundle
 
 [CmdletBinding()]
-param([switch]$SkipTest)
+param([switch]$SkipTest, [switch]$SkipDeploy)
 
 $ErrorActionPreference = 'Stop'
 
@@ -61,6 +62,12 @@ $lines = @(
     'bundle install --quiet'
     'JEKYLL_ENV=production bundle exec jekyll b -d /out'
 )
+# On Linux/macOS the container runs as root, so give the output back to the
+# host user (also when the build fails); else the next run cannot delete _site.
+if (-not $IsWindows -and $PSVersionTable.PSEdition -eq 'Core') {
+    $owner = "$(id -u):$(id -g)"
+    $lines = @($lines[0], "trap 'chown -R ${owner} /out' EXIT") + $lines[1..($lines.Count - 1)]
+}
 if (-not $SkipTest) {
     $lines += "bundle exec htmlproofer /out --disable-external --ignore-urls '/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/'"
 }
@@ -95,6 +102,10 @@ finally {
 if (-not (Test-Path -LiteralPath (Join-Path $site 'index.html'))) {
     Write-Host "Build produced no index.html - aborting before deploy." -ForegroundColor Red
     exit 1
+}
+if ($SkipDeploy) {
+    Write-Host "Built into $site (deploy skipped)." -ForegroundColor Green
+    exit 0
 }
 
 # --- Deploy to Cloudflare Pages ----------------------------------------------
