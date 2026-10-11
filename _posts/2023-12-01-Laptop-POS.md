@@ -9,14 +9,14 @@ image:
   alt: Laptop POS logo
 ---
 
-Laptop POS is an open-source **cloud Point-of-Sale system** for retail stores. It covers the full retail loop — inventory management, checkout, billing, stock tracking, and sales dashboards — with subscription billing and an end-to-end deployment on AWS.
+Laptop POS is an open-source **cloud Point-of-Sale system** for retail stores. It covers the full retail loop — inventory management, checkout, billing, stock tracking, and sales dashboards — with subscription billing. It was deployed end-to-end on AWS.
 
-> The project is open source on [GitHub](https://github.com/laravel-aaa/Laptop-POS) (⭐ 39 stars).
+> The project is open source on [GitHub](https://github.com/laravel-aaa/Laptop-POS) [![GitHub stars](https://img.shields.io/github/stars/laravel-aaa/Laptop-POS?style=social&label=Stars)](https://github.com/laravel-aaa/Laptop-POS)
 {: .prompt-tip}
 
 Each store gets multi-role accounts so the right people see the right tools: **Cashiers** ring up sales at checkout, **Maintainers** manage inventory and the catalog, and **Owners** get the full picture through analytics dashboards. Stores subscribe through **Paddle** — three paid plans plus a no-credit-card free tier — and the interface is responsive across devices and browsers.
 
-Under the hood it runs entirely on **AWS**: S3 for asset storage, EC2 for compute, RDS for the MySQL database, and CodePipeline for continuous deployment.
+It was deployed entirely on **AWS**: S3 for asset storage, EC2 for compute, RDS for the MySQL database, and CodePipeline for continuous deployment.
 
 ## Screenshots
 
@@ -37,4 +37,4 @@ A cloud POS web application for retail stores. Open source at the [repository](h
 - Inventory, checkout, billing, stock tracking, and sales dashboards.
 - Multi-role store accounts: Cashier, Maintainer, Owner.
 - Subscription billing via **Paddle** — three plans plus a free tier.
-- Deployed end-to-end on **AWS**: S3, EC2, RDS (MySQL), CodePipeline.
+- Was deployed end-to-end on **AWS**: S3, EC2, RDS (MySQL), CodePipeline.

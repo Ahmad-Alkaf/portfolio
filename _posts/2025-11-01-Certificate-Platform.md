@@ -11,10 +11,7 @@ image:
 
 Certificate Platform is a multi-tenant **certificate-issuance system** for training organizations. Each organization manages its own courses, participants, trainers, and certificates in fully isolated data, issues certificates from **JSON-configurable templates**, and every certificate carries a **QR code** that anyone can scan to verify it's genuine. Content is fully **bilingual (Arabic / English)** with right-to-left support.
 
-> The source code will be open-sourced soon.
-{: .prompt-info}
-
-It was built by a small team — two engineers working full-stack across the entire codebase, plus a product planner handling requirements with the training organizations who would adopt it.
+It was built by a small team — two engineers working full-stack across the entire codebase, plus a product planner handling requirements.
 
 ## Features
 

@@ -12,7 +12,7 @@ image:
 Design and edit schedules without worrying about collisions between rooms or teachers. Also, you can build a schedule from scratch by generating lectures automatically you just have to provide the essential information such as how many hours in a week a subject needs to be lectured. However, you can add a subject in a pre-built schedule so that the lectures generator can place your lectures in collision-free places.
 
 
-> [Take a look at the application, which is currently live at this link.](https://schedule-builder.alkaf.org) 
+> [Take a look at the application, which is currently live at this link.](https://schedule-builder.kaflabs.com) 
 {: .prompt-tip}
 
 
@@ -25,11 +25,11 @@ We often need to change a lecture place from time to time, (teachers or students
 
 You can run the project easily in a development server following the [Angular instructions](#angular-development-environment) at the end of this file. 
 
-> Clone or Download the code of the [localStorage-NoBackend](https://github.com/Ahmad-Alkaf/schedule_maker/tree/localStorage-NoBackend) branch because it can run without any server configuration and it will save schedules' information in the browser's local storage instead of the main branch which was built with backend server capability using ASP.NET to store data in a Database. Which is not needed for such a program. But as you know university stuff...
+> Clone or Download the code of the [localStorage-NoBackend](https://github.com/Ahmad-Alkaf/Schedule-Builder/tree/localStorage-NoBackend) branch because it can run without any server configuration and it will save schedules' information in the browser's local storage instead of the main branch which was built with backend server capability using ASP.NET to store data in a Database. Which is not needed for such a program. But as you know university stuff...
 {: .prompt-warning}
 
 
-There are many features such as **Print a schedule**, **Copy** / **cut** / **paste** a lecture within a schedule or between different schedules, and more... But I will let the reader find out these and other features by using the app [here](https://schedule-builder.alkaf.org).
+There are many features such as **Print a schedule**, **Copy** / **cut** / **paste** a lecture within a schedule or between different schedules, and more... But I will let the reader find out these and other features by using the app [here](https://schedule-builder.kaflabs.com).
 
 ## Screenshots
 
