@@ -24,7 +24,7 @@ Full-time: December 2023 – Present · Internship: November 2023
 
 TechTroniX is an eCommerce and PC-assembly company. I work on a team of 3 developers.
 
-- Built a desktop quality-control tool (C#, .NET) and automated stress testing for the PC-assembly line. With these tools, the company separated building from testing: team output went from 18 to 30 PC towers per day (+66%) with the same 6 people. The tool runs 38 checks and has 3,636 automated tests.
+- Built a desktop quality-control tool (C#, .NET) and automated stress testing for the PC-assembly line. With these tools, the company separated building from testing: team output went from 18 to 30 PC towers per day with the same 6 people. The tool runs 38 checks and has 3,636 automated tests.
 - Built and maintain these parts of the company's operations portal (Next.js, TypeScript, tRPC, Prisma, PostgreSQL): the quality-control module with 119 data points per PC, the authentication and permissions layer, background jobs, file storage, and live updates with Server-Sent Events.
 - Automated marketplace operations on Amazon, Noon, and Trendyol with Node.js, Amazon SP-API, Puppeteer, and AWS SQS: stock sync from the company's online store through signed webhooks, order processing, and 14 report feeds into the purchasing team's Google Sheets.
 - Built an AI invoice flow for the purchasing team: OCR (Azure Document Intelligence) and an LLM read supplier invoices, and the system matches each line to the product catalog. A person reviews every AI result before anything is saved to the store.
@@ -49,9 +49,6 @@ TechTroniX is an eCommerce and PC-assembly company. I work on a team of 3 develo
 
 **Bachelor of Science in Computer Information Systems (CIS)**, [**Al-Ahgaff University**](https://ahgaff.edu), 2019 – 2023.  
 GPA: **4.12 / 5**. Excellence Certificate for the second-highest GPA among my peers.
-
-#### Graduation Certificate
-![Graduation Certificate photo](Graduation certificate.webp){:w="400"}
 
 ## Certifications & Memberships
 
