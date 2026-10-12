@@ -16,7 +16,7 @@
 
 /* Home-page project cards: show the whole logo instead of cropping it.
    Chirpy locks .preview-img to a 40:21 box with object-fit: cover, which
-   center-crops wide/square logos (e.g. the QRForge wordmark). Switch the home
+   center-crops wide/square logos (e.g. the QR Anvil wordmark). Switch the home
    list to object-fit: contain so each logo fits fully inside the frame, on the
    theme's --img-bg band, edge to edge. */
 #post-list .preview-img img {

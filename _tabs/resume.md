@@ -35,7 +35,7 @@ TechTroniX is an eCommerce and PC-assembly company. I work on a team of 3 develo
 - [Autism Children Technical System (ACTS)](/posts/ACTS)
 - [Schedule Builder](/posts/Schedule-Builder)
 - [Certificate Platform](/posts/Certificate-Platform)
-- [QRForge](/posts/QRForge)
+- [QR Anvil](/posts/QR-Anvil)
 - [ImageForge](/posts/ImageForge)
 - [Laptop POS](/posts/Laptop-POS)
 - [Check Task](/posts/Check-Tasks)
