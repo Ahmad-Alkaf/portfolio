@@ -2,7 +2,7 @@
 title: Alhajarayn Guide
 date: 2022-01-01
 categories: [Projects, Alhajarayn Guide]
-tags: [node.js, express, mysql, javascript, typescript, jquery, bootstrap, html, css] # Tag names should be lowercase
+tags: [node.js, express.js, mysql, javascript, typescript, jquery, bootstrap, html, css] # Tag names should be lowercase
 media_subpath: /assets/img/Projects/Alhajarayn Guide
 image:
   path: /alhajarayn-guide-logo.webp
