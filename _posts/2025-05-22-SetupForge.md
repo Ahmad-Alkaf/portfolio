@@ -9,9 +9,6 @@ image:
   alt: SetupForge logo
 ---
 
-> SetupForge is not publicly deployed, and its source code is private. This page describes what I built.
-{: .prompt-info}
-
 SetupForge is a web app for setting up a Windows PC. You pick your apps from the WinGet catalog (15,000+ packages), and SetupForge generates a custom installer EXE. You run the EXE, and it installs all the apps unattended.
 
 The project spans three layers: a web frontend, server-side EXE compilation on demand, and a native Windows installer runtime (.NET WinForms, C#).
