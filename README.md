@@ -1,45 +1,33 @@
-# Chirpy Starter [![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)](https://rubygems.org/gems/jekyll-theme-chirpy) [![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+# Ahmed Alkaf — Portfolio
 
-When installing the [**Chirpy**][chirpy] theme through [RubyGems.org][gem], Jekyll can only read files in the folders `/_data`, `/_layouts`, `/_includes`, `/_sass` and `/assets`, as well as a small part of options of the `/_config.yml` file from the theme's gem. If you have ever installed this theme gem, you can use the command `bundle info --path jekyll-theme-chirpy` to locate these files.
+The source of my portfolio site: projects, skills, and resume.
 
-The Jekyll team claims that this is to leave the ball in the user’s court, but this also results in users not being able to enjoy the out-of-the-box experience when using feature-rich themes.
+Live site: **<https://ahmed.kaflabs.com>**
 
-To fully use all the features of **Chirpy**, you need to copy the other critical files from the theme's gem to your Jekyll site. The following is a list of targets:
+## Stack
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
+- [Jekyll](https://jekyllrb.com/) with the [Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) theme (installed as a gem).
+- Each project is a post in `_posts/`. The post tags make the **Skills** tab.
+- The resume is `_tabs/resume.md`.
+- Hosting: Cloudflare Pages.
+
+## Build and publish
+
+`publish.ps1` builds the site in Docker (`ruby:3.4`) and deploys `_site` to Cloudflare Pages with Wrangler.
+You need PowerShell, Docker, and Node.js.
+
+```powershell
+./publish.ps1              # build, check links (html-proofer), and deploy
+./publish.ps1 -SkipTest    # build and deploy, no link check
+./publish.ps1 -SkipDeploy  # build into _site only, no deploy
 ```
 
-To save you time, and also in case you lose some files while copying, we extract those files/configurations of the latest version of the **Chirpy** theme and the [CD][CD] workflow to here, so that you can start writing in minutes.
+The first deploy needs a Cloudflare login: `npx --yes wrangler@latest login`.
 
-## Prerequisites
+## Local preview
 
-Follow the instructions in the [Jekyll Docs](https://jekyllrb.com/docs/installation/) to complete the installation of the basic environment. [Git](https://git-scm.com/) also needs to be installed.
-
-## Installation
-
-Sign in to GitHub and [**use this template**][use-template] to generate a brand new repository and name it `USERNAME.github.io`, where `USERNAME` represents your GitHub username.
-
-Then clone it to your local machine and run:
-
-```
-$ bundle
-```
-
-## Usage
-
-Please see the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy#documentation).
+`serve.ps1` starts the Jekyll dev server with live reload (`bundle exec jekyll s -l -o`). It needs Ruby and Bundler on the machine.
 
 ## License
 
-This work is published under [MIT][mit] License.
-
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[use-template]: https://github.com/cotes2020/chirpy-starter/generate
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+`LICENSE` is the MIT License of the Chirpy starter (Cotes Chung).
