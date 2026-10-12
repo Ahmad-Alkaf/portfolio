@@ -1,17 +1,17 @@
 {
   "name": "blog-ahmed-alkaf",
-  "version": "6.1.0",
+  "version": "1.0.0",
   "description": "A Blog, Resume, CV, and Portfolio of Ahmed Alkaf.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cotes2020/jekyll-theme-chirpy.git"
+    "url": "git+https://github.com/Ahmad-Alkaf/portfolio.git"
   },
   "author": "Ahmed Alkaf",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Ahmad-Alkaf/Ahmad-Alkaf.github.io/issues"
+    "url": "https://github.com/Ahmad-Alkaf/portfolio/issues"
   },
-  "homepage": "https://github.com/Ahmad-Alkaf/Ahmad-Alkaf.github.io/",
+  "homepage": "https://ahmed.kaflabs.com",
   "scripts": {
     "prebuild": "npx rimraf assets/js/dist",
     "build": "npx rollup -c --bundleConfigAsCjs",
