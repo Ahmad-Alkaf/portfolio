@@ -32,7 +32,7 @@ github:
   username: Ahmad-Alkaf # change to your github username
 
 twitter:
-  username: Ahmad_Alkaf_ahk # change to your twitter username
+  username: Ahmad_Alkaf_ # change to your twitter username
 
 social:
   # Change to your full name.
@@ -41,7 +41,7 @@ social:
   email: ahmad.h.alkaf@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/Ahmad_Alkaf_ahk # change to your twitter homepage
+    - https://x.com/Ahmad_Alkaf_ # change to your twitter homepage
     - https://github.com/Ahmad-Alkaf # change to your github homepage
     - https://www.linkedin.com/in/Ahmad-Alkaf
     # Uncomment below to add more social links
