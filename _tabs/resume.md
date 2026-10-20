@@ -52,19 +52,6 @@ GPA: **4.12 / 5**. Excellence Certificate for the second-highest GPA among my pe
 
 ## Skills
 
-{% capture site_tags %}
-{% for tag in site.tags %}
-{{ tag | first }}
-{% unless forloop.last %},{% endunless %}
-{% endfor %}
-{% endcapture %}
-{% assign tags_list = site_tags | split:',' | sort_natural %}
-
-<div>
-{% for item in (0..site.tags.size) %}{% unless forloop.last %}
-{% capture this_word %}{{ tags_list[item] | strip_newlines }}{% endcapture %}
-<a href="/tags/{{ this_word | replace: ' ', '-' | replace: '.', '-' | replace: '#', '' }}" class="tag" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Used in {{site.tags[this_word].size }} Projects"><span class="tag-name">{{ this_word }}</span>&nbsp;<span class="count">{{ site.tags[this_word].size }}</span></a>
-{% endunless %}{% endfor %} 
-</div>
+<!-- skills -->
 
 
