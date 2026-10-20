@@ -1,0 +1,151 @@
+/
+/404.html
+/CNAME
+/assets/img/Projects/ACTS/ACTS - Accounts.webp
+/assets/img/Projects/ACTS/ACTS - Activities.webp
+/assets/img/Projects/ACTS/ACTS - Admin's Home.webp
+/assets/img/Projects/ACTS/ACTS - Child Report.webp
+/assets/img/Projects/ACTS/ACTS - Children.webp
+/assets/img/Projects/ACTS/ACTS - Fields.webp
+/assets/img/Projects/ACTS/ACTS - Goals.webp
+/assets/img/Projects/ACTS/ACTS - Home Arabic.webp
+/assets/img/Projects/ACTS/ACTS - Login.webp
+/assets/img/Projects/ACTS/ACTS - Notification.webp
+/assets/img/Projects/ACTS/ACTS - Programs.webp
+/assets/img/Projects/ACTS/ACTS - Settings.webp
+/assets/img/Projects/ACTS/ACTS Gold award.webp
+/assets/img/Projects/ACTS/ACTS Poster.webp
+/assets/img/Projects/ACTS/ACTS award certificate.webp
+/assets/img/Projects/ACTS/ACTS participation certificate.webp
+/assets/img/Projects/ACTS/logo 40-21.png
+/assets/img/Projects/ACTS/logo.png
+/assets/img/Projects/Alhajarayn Guide/alhajarayn-guide-logo.svg
+/assets/img/Projects/Alhajarayn Guide/alhajarayn-guide-logo.webp
+/assets/img/Projects/Check Task/check-task-logo.png
+/assets/img/Projects/Etamyd/etamyd-logo.png
+/assets/img/Projects/ImageForge/imageforge-logo.svg
+/assets/img/Projects/ImageForge/imageforge-logo.webp
+/assets/img/Projects/Laptop POS/checkout.webp
+/assets/img/Projects/Laptop POS/dashboard.webp
+/assets/img/Projects/Laptop POS/inventory.webp
+/assets/img/Projects/Laptop POS/laptop-pos-logo.png
+/assets/img/Projects/PDF Anvil/pdf-anvil-logo.png
+/assets/img/Projects/QR Anvil/qr-anvil-logo.png
+/assets/img/Projects/Schedule Maker/Level 4 table.webp
+/assets/img/Projects/Schedule Maker/adding subject.webp
+/assets/img/Projects/Schedule Maker/conflict lectures warning.webp
+/assets/img/Projects/Schedule Maker/create new lecture dialog.webp
+/assets/img/Projects/Schedule Maker/dark mode and themes.webp
+/assets/img/Projects/Schedule Maker/drag and drop lectures.webp
+/assets/img/Projects/Schedule Maker/generate lectures dialog.webp
+/assets/img/Projects/Schedule Maker/generated lectures.webp
+/assets/img/Projects/Schedule Maker/new table dialog.webp
+/assets/img/Projects/Schedule Maker/register & login to save your data.webp
+/assets/img/Projects/Schedule Maker/schedule maker icon 40-21.png
+/assets/img/Projects/Schedule Maker/schedule maker icon.png
+/assets/img/Projects/Schedule Maker/table.webp
+/assets/img/Projects/SetupForge/setupforge-logo.png
+/assets/img/avatar.jpg
+/assets/img/favicons/android-chrome-192x192.png
+/assets/img/favicons/android-chrome-384x384.png
+/assets/img/favicons/android-chrome-512x512.png
+/assets/img/favicons/apple-touch-icon.png
+/assets/img/favicons/browserconfig.xml
+/assets/img/favicons/favicon-16x16.png
+/assets/img/favicons/favicon-32x32.png
+/assets/img/favicons/favicon-96x96.png
+/assets/img/favicons/favicon.ico
+/assets/img/favicons/favicon.svg
+/assets/img/favicons/k-logo-sequare.png
+/assets/img/favicons/mstile-150x150.png
+/assets/img/favicons/safari-pinned-tab.svg
+/assets/img/favicons/site.webmanifest
+/assets/img/favicons/web-app-manifest-192x192.png
+/assets/img/favicons/web-app-manifest-512x512.png
+/assets/img/resume/Colloge Flag.webp
+/assets/img/resume/University personal photo 6x6 (HD).webp
+/categories/
+/categories/alhajarayn-guide/
+/categories/autism-children-technical-system-acts/
+/categories/check-task/
+/categories/etamyd/
+/categories/imageforge/
+/categories/laptop-pos/
+/categories/pdf-anvil/
+/categories/projects/
+/categories/qr-anvil/
+/categories/schedule-builder/
+/categories/setupforge/
+/feed.xml
+/posts/ACTS/
+/posts/Alhajarayn-Guide-Transactions/
+/posts/Check-Tasks/
+/posts/Etamyd/
+/posts/ImageForge/
+/posts/Laptop-POS/
+/posts/PDF-Anvil/
+/posts/QR-Anvil/
+/posts/Schedule-Builder/
+/posts/SetupForge/
+/resume/
+/robots.txt
+/sitemap.xml
+/sw.min.js
+/tags/
+/tags/agile-methodologies/
+/tags/android/
+/tags/angular-material/
+/tags/angular/
+/tags/asp-net/
+/tags/aws-s3/
+/tags/aws/
+/tags/better-auth/
+/tags/bootstrap/
+/tags/c/
+/tags/clerk/
+/tags/cloudflare-workers/
+/tags/css/
+/tags/docker/
+/tags/express-js/
+/tags/firebase/
+/tags/firestore/
+/tags/github-actions/
+/tags/html/
+/tags/human-computer-interaction/
+/tags/i18n/
+/tags/inertia/
+/tags/java/
+/tags/javascript/
+/tags/jquery/
+/tags/laravel/
+/tags/multi-tenancy/
+/tags/mysql/
+/tags/nestjs/
+/tags/next-js/
+/tags/node-js/
+/tags/paddle/
+/tags/paraglide/
+/tags/php/
+/tags/playwright/
+/tags/postgresql/
+/tags/powershell/
+/tags/prisma/
+/tags/problem-solving/
+/tags/rbac/
+/tags/react/
+/tags/redis/
+/tags/scss/
+/tags/shadcn-ui/
+/tags/sharp/
+/tags/sql/
+/tags/tailwind-css/
+/tags/tanstack-query/
+/tags/tanstack-start/
+/tags/typeorm/
+/tags/typescript/
+/tags/vitest/
+/tags/web-workers/
+/tags/webassembly/
+/tags/winforms/
+/tags/zod/
+/timeline/
