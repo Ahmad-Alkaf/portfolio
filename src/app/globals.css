@@ -218,8 +218,7 @@ h1 {
 	list-style: none;
 	margin: 0;
 	padding: 0 0 0.35rem;
-	overflow-x: auto;
-	scrollbar-width: none;
+	flex-wrap: wrap;
 }
 
 .nav-links a {
@@ -539,6 +538,7 @@ main > .meta:first-child {
 	background: var(--bg-img);
 	border-radius: var(--radius);
 	margin: 1.25rem 0 0.5rem;
+	max-height: 22rem;
 }
 
 .post-footer {
@@ -774,6 +774,16 @@ main > .meta:first-child {
 @media (max-width: 640px) {
 	h1 {
 		font-size: 1.6rem;
+	}
+
+	.nav-links {
+		gap: 0;
+		margin: 0 -0.5rem;
+	}
+
+	.nav-links a {
+		padding: 0.35rem 0.5rem;
+		font-size: 0.9rem;
 	}
 
 	.intro {
