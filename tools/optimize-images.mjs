@@ -25,8 +25,8 @@ const ROOT = path.resolve(__dirname, '..');
 
 // Folders to sweep (globbed for Projects/* subfolders).
 const ROOTS = [
-  path.join(ROOT, 'assets/img/Projects'),
-  path.join(ROOT, 'assets/img/resume'),
+  path.join(ROOT, 'public/assets/img/Projects'),
+  path.join(ROOT, 'public/assets/img/resume'),
 ];
 
 const MAX_WIDTH = 1600;
