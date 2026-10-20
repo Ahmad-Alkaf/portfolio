@@ -1,0 +1,14 @@
+# Cloudflare Pages response headers.
+# https://developers.cloudflare.com/pages/configuration/headers/
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# Next.js file names contain a content hash, so the files never change.
+/_next/static/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The browser must always get the newest service-worker file.
+/sw.min.js
+  Cache-Control: no-cache
