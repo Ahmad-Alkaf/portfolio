@@ -1,25 +1,19 @@
-# Bundler cache
-.bundle
-vendor
-Gemfile.lock
-
-# Jekyll cache
-.jekyll-cache
-_site
-
-# RubyGems
-*.gem
-
-# NPM dependencies
+# Dependencies
 node_modules
-package-lock.json
+
+# Next.js build output
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# Old Jekyll build output (from the main branch)
+_site
+.jekyll-cache
 
 # IDE configurations
 .idea
 .vscode
-
-# Misc
-assets/js/dist
 
 # Local browser-session artifacts (Playwright MCP, ad-hoc screenshots)
 .playwright-mcp/
