@@ -5,8 +5,8 @@ categories: [Projects, Laptop POS]
 tags: [laravel, php, react, typescript, inertia, tailwind css, mysql, aws, paddle] # Tag names should be lowercase
 media_subpath: /assets/img/Projects/Laptop POS
 image:
-  path: /laptop-pos-logo.png
-  alt: CornerTill (formerly Laptop POS) logo
+  path: /cornertill-logo.png
+  alt: CornerTill logo
 ---
 
 > Laptop POS is now **CornerTill**. The project was renamed in November 2026, and the repository moved to [Ahmad-Alkaf/CornerTill](https://github.com/Ahmad-Alkaf/CornerTill) on GitHub. Old links to the repository still work.
@@ -23,13 +23,13 @@ It was deployed entirely on **AWS**: S3 for asset storage, EC2 for compute, RDS 
 
 ## Screenshots
 
-![Inventory page — manage products and stock](/inventory.webp)
+![Inventory page — manage products and stock](/cornertill-inventory.webp)
 _Inventory page — manage products and stock_
 
-![Checkout page — ring up a sale](/checkout.webp)
+![Checkout page — ring up a sale](/cornertill-checkout.webp)
 _Checkout page — ring up a sale_
 
-![Dashboard page — sales analytics at a glance](/dashboard.webp)
+![Dashboard page — sales analytics at a glance](/cornertill-dashboard.webp)
 _Dashboard page — sales analytics at a glance_
 
 ## Summary
