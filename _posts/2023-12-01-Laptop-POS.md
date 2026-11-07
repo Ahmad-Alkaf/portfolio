@@ -1,17 +1,20 @@
 ---
-title: Laptop POS
+title: CornerTill (formerly Laptop POS)
 date: 2023-12-01
 categories: [Projects, Laptop POS]
 tags: [laravel, php, react, typescript, inertia, tailwind css, mysql, aws, paddle] # Tag names should be lowercase
 media_subpath: /assets/img/Projects/Laptop POS
 image:
   path: /laptop-pos-logo.png
-  alt: Laptop POS logo
+  alt: CornerTill (formerly Laptop POS) logo
 ---
 
-Laptop POS is an open-source **cloud Point-of-Sale system** for retail stores. It covers the full retail loop — inventory management, checkout, billing, stock tracking, and sales dashboards — with subscription billing. It was deployed end-to-end on AWS.
+> Laptop POS is now **CornerTill**. The project was renamed in November 2026, and the repository moved to [Ahmad-Alkaf/CornerTill](https://github.com/Ahmad-Alkaf/CornerTill) on GitHub. Old links to the repository still work.
+{: .prompt-info}
 
-> The project is open source on [GitHub](https://github.com/laravel-aaa/Laptop-POS) [![GitHub stars](https://img.shields.io/github/stars/laravel-aaa/Laptop-POS?style=social&label=Stars)](https://github.com/laravel-aaa/Laptop-POS)
+CornerTill is a **cloud Point-of-Sale system** for retail stores. It covers the full retail loop — inventory management, checkout, billing, stock tracking, and sales dashboards — with subscription billing. It was deployed end-to-end on AWS.
+
+> The source code is in a public repo on [GitHub](https://github.com/Ahmad-Alkaf/CornerTill) (source-available, PolyForm Noncommercial license; it was open source until November 2026). [![GitHub stars](https://img.shields.io/github/stars/Ahmad-Alkaf/CornerTill?style=social&label=Stars)](https://github.com/Ahmad-Alkaf/CornerTill)
 {: .prompt-tip}
 
 Each store gets multi-role accounts so the right people see the right tools: **Cashiers** ring up sales at checkout, **Maintainers** manage inventory and the catalog, and **Owners** get the full picture through analytics dashboards. Stores subscribe through **Paddle** — three paid plans plus a no-credit-card free tier — and the interface is responsive across devices and browsers.
@@ -31,7 +34,7 @@ _Dashboard page — sales analytics at a glance_
 
 ## Summary
 
-A cloud POS web application for retail stores. Open source at the [repository](https://github.com/laravel-aaa/Laptop-POS).
+A cloud POS web application for retail stores. Source-available in a public [repository](https://github.com/Ahmad-Alkaf/CornerTill).
 
 - Built with **Laravel** (backend), **Inertia** (glue layer), and **React + TypeScript** (frontend), styled with **Tailwind CSS**.
 - Inventory, checkout, billing, stock tracking, and sales dashboards.

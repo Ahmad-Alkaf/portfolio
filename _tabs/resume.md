@@ -24,7 +24,7 @@ I'm Ahmed Hashem Mohsen Alkaf Alhashemi, a full-stack software engineer with 4 y
 - [PDF Anvil](/posts/PDF-Anvil)
 - [SetupForge](/posts/SetupForge)
 - [ImageForge](/posts/ImageForge)
-- [Laptop POS](/posts/Laptop-POS)
+- [CornerTill (formerly Laptop POS)](/posts/Laptop-POS)
 - [Check Task](/posts/Check-Tasks)
 - [Alhajarayn Guide](/posts/Alhajarayn-Guide-Transactions)
 
