@@ -10,11 +10,24 @@ import './globals.css';
 const FAVICONS = '/assets/img/favicons';
 
 // next/font downloads the fonts at build time and serves them from this site.
-const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
-const sans = Geist({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
-// The mono fallback face is in globals.css. It has the same 0.6 em advance as Geist Mono,
-// so the chips and labels keep their width when the font loads. Turbopack ignores
-// adjustFontFallback: false without a fallback list, so the list is necessary.
+// The fallback faces are in globals.css ("Font fallbacks"). They have the metrics of the
+// web fonts, so the text keeps its size when a font loads, also on Linux and Android.
+// Turbopack ignores adjustFontFallback: false without a fallback list, so the list is necessary.
+const display = Bricolage_Grotesque({
+	subsets: ['latin'],
+	variable: '--font-display',
+	display: 'swap',
+	adjustFontFallback: false,
+	fallback: ['Bricolage Metric Fallback', 'Bricolage Roboto Fallback']
+});
+const sans = Geist({
+	subsets: ['latin'],
+	variable: '--font-body',
+	display: 'swap',
+	adjustFontFallback: false,
+	fallback: ['Geist Metric Fallback', 'Geist Roboto Fallback']
+});
+// Geist Mono has a fixed 0.6 em advance, and so has its fallback face.
 const mono = Geist_Mono({
 	subsets: ['latin'],
 	variable: '--font-code',
