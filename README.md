@@ -102,4 +102,4 @@ The first deploy needs a Cloudflare login: `npx --yes wrangler@latest login`.
 
 ## Copyright
 
-© Ahmad Alkaf. All rights reserved.
+© Ahmed Alkaf. All rights reserved.
