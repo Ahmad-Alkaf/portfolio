@@ -46,7 +46,7 @@ The project spans three layers: a web frontend, server-side EXE compilation on d
 - **Installer runtime (C#, WinForms)** — a JSON-based action interpreter with parallel or sequential child execution, a PowerShell runner, process management, configurable error handling (Continue / Stop), real-time console output, progress tracking, and a hidden-execution mode.
 - **Frontend data** — TanStack Query (React Query) with a 6-hour stale time and a 48-hour cache, Radix UI components.
 - **Privacy-limited analytics** — PostHog events on key user actions, with no session recording and Do Not Track honoured.
-- **Tests** — 79 automated test cases across 16 files with Vitest.
+- **Tests** — 197 automated test cases across 23 files with Vitest.
 
 ## Summary
 
@@ -55,4 +55,4 @@ A full-stack Windows setup tool: web app, server-side EXE build, and native inst
 - Next.js + React frontend over a 71,000+ app catalog (WinGet and the Microsoft Store), with virtualized rendering and shareable presets.
 - Server-side compilation of a .NET Framework WinForms installer on Linux with Mono MSBuild, behind validation, an injection defence, and build back-pressure.
 - C# installer runtime that runs PowerShell install actions unattended.
-- Supervised startup with health, status, and readiness endpoints; 79 Vitest test cases; Docker.
+- Supervised startup with health, status, and readiness endpoints; 197 Vitest test cases; Docker.
