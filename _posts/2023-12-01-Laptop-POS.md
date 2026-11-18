@@ -24,7 +24,7 @@ screenshot:
 case:
   problem: A small store needs inventory, checkout, bills, staff roles, and sales reports in one web app that works on any device.
   built: Laravel and Inertia with React and TypeScript. Multi-role store accounts (Cashier, Maintainer, Owner), a full Arabic RTL layout with an English and Arabic switch, Google sign-in, and email through Resend.
-  result: Live at cornertill.com as a free beta, with auto-deploy, hourly and daily database backups with a tested restore, and uptime monitoring. The public repo has 39 stars and 9 forks on GitHub.
+  result: Live at cornertill.com as a free beta, with auto-deploy, hourly and daily database backups with a tested restore, and uptime monitoring. The public repo had 39 stars and 9 forks on GitHub in November 2026.
 ---
 
 > CornerTill is live at [cornertill.com](https://cornertill.com) as a free beta. The source code is in a public repo on [GitHub](https://github.com/Ahmad-Alkaf/CornerTill) (source-available, PolyForm Noncommercial license; it was open source until November 2026). [![GitHub stars](https://img.shields.io/github/stars/Ahmad-Alkaf/CornerTill?style=social&label=Stars)](https://github.com/Ahmad-Alkaf/CornerTill)
@@ -74,7 +74,7 @@ _Dashboard page — sales analytics at a glance_
 
 ## Summary
 
-A cloud POS web application for retail stores, live as a free beta at [cornertill.com](https://cornertill.com). Source-available in a public [repository](https://github.com/Ahmad-Alkaf/CornerTill) with 39 stars and 9 forks.
+A cloud POS web application for retail stores, live as a free beta at [cornertill.com](https://cornertill.com). Source-available in a public [repository](https://github.com/Ahmad-Alkaf/CornerTill) (39 stars and 9 forks in November 2026).
 
 - Built with **Laravel**, **Inertia**, and **React + TypeScript**, styled with **Tailwind CSS**, on **MySQL**.
 - Inventory, checkout, bills, stock tracking, and sales dashboards, with multi-role store accounts.
