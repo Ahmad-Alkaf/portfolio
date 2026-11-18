@@ -40,7 +40,7 @@ We often need to change a lecture place from time to time, (teachers or students
 
 You can run the project easily in a development server following the [Angular instructions](#angular-development-environment) at the end of this file. 
 
-> Clone or Download the code of the [localStorage-NoBackend](https://github.com/Ahmad-Alkaf/Schedule-Builder/tree/localStorage-NoBackend) branch because it can run without any server configuration and it will save schedules' information in the browser's local storage instead of the main branch which was built with backend server capability using ASP.NET to store data in a Database. Which is not needed for such a program. But as you know university stuff...
+> Clone or Download the code of the [localStorage-NoBackend](https://github.com/Ahmad-Alkaf/Schedule-Builder/tree/localStorage-NoBackend) branch because it runs without any server configuration and saves the schedules in the browser's local storage. The main branch also has an optional cloud storage: an account backed by ASP.NET and an MSSQL database.
 {: .prompt-warning}
 
 
