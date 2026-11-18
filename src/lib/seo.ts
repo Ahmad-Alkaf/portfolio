@@ -10,15 +10,21 @@ type PageSeo = {
 	/** The page URL path, with a trailing slash (for example /posts/ACTS/). */
 	path: string;
 	article?: { publishedTime: string; tags: string[] };
+	/** The share image. Default: the site image (/opengraph-image). */
+	image?: { url: string; alt: string };
 	noindex?: boolean;
 };
 
+const SITE_IMAGE = { url: '/opengraph-image', alt: `${site.title}, ${site.role}` };
+
 /**
  * Title, description, canonical URL, Open Graph, and Twitter card for one page.
- * The share images come from the opengraph-image files (one for the site, one for each post).
+ * The image is set on each page, because a page-level `openGraph` object replaces
+ * the image of the root opengraph-image file.
  */
-export function pageMetadata({ title, description = site.description, path, article, noindex }: PageSeo): Metadata {
+export function pageMetadata({ title, description = site.description, path, article, image = SITE_IMAGE, noindex }: PageSeo): Metadata {
 	const ogTitle = title ?? `${site.title} · ${site.role}`;
+	const images = [{ url: image.url, width: 1200, height: 630, alt: image.alt, type: 'image/png' }];
 	return {
 		...(title ? { title } : {}),
 		description,
@@ -32,6 +38,7 @@ export function pageMetadata({ title, description = site.description, path, arti
 			url: path,
 			siteName: site.title,
 			locale: 'en_US',
+			images,
 			...(article
 				? { type: 'article', publishedTime: article.publishedTime, authors: [site.author.url], tags: article.tags }
 				: { type: 'website' })
@@ -41,7 +48,8 @@ export function pageMetadata({ title, description = site.description, path, arti
 			site: site.twitter,
 			creator: site.twitter,
 			title: ogTitle,
-			description
+			description,
+			images
 		},
 		...(noindex ? { robots: { index: false, follow: true } } : {})
 	};
@@ -88,11 +96,16 @@ export function projectJsonLd(post: Post): Record<string, unknown> {
 		image: `${site.url}${post.url}opengraph-image`,
 		keywords: post.tagItems.map((tag) => tag.label).join(', '),
 		author: { '@type': 'Person', '@id': personId, name: site.author.name, url: `${site.url}/` },
-		about: {
-			'@type': 'CreativeWork',
-			name: post.title,
-			...(post.links.live ? { url: post.links.live } : {}),
-			...(post.links.source ? { codeRepository: post.links.source } : {})
-		}
+		about: [
+			{
+				'@type': 'SoftwareApplication',
+				name: post.title,
+				description: post.summary,
+				...(post.links.live ? { url: post.links.live } : {})
+			},
+			...(post.links.source
+				? [{ '@type': 'SoftwareSourceCode', name: post.title, codeRepository: post.links.source, author: { '@id': personId } }]
+				: [])
+		]
 	};
 }
