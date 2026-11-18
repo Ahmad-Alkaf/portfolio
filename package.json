@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Ahmad-Alkaf/portfolio.git"
   },
   "author": "Ahmed Alkaf",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "homepage": "https://ahmed.kaflabs.com",
   "engines": {
     "node": ">=20.9.0"
