@@ -1,10 +1,14 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getPost, getPosts, slugify } from '@/lib/content';
+import { ContactSection } from '@/components/ContactSection';
+import { ArrowLeftIcon, ArrowRightIcon } from '@/components/icons';
+import { JsonLd } from '@/components/JsonLd';
+import { Lightbox } from '@/components/Lightbox';
+import { CaseStudy, Eyebrow, ProjectLinks, Shot, TagChips, toProjectSummary } from '@/components/ProjectBits';
+import { getPost, getPosts } from '@/lib/content';
 import { formatDate, isoDate } from '@/lib/format';
-import { pageMetadata } from '@/lib/seo';
-import { site } from '@/site.config';
+import { pageMetadata, projectJsonLd } from '@/lib/seo';
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -21,8 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		title: post.title,
 		description: post.description,
 		path: post.url,
-		image: post.image,
-		article: { publishedTime: isoDate(post.date), tags: post.tags }
+		article: { publishedTime: isoDate(post.date), tags: post.tagItems.map((tag) => tag.label) }
 	});
 }
 
@@ -35,69 +38,60 @@ export default async function PostPage({ params }: Props) {
 	const index = posts.indexOf(post);
 	const newer = posts[index - 1];
 	const older = posts[index + 1];
+	const summary = toProjectSummary(post);
 
 	return (
-		<article className="post">
-			<header className="post-header">
-				<h1>{post.title}</h1>
-				<p className="meta">
-					Posted <time dateTime={post.date}>{formatDate(post.date)}</time> · By {site.author.name} · {post.readingMinutes} min read
-				</p>
-				{post.image ? (
-					<img className="post-cover" src={post.image.src} alt={post.image.alt} width={1200} height={630} />
-				) : null}
-			</header>
-
-			<div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
-
-			<footer className="post-footer">
-				{post.categories.length > 0 ? (
+		<>
+			<JsonLd data={projectJsonLd(post)} />
+			<article className="post">
+				<header className="post-head">
+					<Link href="/projects/" className="back-link">
+						<ArrowLeftIcon /> All projects
+					</Link>
+					<Eyebrow post={summary} />
+					<h1 className="post-title">{post.title}</h1>
+					<p className="post-lead">{post.summary}</p>
 					<p className="meta">
-						Categories:{' '}
-						{post.categories.map((name, i) => (
-							<span key={name}>
-								{i > 0 ? ', ' : null}
-								<Link href={`/categories/${slugify(name)}/`}>{name}</Link>
-							</span>
-						))}
+						<time dateTime={post.date}>{formatDate(post.date)}</time> · {post.readingMinutes} min read
 					</p>
-				) : null}
-				{post.tags.length > 0 ? (
-					<ul className="tags" aria-label="Skills">
-						{post.tags.map((tag) => (
-							<li key={tag}>
-								<Link className="tag" href={`/tags/${slugify(tag)}/`}>
-									{tag}
-								</Link>
-							</li>
-						))}
-					</ul>
-				) : null}
-				<p className="license">
-					This post is licensed under{' '}
-					<a href={site.license.url} target="_blank" rel="noopener noreferrer license">
-						{site.license.name}
-					</a>{' '}
-					by the author.
-				</p>
-			</footer>
+					<div className="actions">
+						<ProjectLinks post={summary} />
+					</div>
+					<TagChips tags={post.tagItems} />
+				</header>
 
-			<nav className="post-nav" aria-label="More posts">
-				{older ? (
-					<Link href={older.url} className="post-nav-link">
-						<span className="meta">Older</span>
-						<span>{older.title}</span>
-					</Link>
-				) : (
-					<span />
-				)}
-				{newer ? (
-					<Link href={newer.url} className="post-nav-link post-nav-next">
-						<span className="meta">Newer</span>
-						<span>{newer.title}</span>
-					</Link>
-				) : null}
-			</nav>
-		</article>
+				<div className="post-intro">
+					{post.caseStudy ? <CaseStudy caseStudy={post.caseStudy} headingLevel={2} /> : null}
+					<div className="post-cover">
+						<Shot post={summary} sizes="(min-width: 1024px) 560px, calc(100vw - 32px)" priority />
+					</div>
+				</div>
+
+				<div className="prose" dangerouslySetInnerHTML={{ __html: post.html }} />
+				<Lightbox scope=".post" />
+
+				<nav className="post-nav" aria-label="More projects">
+					{newer ? (
+						<Link href={newer.url} className="post-nav-link">
+							<span className="eyebrow">
+								<ArrowLeftIcon /> Newer
+							</span>
+							<span className="post-nav-title">{newer.title}</span>
+						</Link>
+					) : (
+						<span />
+					)}
+					{older ? (
+						<Link href={older.url} className="post-nav-link post-nav-next">
+							<span className="eyebrow">
+								Older <ArrowRightIcon />
+							</span>
+							<span className="post-nav-title">{older.title}</span>
+						</Link>
+					) : null}
+				</nav>
+			</article>
+			<ContactSection />
+		</>
 	);
 }
