@@ -12,7 +12,17 @@ const FAVICONS = '/assets/img/favicons';
 // next/font downloads the fonts at build time and serves them from this site.
 const display = Bricolage_Grotesque({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
 const sans = Geist({ subsets: ['latin'], variable: '--font-body', display: 'swap' });
-const mono = Geist_Mono({ subsets: ['latin'], variable: '--font-code', display: 'swap', preload: false });
+// The mono fallback face is in globals.css. It has the same 0.6 em advance as Geist Mono,
+// so the chips and labels keep their width when the font loads. Turbopack ignores
+// adjustFontFallback: false without a fallback list, so the list is necessary.
+const mono = Geist_Mono({
+	subsets: ['latin'],
+	variable: '--font-code',
+	display: 'swap',
+	preload: false,
+	adjustFontFallback: false,
+	fallback: ['Geist Mono Metric Fallback']
+});
 
 export const metadata: Metadata = {
 	metadataBase: new URL(site.url),

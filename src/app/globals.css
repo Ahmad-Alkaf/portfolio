@@ -6,6 +6,29 @@
  * labels and metadata. Light and dark colors are tokens on :root.
  */
 
+/* ---------- Font fallbacks ---------- */
+
+/*
+ * Geist Mono has a fixed advance of 0.6 em. These local mono faces have the
+ * same advance (Menlo and DejaVu Sans Mono: 0.602 em), so a chip or a label has
+ * the same width before and after Geist Mono loads, and nothing moves. The
+ * overrides copy the Geist Mono line metrics. next/font makes its fallback from
+ * local(Arial), which is missing on Linux and Android, so layout.tsx uses this
+ * face as the fallback.
+ */
+@font-face {
+	font-family: 'Geist Mono Metric Fallback';
+	/* All weights use the regular face: Geist Mono keeps 0.6 em at each weight, and a synthetic bold could change it. */
+	font-weight: 100 900;
+	src: local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'), local('LiberationMono'),
+		local('Cousine'), local('Cousine-Regular'), local('Droid Sans Mono'), local('DroidSansMono'), local('Menlo'),
+		local('Menlo-Regular'), local('DejaVu Sans Mono'), local('DejaVuSansMono');
+	size-adjust: 100%;
+	ascent-override: 100.5%;
+	descent-override: 29.5%;
+	line-gap-override: 0%;
+}
+
 /* ---------- Tokens ---------- */
 
 :root {
