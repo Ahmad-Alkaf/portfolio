@@ -1853,3 +1853,14 @@ a.chip:hover {
 .site-footer a:hover {
 	color: var(--accent-hover);
 }
+
+/* Keep the name on one line in the header. On the narrowest phones, drop the small photo to make room. */
+.brand-name {
+	white-space: nowrap;
+}
+
+@media (width < 360px) {
+	.brand-avatar {
+		display: none;
+	}
+}
