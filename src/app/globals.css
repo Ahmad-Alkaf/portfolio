@@ -651,6 +651,8 @@ a.chip:hover {
 
 .hero {
 	display: grid;
+	/* minmax(0, 1fr): a long unbreakable line cannot widen the column. */
+	grid-template-columns: minmax(0, 1fr);
 	gap: 40px;
 	padding-top: clamp(40px, 8vw, 96px);
 	align-items: center;
@@ -799,7 +801,7 @@ a.chip:hover {
 }
 
 .shot-url {
-	flex: 1;
+	flex: 1 1 0;
 	min-width: 0;
 	max-width: 260px;
 	margin-inline: auto;
@@ -845,6 +847,8 @@ a.chip:hover {
 
 .feature {
 	display: grid;
+	/* minmax(0, 1fr): a long unbreakable line cannot widen the column. */
+	grid-template-columns: minmax(0, 1fr);
 	gap: 28px;
 	align-items: start;
 }
@@ -1111,6 +1115,8 @@ a.chip:hover {
 
 .contact {
 	display: grid;
+	/* minmax(0, 1fr): a long unbreakable line cannot widen the column. */
+	grid-template-columns: minmax(0, 1fr);
 	gap: 24px;
 	margin-top: clamp(72px, 10vw, 120px);
 	padding: clamp(28px, 5vw, 48px);
@@ -1199,6 +1205,8 @@ a.chip:hover {
 
 .post-intro {
 	display: grid;
+	/* minmax(0, 1fr): a long unbreakable line cannot widen the column. */
+	grid-template-columns: minmax(0, 1fr);
 	gap: 32px;
 	margin-bottom: 56px;
 	align-items: start;
