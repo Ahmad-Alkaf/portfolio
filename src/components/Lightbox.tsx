@@ -27,9 +27,15 @@ export function Lightbox({ scope }: { scope: string }) {
 		const images = [...root.querySelectorAll('img')].filter((img) => !img.closest('a, button, .no-zoom'));
 		const found: Item[] = [];
 		const buttons: HTMLButtonElement[] = [];
-		images.forEach((img, i) => {
-			const caption = img.closest('figure')?.querySelector('figcaption')?.textContent?.trim() ?? '';
-			found.push({ src: img.currentSrc || img.src, alt: img.alt, caption: caption || img.alt });
+		for (const img of images) {
+			// img.src is the full-size file. currentSrc can be the small srcset copy.
+			const src = img.src;
+			let i = found.findIndex((item) => item.src === src);
+			if (i === -1) {
+				// The same image can show twice (the cover and the post body). It is one item in the viewer.
+				const caption = img.closest('figure')?.querySelector('figcaption')?.textContent?.trim() ?? '';
+				i = found.push({ src, alt: img.alt, caption: caption || img.alt }) - 1;
+			}
 			const button = document.createElement('button');
 			button.type = 'button';
 			button.className = 'zoom';
@@ -38,7 +44,7 @@ export function Lightbox({ scope }: { scope: string }) {
 			button.append(img);
 			button.addEventListener('click', () => open(i));
 			buttons.push(button);
-		});
+		}
 		// The list of images is read from the DOM once, after the post renders.
 		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setItems(found);
