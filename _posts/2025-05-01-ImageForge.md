@@ -7,7 +7,7 @@ media_subpath: /assets/img/Projects/ImageForge
 image:
   path: /imageforge-logo.webp
   alt: ImageForge logo
-summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser. Not deployed; the source is in a public repo.
+summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser.
 kind: Personal project
 status: not deployed
 order: 8
