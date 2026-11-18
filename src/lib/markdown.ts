@@ -12,8 +12,6 @@
 // - `{% include embed/youtube.html id='...' %}`: a YouTube video.
 // - `<i class="fas fa-map-marker-alt">`: a map pin icon.
 // - External links open in a new tab (as jekyll-target-blank did).
-//
-// The Resume tab uses the marker `<!-- skills -->` for the list of skills.
 
 import type { Element, ElementContent, Root as HastRoot, RootContent } from 'hast';
 import { toString } from 'hast-util-to-string';
@@ -29,13 +27,9 @@ import { unified } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
 import { site } from '@/site.config';
 
-export type SkillLink = { name: string; href: string; count: number };
-
 export type RenderOptions = {
 	/** Folder for relative image paths (Chirpy `media_subpath`). */
 	mediaSubpath?: string;
-	/** Replaces the `<!-- skills -->` marker. */
-	skills?: SkillLink[];
 };
 
 export type Rendered = {
@@ -54,7 +48,7 @@ function preprocess(source: string): string {
 		.replace(
 			YOUTUBE_INCLUDE,
 			(_match, id: string) =>
-				`\n\n<div class="video"><iframe src="https://www.youtube.com/embed/${id}" title="YouTube video player" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n\n`
+				`\n\n<div class="video"><iframe src="https://www.youtube.com/embed/${id}" title="YouTube video player" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n\n`
 		)
 		.replace(IMAGE_WITH_SPACE, (_match, alt: string, dest: string) => `![${alt}](<${dest.trim()}>)`);
 }
@@ -155,42 +149,12 @@ const MAP_PIN: Element = {
 	]
 };
 
-function skillsElement(skills: SkillLink[]): Element {
-	return {
-		type: 'element',
-		tagName: 'div',
-		properties: { className: ['skills'] },
-		children: skills.map((skill) => ({
-			type: 'element',
-			tagName: 'a',
-			properties: {
-				href: skill.href,
-				className: ['tag'],
-				title: `Used in ${skill.count} ${skill.count === 1 ? 'project' : 'projects'}`
-			},
-			children: [
-				{ type: 'text', value: skill.name },
-				{
-					type: 'element',
-					tagName: 'span',
-					properties: { className: ['count'] },
-					children: [{ type: 'text', value: String(skill.count) }]
-				}
-			]
-		}))
-	};
-}
-
 /** The site-specific HTML changes (images, links, captions, icons, tables). */
 function rehypeSite(options: RenderOptions) {
 	return (tree: HastRoot) => {
 		visit(tree, (node, index, parent) => {
 			if (!parent || index === undefined) return;
 
-			if (node.type === 'comment' && node.value.trim() === 'skills') {
-				parent.children[index] = skillsElement(options.skills ?? []);
-				return SKIP;
-			}
 			if (node.type !== 'element') return;
 
 			if (node.tagName === 'img' && typeof node.properties.src === 'string') {

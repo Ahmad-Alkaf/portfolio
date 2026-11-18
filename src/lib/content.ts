@@ -5,8 +5,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { parse as parseYaml } from 'yaml';
-import { renderMarkdown, resolveImageSrc, type SkillLink } from './markdown';
-import { site } from '@/site.config';
+import { renderMarkdown, resolveImageSrc } from './markdown';
+import { tagLabel } from '@/site.config';
 
 const ROOT = process.cwd();
 const POSTS_DIR = path.join(ROOT, '_posts');
@@ -23,22 +23,25 @@ export type Post = {
 	categories: string[];
 	tags: string[];
 	image?: { src: string; alt: string };
+	/** One line: what the project is. */
+	summary: string;
+	/** For example "Personal product" or "Academic capstone". */
+	kind?: string;
+	/** For example "live", "public repo", or "open source". */
+	status?: string;
+	/** The order on the home page. Empty: not featured. */
+	featured?: number;
+	links: { live?: string; source?: string };
+	screenshot?: { src: string; small?: string; alt: string; domain?: string };
+	caseStudy?: { problem: string; built: string; result: string };
+	tagItems: TagItem[];
 	html: string;
 	description: string;
 	excerpt: string;
 	readingMinutes: number;
 };
 
-export type Tab = {
-	name: string;
-	url: string;
-	title: string;
-	order: number;
-	/** Empty for a Markdown page. Else the Jekyll layout: categories, tags, or archives. */
-	layout: string;
-	content: string;
-	mediaSubpath?: string;
-};
+export type TagItem = { name: string; label: string; slug: string; url: string };
 
 export type Term = { name: string; slug: string; url: string; posts: Post[] };
 
@@ -91,6 +94,65 @@ function postImage(data: FrontMatter, mediaSubpath?: string): Post['image'] {
 	return undefined;
 }
 
+function asRecord(value: unknown): Record<string, unknown> {
+	return value && typeof value === 'object' && !Array.isArray(value) ? (value as Record<string, unknown>) : {};
+}
+
+function postScreenshot(data: FrontMatter, mediaSubpath?: string): Post['screenshot'] {
+	const shot = asRecord(data.screenshot);
+	const src = asString(shot.path);
+	if (!src) return undefined;
+	const small = asString(shot.small);
+	return {
+		src: resolveImageSrc(src, mediaSubpath),
+		small: small ? resolveImageSrc(small, mediaSubpath) : undefined,
+		alt: asString(shot.alt) ?? '',
+		domain: asString(shot.domain)
+	};
+}
+
+function postCase(data: FrontMatter): Post['caseStudy'] {
+	const c = asRecord(data.case);
+	const problem = asString(c.problem);
+	const built = asString(c.built);
+	const result = asString(c.result);
+	return problem && built && result ? { problem, built, result } : undefined;
+}
+
+// The tags that a reader looks for first. They go to the front of the chip lists.
+const TAG_RANK = [
+	'react',
+	'next.js',
+	'typescript',
+	'tanstack start',
+	'node.js',
+	'nestjs',
+	'angular',
+	'laravel',
+	'postgresql',
+	'prisma',
+	'mysql',
+	'webassembly',
+	'docker',
+	'c#',
+	'asp.net',
+	'java',
+	'android'
+];
+
+function rankTags(tags: string[]): string[] {
+	const rank = (tag: string) => {
+		const i = TAG_RANK.indexOf(tag.toLowerCase());
+		return i === -1 ? TAG_RANK.length : i;
+	};
+	return tags.map((tag, i) => ({ tag, i })).sort((a, b) => rank(a.tag) - rank(b.tag) || a.i - b.i).map(({ tag }) => tag);
+}
+
+export function tagItem(name: string): TagItem {
+	const slug = slugify(name);
+	return { name, label: tagLabel(name), slug, url: `/tags/${slug}/` };
+}
+
 let postsCache: Post[] | undefined;
 
 /** All posts, the newest first. */
@@ -106,16 +168,27 @@ export function getPosts(): Post[] {
 		const mediaSubpath = asString(data.media_subpath);
 		const rendered = renderMarkdown(content, { mediaSubpath });
 		const date = (asString(data.date) ?? fileDate).slice(0, 10);
+		const tags = asStringList(data.tags);
+		const links = asRecord(data.links);
+		const summary = asString(data.summary) ?? truncate(rendered.text, 160);
 		posts.push({
 			slug,
 			url: `/posts/${slug}/`,
 			title: asString(data.title) ?? slug,
 			date,
 			categories: asStringList(data.categories),
-			tags: asStringList(data.tags),
+			tags,
 			image: postImage(data, mediaSubpath),
+			summary,
+			kind: asString(data.kind),
+			status: asString(data.status),
+			featured: typeof data.featured === 'number' ? data.featured : undefined,
+			links: { live: asString(links.live), source: asString(links.source) },
+			screenshot: postScreenshot(data, mediaSubpath),
+			caseStudy: postCase(data),
+			tagItems: rankTags(tags).map(tagItem),
 			html: rendered.html,
-			description: asString(data.description) ?? truncate(rendered.text, 200),
+			description: asString(data.description) ?? summary,
 			excerpt: truncate(rendered.text, 200),
 			readingMinutes: Math.max(1, Math.floor(rendered.words / 180))
 		});
@@ -138,10 +211,10 @@ export function getTags(): Term[] {
 	const map = new Map<string, Term>();
 	for (const post of getPosts()) {
 		for (const name of post.tags) {
-			const slug = slugify(name);
-			const term = map.get(slug) ?? { name, slug, url: `/tags/${slug}/`, posts: [] };
+			const item = tagItem(name);
+			const term = map.get(item.slug) ?? { name: item.label, slug: item.slug, url: item.url, posts: [] };
 			term.posts.push(post);
-			map.set(slug, term);
+			map.set(item.slug, term);
 		}
 	}
 	return [...map.values()].sort(byName);
@@ -195,46 +268,21 @@ export function getCategoryPages(): Term[] {
 	return [...pages.values()];
 }
 
-export function getSkillLinks(): SkillLink[] {
-	return getTags().map((tag) => ({ name: tag.name, href: tag.url, count: tag.posts.length }));
+/** The featured projects, in their `featured` order. */
+export function getFeaturedPosts(): Post[] {
+	return getPosts()
+		.filter((post) => post.featured !== undefined)
+		.sort((a, b) => (a.featured ?? 0) - (b.featured ?? 0));
 }
 
-let tabsCache: Tab[] | undefined;
-
-/** The tab pages in _tabs/, in their `order`. */
-export function getTabs(): Tab[] {
-	if (tabsCache) return tabsCache;
-	const tabs: Tab[] = [];
-	for (const file of fs.readdirSync(TABS_DIR)) {
-		const match = file.match(/^(.+)\.(md|markdown)$/);
-		if (!match) continue;
-		const name = match[1] ?? '';
-		const { data, content } = readMarkdownFile(path.join(TABS_DIR, file));
-		const layout = asString(data.layout) ?? '';
-		tabs.push({
-			name,
-			url: `/${name}/`,
-			title: asString(data.title) ?? site.tabLabels[name] ?? name.charAt(0).toUpperCase() + name.slice(1),
-			order: typeof data.order === 'number' ? data.order : 99,
-			layout: layout === 'page' ? '' : layout,
-			content,
-			mediaSubpath: asString(data.media_subpath)
-		});
-	}
-	tabs.sort((a, b) => a.order - b.order);
-	tabsCache = tabs;
-	return tabs;
+/** Where an old category URL goes now: the project of a one-project category, else the projects page. */
+export function categoryTarget(category: Term): string {
+	const [only] = category.posts;
+	return category.posts.length === 1 && only && category.slug !== 'projects' ? only.url : '/projects/';
 }
 
-/** The tabs that are Markdown pages (for example Resume). */
-export function getPageTabs(): Tab[] {
-	return getTabs().filter((tab) => tab.layout === '');
-}
-
-export function getTab(name: string): Tab | undefined {
-	return getTabs().find((tab) => tab.name === name);
-}
-
-export function renderTab(tab: Tab) {
-	return renderMarkdown(tab.content, { mediaSubpath: tab.mediaSubpath, skills: getSkillLinks() });
+/** The Resume page source (_tabs/resume.md). */
+export function getResume(): { title: string; content: string; mediaSubpath?: string } {
+	const { data, content } = readMarkdownFile(path.join(TABS_DIR, 'resume.md'));
+	return { title: asString(data.title) ?? 'Resume', content, mediaSubpath: asString(data.media_subpath) };
 }
