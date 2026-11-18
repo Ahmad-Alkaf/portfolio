@@ -43,7 +43,7 @@
 	--shadow-color-l: rgb(26 23 20 / 14%);
 	--shadow-color-d: rgb(0 0 0 / 55%);
 
-	/* Fallback for browsers without light-dark(): follow the system scheme only. */
+	/* Light values first. The dark values come from light-dark() below, or from the fallback block. */
 	--paper: var(--paper-l);
 	--surface: var(--surface-l);
 	--sunken: var(--sunken-l);
@@ -73,25 +73,6 @@
 	color-scheme: light dark;
 	accent-color: var(--accent);
 
-	@media (prefers-color-scheme: dark) {
-		--paper: var(--paper-d);
-		--surface: var(--surface-d);
-		--sunken: var(--sunken-d);
-		--ink: var(--ink-d);
-		--muted: var(--muted-d);
-		--line: var(--line-d);
-		--line-strong: var(--line-strong-d);
-		--accent: var(--accent-d);
-		--accent-hover: var(--accent-hover-d);
-		--on-accent: var(--on-accent-d);
-		--accent-soft: var(--accent-soft-d);
-		--live: var(--live-d);
-		--info: var(--info-d);
-		--warn: var(--warn-d);
-		--danger: var(--danger-d);
-		--shadow-color: var(--shadow-color-d);
-	}
-
 	@supports (color: light-dark(white, black)) {
 		--paper: light-dark(var(--paper-l), var(--paper-d));
 		--surface: light-dark(var(--surface-l), var(--surface-d));
@@ -110,13 +91,56 @@
 		--danger: light-dark(var(--danger-l), var(--danger-d));
 		--shadow-color: light-dark(var(--shadow-color-l), var(--shadow-color-d));
 	}
+}
 
-	/* The theme toggle writes the scheme into <meta name="color-scheme">. */
-	&:has(> head > meta[name='color-scheme'][content='dark']) {
-		color-scheme: dark;
+/* The theme toggle sets data-scheme="light" or "dark" on <html>. */
+:root[data-scheme='light'] {
+	color-scheme: light;
+}
+
+:root[data-scheme='dark'] {
+	color-scheme: dark;
+}
+
+/* Browsers without light-dark(): the same dark values, from the system scheme or the toggle. */
+@supports not (color: light-dark(white, black)) {
+	:root[data-scheme='dark'] {
+		--paper: var(--paper-d);
+		--surface: var(--surface-d);
+		--sunken: var(--sunken-d);
+		--ink: var(--ink-d);
+		--muted: var(--muted-d);
+		--line: var(--line-d);
+		--line-strong: var(--line-strong-d);
+		--accent: var(--accent-d);
+		--accent-hover: var(--accent-hover-d);
+		--on-accent: var(--on-accent-d);
+		--accent-soft: var(--accent-soft-d);
+		--live: var(--live-d);
+		--info: var(--info-d);
+		--warn: var(--warn-d);
+		--danger: var(--danger-d);
+		--shadow-color: var(--shadow-color-d);
 	}
-	&:has(> head > meta[name='color-scheme'][content='light']) {
-		color-scheme: light;
+	@media (prefers-color-scheme: dark) {
+		:root:not([data-scheme='light']) {
+			--paper: var(--paper-d);
+			--surface: var(--surface-d);
+			--sunken: var(--sunken-d);
+			--ink: var(--ink-d);
+			--muted: var(--muted-d);
+			--line: var(--line-d);
+			--line-strong: var(--line-strong-d);
+			--accent: var(--accent-d);
+			--accent-hover: var(--accent-hover-d);
+			--on-accent: var(--on-accent-d);
+			--accent-soft: var(--accent-soft-d);
+			--live: var(--live-d);
+			--info: var(--info-d);
+			--warn: var(--warn-d);
+			--danger: var(--danger-d);
+			--shadow-color: var(--shadow-color-d);
+		}
 	}
 }
 
@@ -582,28 +606,20 @@ a.chip:hover {
 }
 
 @media (prefers-color-scheme: dark) {
-	.theme-toggle .to-light {
+	:root:not([data-scheme='light']) .theme-toggle .to-light {
 		display: inline-flex;
 	}
-	.theme-toggle .to-dark {
+	:root:not([data-scheme='light']) .theme-toggle .to-dark {
 		display: none;
 	}
 }
 
-:root:has(> head > meta[name='color-scheme'][content='dark']) .theme-toggle .to-light {
+:root[data-scheme='dark'] .theme-toggle .to-light {
 	display: inline-flex;
 }
 
-:root:has(> head > meta[name='color-scheme'][content='dark']) .theme-toggle .to-dark {
+:root[data-scheme='dark'] .theme-toggle .to-dark {
 	display: none;
-}
-
-:root:has(> head > meta[name='color-scheme'][content='light']) .theme-toggle .to-light {
-	display: none;
-}
-
-:root:has(> head > meta[name='color-scheme'][content='light']) .theme-toggle .to-dark {
-	display: inline-flex;
 }
 
 @media (width < 720px) {
@@ -1728,7 +1744,8 @@ a.chip:hover {
 }
 
 @media print {
-	:root {
+	/* :not(.never) raises the specificity above the [data-scheme] rules. Print is always light. */
+	:root:not(.never) {
 		color-scheme: light !important;
 		--paper: #fff;
 		--surface: #fff;

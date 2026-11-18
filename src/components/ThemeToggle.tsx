@@ -5,33 +5,44 @@ import { MoonIcon, SunIcon } from './icons';
 
 // A two-state color scheme toggle. The page follows the system scheme until
 // the user selects the other scheme. Selecting the system scheme again
-// removes the stored value. The value lives in <meta name="color-scheme">,
-// and the CSS maps that value to the `color-scheme` property.
+// removes the stored value. The override is the data-scheme attribute on
+// <html>; the CSS maps it to the `color-scheme` property and the colors.
+// <meta name="color-scheme" content="light dark"> stays unchanged.
 
 const KEY = 'color-scheme';
 const OLD_KEY = 'theme';
+const THEME_COLOR = { light: '#f7f5f0', dark: '#141210' } as const;
 
-/** Runs in <head>, directly after the color-scheme meta, before the first paint. */
-export const themeScript = `(function(){try{var m=document.querySelector('meta[name="color-scheme"]');var t=localStorage.getItem('${KEY}')||localStorage.getItem('${OLD_KEY}');if(m&&(t==='light'||t==='dark'))m.content=t;}catch(e){}})();`;
+type Scheme = keyof typeof THEME_COLOR;
 
-function meta(): HTMLMetaElement | null {
-	return document.querySelector('meta[name="color-scheme"]');
-}
+/** Runs in <head> before the first paint, so the page does not flash. */
+export const themeScript = `(function(){try{var t=localStorage.getItem('${KEY}')||localStorage.getItem('${OLD_KEY}');if(t==='light'||t==='dark')document.documentElement.dataset.scheme=t;}catch(e){}})();`;
 
-function readStored(): string | null {
+function readStored(): Scheme | null {
 	try {
-		return localStorage.getItem(KEY) ?? localStorage.getItem(OLD_KEY);
+		const value = localStorage.getItem(KEY) ?? localStorage.getItem(OLD_KEY);
+		return value === 'light' || value === 'dark' ? value : null;
 	} catch {
 		return null;
 	}
 }
 
+/** Sets the override (or removes it), and makes the browser bar color follow it. */
+function applyScheme(scheme: Scheme | null) {
+	const root = document.documentElement;
+	if (scheme) root.dataset.scheme = scheme;
+	else delete root.dataset.scheme;
+	for (const meta of document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]')) {
+		meta.dataset.original ??= meta.content;
+		meta.content = scheme ? THEME_COLOR[scheme] : meta.dataset.original;
+	}
+}
+
 function toggle() {
-	const element = meta();
-	if (!element) return;
-	const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-	const current = element.content === 'light' || element.content === 'dark' ? element.content : system;
-	const target = current === 'dark' ? 'light' : 'dark';
+	const system: Scheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	const stored = document.documentElement.dataset.scheme;
+	const current: Scheme = stored === 'light' || stored === 'dark' ? stored : system;
+	const target: Scheme = current === 'dark' ? 'light' : 'dark';
 	try {
 		localStorage.removeItem(OLD_KEY);
 		if (target === system) localStorage.removeItem(KEY);
@@ -39,17 +50,16 @@ function toggle() {
 	} catch {
 		// Storage can be blocked. The scheme still changes on this page.
 	}
-	element.content = target === system ? 'light dark' : target;
+	applyScheme(target === system ? null : target);
 }
 
 export function ThemeToggle() {
 	useEffect(() => {
+		// The head script set the attribute. Make the browser bar color match it.
+		applyScheme(readStored());
 		// Another tab can change the stored value.
 		const onStorage = (event: StorageEvent) => {
-			if (event.key !== KEY && event.key !== OLD_KEY) return;
-			const element = meta();
-			const value = readStored();
-			if (element) element.content = value === 'light' || value === 'dark' ? value : 'light dark';
+			if (event.key === null || event.key === KEY || event.key === OLD_KEY) applyScheme(readStored());
 		};
 		window.addEventListener('storage', onStorage);
 		return () => window.removeEventListener('storage', onStorage);

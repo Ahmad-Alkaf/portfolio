@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang={site.lang} className={`${display.variable} ${sans.variable} ${mono.variable}`} suppressHydrationWarning>
 			<head>
-				{/* The theme toggle changes this value. The script must follow it directly. */}
+				{/* The page supports both schemes. The theme toggle overrides it with data-scheme on <html>. */}
 				<meta name="color-scheme" content="light dark" />
 				<script dangerouslySetInnerHTML={{ __html: themeScript }} />
 			</head>
