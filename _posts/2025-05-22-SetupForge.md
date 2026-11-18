@@ -11,6 +11,7 @@ summary: Pick Windows apps on the web and get one custom installer EXE that inst
 kind: Personal product
 status: live
 featured: 4
+order: 4
 links:
   live: https://setup-forge.com
 screenshot:

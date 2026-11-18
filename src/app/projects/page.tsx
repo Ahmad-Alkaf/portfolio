@@ -1,6 +1,6 @@
 import { toProjectSummary } from '@/components/ProjectBits';
 import { ProjectFilter } from '@/components/ProjectFilter';
-import { getPosts, getTags, slugify } from '@/lib/content';
+import { getProjects, getTags, slugify } from '@/lib/content';
 import { pageMetadata } from '@/lib/seo';
 import { filterTags, tagLabel } from '@/site.config';
 
@@ -11,7 +11,7 @@ export const metadata = pageMetadata({
 });
 
 export default function ProjectsPage() {
-	const posts = getPosts();
+	const posts = getProjects();
 	const tags = new Map(getTags().map((tag) => [tag.slug, tag]));
 	const options = filterTags
 		.map((name) => {
@@ -25,7 +25,7 @@ export default function ProjectsPage() {
 			<header className="page-head">
 				<p className="eyebrow">Projects</p>
 				<h1 className="page-title">Everything I have built</h1>
-				<p className="section-text">Newest first. Select a stack to see only the projects that use it.</p>
+				<p className="section-text">Live products first, then earlier and course work. Select a stack to see only the projects that use it.</p>
 			</header>
 			<ProjectFilter options={options} projects={posts.map(toProjectSummary)} />
 		</>

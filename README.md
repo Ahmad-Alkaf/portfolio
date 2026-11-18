@@ -7,7 +7,7 @@ I am a full-stack software engineer. I build web products with TypeScript, React
 ## What the site has
 
 - **Home**: who I am in one screen, my live products with a short case study each (problem, what I built, result), more projects, my skills, and a contact section.
-- **Projects** (`/projects/`): every project, with a filter by stack. The filter is kept in the URL (`/projects/?stack=react`).
+- **Projects** (`/projects/`): every project, live products first, with a filter by stack. The filter is kept in the URL (`/projects/?stack=react`).
 - **Case studies** (`/posts/<slug>/`): one page for each project, with the live site and source links, the stack, and screenshots that open larger.
 - **Skills** (`/tags/`): skills by area, and one page for each technology with the projects that use it.
 - **Resume** (`/resume/`): a one-column resume with a print style. "Print or save as PDF" makes a clean PDF.
@@ -54,8 +54,10 @@ image:
   alt: My Project logo
 summary: One sentence that says what the project is.
 kind: Personal product                    # for example Team product, Course project
-status: live                              # live | public repo | open source
-featured: 5                               # optional: the order on the home page
+status: live                              # live | public repo | open source | not deployed
+featured: 6                               # optional: the order on the home page ("Products in production")
+order: 6                                  # optional: the order on /projects/ and the resume (live products first)
+# more: true                              # optional, for a post with no featured: a card in "More projects" on the home page
 links:
   live: https://example.com
   source: https://github.com/Ahmad-Alkaf/my-project

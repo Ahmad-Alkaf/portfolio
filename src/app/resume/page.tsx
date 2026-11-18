@@ -6,7 +6,7 @@ import { JsonLd } from '@/components/JsonLd';
 import { PrintButton } from '@/components/PrintButton';
 import { StatusBadge } from '@/components/ProjectBits';
 import { SkillGroups } from '@/components/SkillGroups';
-import { getFeaturedPosts, getPosts, getResume, truncate } from '@/lib/content';
+import { getProjects, getResume, truncate } from '@/lib/content';
 import { renderMarkdown } from '@/lib/markdown';
 import { pageMetadata, personJsonLd } from '@/lib/seo';
 import { site } from '@/site.config';
@@ -29,8 +29,7 @@ function host(url: string): string {
 }
 
 function ResumeProjects() {
-	const featured = getFeaturedPosts();
-	const posts = [...featured, ...getPosts().filter((post) => !featured.includes(post))];
+	const posts = getProjects();
 	return (
 		<ul className="resume-projects">
 			{posts.map((post) => (

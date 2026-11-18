@@ -10,6 +10,7 @@ image:
 summary: Build lecture schedules with drag and drop, or generate collision-free lectures automatically.
 kind: Course project
 status: live
+order: 8
 links:
   live: https://schedule-builder.kaflabs.com
   source: https://github.com/Ahmad-Alkaf/Schedule-Builder

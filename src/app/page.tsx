@@ -7,7 +7,7 @@ import { ProjectCard } from '@/components/ProjectCard';
 import { ProjectFeature } from '@/components/ProjectFeature';
 import { toProjectSummary } from '@/components/ProjectBits';
 import { SkillGroups } from '@/components/SkillGroups';
-import { getFeaturedPosts, getPosts } from '@/lib/content';
+import { getFeaturedPosts, getMorePosts, getPosts } from '@/lib/content';
 import { pageMetadata, personJsonLd } from '@/lib/seo';
 import { site } from '@/site.config';
 
@@ -15,7 +15,8 @@ export const metadata = pageMetadata({ path: '/' });
 
 export default function HomePage() {
 	const featured = getFeaturedPosts();
-	const others = getPosts().filter((post) => !featured.includes(post));
+	const others = getMorePosts();
+	const projectCount = getPosts().length;
 	const [user, domain] = site.author.email;
 	const github = site.social.find((link) => link.type === 'github');
 	const linkedin = site.social.find((link) => link.type === 'linkedin');
@@ -94,11 +95,11 @@ export default function HomePage() {
 					<div>
 						<p className="eyebrow">More projects</p>
 						<h2 id="more-title" className="section-title">
-							Earlier work and side projects
+							Earlier work
 						</h2>
 					</div>
 					<Link href="/projects/" className="text-link">
-						All projects, by stack <ArrowRightIcon />
+						All {projectCount} projects, by stack <ArrowRightIcon />
 					</Link>
 				</header>
 				<ul className="cards">

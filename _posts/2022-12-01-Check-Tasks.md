@@ -10,6 +10,7 @@ image:
 summary: An Android app for tasks and goals, with reminders and cloud sync through Firebase.
 kind: Course project
 status: open source
+order: 9
 links:
   source: https://github.com/Ahgaff-level4/Check-Task
 ---

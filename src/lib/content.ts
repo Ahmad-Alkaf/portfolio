@@ -27,10 +27,14 @@ export type Post = {
 	summary: string;
 	/** For example "Personal product" or "Academic capstone". */
 	kind?: string;
-	/** For example "live", "public repo", or "open source". */
+	/** For example "live", "public repo", "open source", or "not deployed". */
 	status?: string;
 	/** The order on the home page. Empty: not featured. */
 	featured?: number;
+	/** The order on the projects page and the resume. Empty: after the ordered posts, newest first. */
+	order?: number;
+	/** Also show a card in "More projects" on the home page. */
+	more: boolean;
 	links: { live?: string; source?: string };
 	screenshot?: { src: string; small?: string; alt: string; domain?: string };
 	caseStudy?: { problem: string; built: string; result: string };
@@ -183,6 +187,8 @@ export function getPosts(): Post[] {
 			kind: asString(data.kind),
 			status: asString(data.status),
 			featured: typeof data.featured === 'number' ? data.featured : undefined,
+			order: typeof data.order === 'number' ? data.order : undefined,
+			more: data.more === true,
 			links: { live: asString(links.live), source: asString(links.source) },
 			screenshot: postScreenshot(data, mediaSubpath),
 			caseStudy: postCase(data),
@@ -273,6 +279,17 @@ export function getFeaturedPosts(): Post[] {
 	return getPosts()
 		.filter((post) => post.featured !== undefined)
 		.sort((a, b) => (a.featured ?? 0) - (b.featured ?? 0));
+}
+
+/** All posts in their `order` (live products first). Posts with no `order` come last, newest first. */
+export function getProjects(): Post[] {
+	const rank = (post: Post) => post.order ?? Number.MAX_SAFE_INTEGER;
+	return [...getPosts()].sort((a, b) => rank(a) - rank(b));
+}
+
+/** The projects for the "More projects" cards on the home page, in their `order`. */
+export function getMorePosts(): Post[] {
+	return getProjects().filter((post) => post.more && post.featured === undefined);
 }
 
 /** Where an old category URL goes now: the project of a one-project category, else the projects page. */

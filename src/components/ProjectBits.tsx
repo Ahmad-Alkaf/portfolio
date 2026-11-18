@@ -13,7 +13,12 @@ export function toProjectSummary(post: Post): ProjectSummary {
 	return { slug, url, title, date, summary, kind, status, links, screenshot, image, tagItems };
 }
 
-const STATUS_LABEL: Record<string, string> = { live: 'Live', 'public repo': 'Public repo', 'open source': 'Open source' };
+const STATUS_LABEL: Record<string, string> = {
+	live: 'Live',
+	'public repo': 'Public repo',
+	'open source': 'Open source',
+	'not deployed': 'Not deployed'
+};
 
 export function StatusBadge({ status }: { status?: string }) {
 	if (!status) return null;

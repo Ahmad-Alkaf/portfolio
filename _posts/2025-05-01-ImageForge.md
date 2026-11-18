@@ -9,7 +9,8 @@ image:
   alt: ImageForge logo
 summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser.
 kind: Personal project
-status: public repo
+status: not deployed
+order: 7
 links:
   source: https://github.com/Ahmad-Alkaf/image-utility
 ---
