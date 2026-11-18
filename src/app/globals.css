@@ -1071,6 +1071,13 @@ a.chip:hover {
 	display: flex;
 }
 
+/* A short list (the two "Earlier work" cards on the home page): two wide columns, not a third empty one. */
+@media (width >= 720px) {
+	.cards-two {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
 .cards > li[hidden] {
 	display: none;
 }

@@ -102,7 +102,7 @@ export default function HomePage() {
 						All {projectCount} projects, by stack <ArrowRightIcon />
 					</Link>
 				</header>
-				<ul className="cards">
+				<ul className="cards cards-two">
 					{others.map((post) => (
 						<li key={post.slug}>
 							<ProjectCard post={toProjectSummary(post)} />
