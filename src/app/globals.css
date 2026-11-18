@@ -1605,6 +1605,8 @@ a.chip:hover {
 /* Images that open larger. */
 .zoom {
 	display: block;
+	/* The button shrinks to its image. This bound keeps an image that did not load inside the column. */
+	max-width: 100%;
 	padding: 0;
 	border: 0;
 	background: none;
