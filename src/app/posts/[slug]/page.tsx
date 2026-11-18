@@ -64,7 +64,7 @@ export default async function PostPage({ params }: Props) {
 				<div className="post-intro">
 					{post.caseStudy ? <CaseStudy caseStudy={post.caseStudy} headingLevel={2} /> : null}
 					<div className="post-cover">
-						<Shot post={summary} sizes="(min-width: 1024px) 560px, calc(100vw - 32px)" priority />
+						<Shot post={summary} sizes="(min-width: 1024px) 572px, calc(100vw - 32px)" priority />
 					</div>
 				</div>
 

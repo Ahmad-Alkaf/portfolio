@@ -1492,6 +1492,12 @@ a.chip:hover {
 	margin: 0;
 }
 
+/* A button does not stretch by itself. In a browser frame, the image fills the frame. */
+.shot .zoom {
+	width: 100%;
+	border-radius: 0;
+}
+
 /* ---------- Lightbox ---------- */
 
 .lightbox {
