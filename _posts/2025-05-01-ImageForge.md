@@ -7,7 +7,7 @@ media_subpath: /assets/img/Projects/ImageForge
 image:
   path: /imageforge-logo.webp
   alt: ImageForge logo
-summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser.
+summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser. Not deployed; the source is in a public repo.
 kind: Personal project
 status: not deployed
 order: 7
@@ -15,7 +15,8 @@ links:
   source: https://github.com/Ahmad-Alkaf/image-utility
 ---
 
-> The source code is in a public repo on [GitHub](https://github.com/Ahmad-Alkaf/image-utility) (source-available, PolyForm Noncommercial license).
+> ImageForge is not deployed. There is no live site. The source code is in a public repo on [GitHub](https://github.com/Ahmad-Alkaf/image-utility) (source-available, PolyForm Noncommercial license).
+{: .prompt-info}
 
 ImageForge is a web-based image toolkit. It bundles the edits you usually need a handful of separate tools for into **seven tools**, with batch processing and bulk download built in.
 
