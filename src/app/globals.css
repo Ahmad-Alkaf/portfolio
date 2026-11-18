@@ -1155,6 +1155,17 @@ a.chip:hover {
 .copy {
 	position: relative;
 	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+}
+
+/* Shown only when the browser blocks the copy. */
+.copy-address {
+	font-family: var(--font-mono);
+	font-size: 0.9rem;
+	user-select: all;
+	overflow-wrap: anywhere;
 }
 
 .copy-tip {
