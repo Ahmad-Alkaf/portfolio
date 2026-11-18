@@ -12,7 +12,12 @@
 // - `{% include embed/youtube.html id='...' %}`: a YouTube video.
 // - `<i class="fas fa-map-marker-alt">`: a map pin icon.
 // - External links open in a new tab (as jekyll-target-blank did).
+//
+// Local images get their intrinsic width and height, so a lazy image does not
+// move the text when it loads.
 
+import fs from 'node:fs';
+import path from 'node:path';
 import type { Element, ElementContent, Root as HastRoot, RootContent } from 'hast';
 import { toString } from 'hast-util-to-string';
 import type { Blockquote, Paragraph, Root as MdastRoot } from 'mdast';
@@ -109,6 +114,42 @@ function safeDecode(value: string): string {
 	}
 }
 
+const PUBLIC_DIR = path.join(process.cwd(), 'public');
+const sizeCache = new Map<string, { width: number; height: number } | undefined>();
+
+/** The pixel size of a WebP or PNG file, from its header. Other formats: undefined. */
+function readImageSize(file: string): { width: number; height: number } | undefined {
+	let data: Buffer;
+	try {
+		data = fs.readFileSync(file);
+	} catch {
+		return undefined;
+	}
+	if (data.length >= 24 && data.toString('ascii', 1, 4) === 'PNG') {
+		return { width: data.readUInt32BE(16), height: data.readUInt32BE(20) };
+	}
+	if (data.length >= 30 && data.toString('ascii', 0, 4) === 'RIFF' && data.toString('ascii', 8, 12) === 'WEBP') {
+		const chunk = data.toString('ascii', 12, 16);
+		if (chunk === 'VP8X') return { width: 1 + data.readUIntLE(24, 3), height: 1 + data.readUIntLE(27, 3) };
+		if (chunk === 'VP8 ') return { width: data.readUInt16LE(26) & 0x3fff, height: data.readUInt16LE(28) & 0x3fff };
+		if (chunk === 'VP8L') {
+			const bits = data.readUInt32LE(21);
+			return { width: 1 + (bits & 0x3fff), height: 1 + ((bits >> 14) & 0x3fff) };
+		}
+	}
+	return undefined;
+}
+
+/** The intrinsic size of an image in public/, for a site path such as /assets/img/a%20b.webp. */
+function localImageSize(src: string): { width: number; height: number } | undefined {
+	if (!src.startsWith('/') || src.startsWith('//')) return undefined;
+	if (!sizeCache.has(src)) {
+		const file = path.join(PUBLIC_DIR, safeDecode(src.split(/[?#]/)[0] ?? ''));
+		sizeCache.set(src, file.startsWith(PUBLIC_DIR) ? readImageSize(file) : undefined);
+	}
+	return sizeCache.get(src);
+}
+
 export function resolveImageSrc(src: string, mediaSubpath?: string): string {
 	if (/^([a-z]+:)?\/\//i.test(src) || src.startsWith('data:')) return src;
 	const path = mediaSubpath ? `${mediaSubpath.replace(/\/+$/, '')}/${src.replace(/^\/+/, '')}` : src;
@@ -159,6 +200,13 @@ function rehypeSite(options: RenderOptions) {
 
 			if (node.tagName === 'img' && typeof node.properties.src === 'string') {
 				node.properties.src = resolveImageSrc(node.properties.src, options.mediaSubpath);
+				// The intrinsic size reserves the space. A `{: w="200"}` width keeps the aspect ratio.
+				const size = node.properties.height === undefined ? localImageSize(node.properties.src) : undefined;
+				if (size) {
+					const width = Number(node.properties.width ?? size.width) || size.width;
+					node.properties.width = String(width);
+					node.properties.height = String(Math.round((width * size.height) / size.width));
+				}
 				node.properties.loading ??= 'lazy';
 				node.properties.decoding = 'async';
 				return;
