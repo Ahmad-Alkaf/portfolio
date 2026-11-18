@@ -14,7 +14,7 @@ export function ProjectFeature({ post, priority = false }: { post: Post; priorit
 			<div className="feature-body">
 				<Eyebrow post={summary} />
 				<h3 id={`feature-${post.slug}`} className="feature-title">
-					<Link href={post.url}>{post.title}</Link>
+					<Link href={post.url}>{post.name}</Link>
 				</h3>
 				<p className="feature-summary">{post.summary}</p>
 				{post.caseStudy ? <CaseStudy caseStudy={post.caseStudy} /> : null}
@@ -22,7 +22,7 @@ export function ProjectFeature({ post, priority = false }: { post: Post; priorit
 				<div className="actions">
 					<Link href={post.url} className="button button-primary">
 						Case study <ArrowRightIcon />
-						<span className="visually-hidden">: {post.title}</span>
+						<span className="visually-hidden">: {post.name}</span>
 					</Link>
 					<ProjectLinks post={summary} />
 				</div>

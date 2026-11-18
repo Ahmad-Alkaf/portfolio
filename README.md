@@ -45,6 +45,7 @@ Add `_posts/YYYY-MM-DD-<slug>.md`:
 ```markdown
 ---
 title: My Project
+# name: My Project                        # optional: a short name for the cards and lists (default: the title)
 date: 2026-10-20
 categories: [Projects, My Project]
 tags: [next.js, typescript, postgresql]   # each tag has a page at /tags/<tag>/

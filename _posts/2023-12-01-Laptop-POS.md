@@ -1,5 +1,6 @@
 ---
 title: CornerTill (formerly Laptop POS)
+name: CornerTill
 date: 2023-12-01
 categories: [Projects, Laptop POS]
 tags: [laravel, php, react, typescript, inertia, tailwind css, mysql, docker, i18n, aws, paddle] # Tag names should be lowercase

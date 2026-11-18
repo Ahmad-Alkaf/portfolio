@@ -11,7 +11,7 @@ export function ProjectCard({ post, headingLevel = 3 }: { post: ProjectSummary; 
 				<Eyebrow post={post} />
 				<Heading className="card-title">
 					<Link href={post.url} className="card-link">
-						{post.title}
+						{post.name}
 					</Link>
 				</Heading>
 				<p className="card-summary">{post.summary}</p>

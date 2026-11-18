@@ -77,7 +77,7 @@ export default async function PostPage({ params }: Props) {
 							<span className="eyebrow">
 								<ArrowLeftIcon /> Newer
 							</span>
-							<span className="post-nav-title">{newer.title}</span>
+							<span className="post-nav-title">{newer.name}</span>
 						</Link>
 					) : (
 						<span />
@@ -87,7 +87,7 @@ export default async function PostPage({ params }: Props) {
 							<span className="eyebrow">
 								Older <ArrowRightIcon />
 							</span>
-							<span className="post-nav-title">{older.title}</span>
+							<span className="post-nav-title">{older.name}</span>
 						</Link>
 					) : null}
 				</nav>

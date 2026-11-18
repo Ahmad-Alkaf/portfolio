@@ -36,7 +36,7 @@ function ResumeProjects() {
 				<li key={post.slug}>
 					<p className="resume-project-head">
 						<Link href={post.url} className="resume-project-title">
-							{post.title}
+							{post.name}
 						</Link>
 						<span className="muted">
 							{[post.kind, post.date.slice(0, 4)].filter(Boolean).join(' · ')}

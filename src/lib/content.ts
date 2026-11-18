@@ -17,7 +17,10 @@ type FrontMatter = Record<string, unknown>;
 export type Post = {
 	slug: string;
 	url: string;
+	/** The full title, for the post page, the share image, and the feed. */
 	title: string;
+	/** The short name, for the cards and the lists. Front matter `name:`, else the title. */
+	name: string;
 	/** YYYY-MM-DD */
 	date: string;
 	categories: string[];
@@ -179,6 +182,7 @@ export function getPosts(): Post[] {
 			slug,
 			url: `/posts/${slug}/`,
 			title: asString(data.title) ?? slug,
+			name: asString(data.name) ?? asString(data.title) ?? slug,
 			date,
 			categories: asStringList(data.categories),
 			tags,

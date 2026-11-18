@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	if (!tag) return {};
 	return pageMetadata({
 		title: `${tag.name} projects`,
-		description: `Projects by Ahmed Alkaf that use ${tag.name}: ${tag.posts.map((post) => post.title).join(', ')}.`,
+		description: `Projects by Ahmed Alkaf that use ${tag.name}: ${tag.posts.map((post) => post.name).join(', ')}.`,
 		path: tag.url
 	});
 }

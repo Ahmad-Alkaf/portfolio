@@ -5,12 +5,12 @@ import type { Post, TagItem } from '@/lib/content';
 /** The fields that the project cards need (no HTML body), so the client filter gets a small payload. */
 export type ProjectSummary = Pick<
 	Post,
-	'slug' | 'url' | 'title' | 'date' | 'summary' | 'kind' | 'status' | 'links' | 'screenshot' | 'image' | 'tagItems'
+	'slug' | 'url' | 'name' | 'date' | 'summary' | 'kind' | 'status' | 'links' | 'screenshot' | 'image' | 'tagItems'
 >;
 
 export function toProjectSummary(post: Post): ProjectSummary {
-	const { slug, url, title, date, summary, kind, status, links, screenshot, image, tagItems } = post;
-	return { slug, url, title, date, summary, kind, status, links, screenshot, image, tagItems };
+	const { slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems } = post;
+	return { slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems };
 }
 
 const STATUS_LABEL: Record<string, string> = {
@@ -78,7 +78,7 @@ export function Shot({ post, sizes, priority = false }: { post: ProjectSummary; 
 			<div className="shot">
 				<div className="shot-bar" aria-hidden="true">
 					<span className="shot-dots" />
-					<span className="shot-url">{domain ?? (post.links.source ? post.links.source.replace(/^https:\/\//, '') : post.title)}</span>
+					<span className="shot-url">{domain ?? (post.links.source ? post.links.source.replace(/^https:\/\//, '') : post.name)}</span>
 				</div>
 				<img
 					src={src}
@@ -113,14 +113,14 @@ export function ProjectLinks({ post, compact = false }: { post: ProjectSummary; 
 			{live ? (
 				<a className={compact ? 'text-link' : 'button button-ghost'} href={live} target="_blank" rel="noopener noreferrer">
 					Live site <ArrowUpRightIcon />
-					<span className="visually-hidden"> of {post.title} (opens in a new tab)</span>
+					<span className="visually-hidden"> of {post.name} (opens in a new tab)</span>
 				</a>
 			) : null}
 			{source ? (
 				<a className={compact ? 'text-link' : 'button button-ghost'} href={source} target="_blank" rel="noopener noreferrer">
 					{compact ? null : <GitHubIcon width={16} height={16} />}
 					Source <ArrowUpRightIcon />
-					<span className="visually-hidden"> of {post.title} on GitHub (opens in a new tab)</span>
+					<span className="visually-hidden"> of {post.name} on GitHub (opens in a new tab)</span>
 				</a>
 			) : null}
 		</>

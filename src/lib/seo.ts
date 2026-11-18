@@ -99,12 +99,12 @@ export function projectJsonLd(post: Post): Record<string, unknown> {
 		about: [
 			{
 				'@type': 'SoftwareApplication',
-				name: post.title,
+				name: post.name,
 				description: post.summary,
 				...(post.links.live ? { url: post.links.live } : {})
 			},
 			...(post.links.source
-				? [{ '@type': 'SoftwareSourceCode', name: post.title, codeRepository: post.links.source, author: { '@id': personId } }]
+				? [{ '@type': 'SoftwareSourceCode', name: post.name, codeRepository: post.links.source, author: { '@id': personId } }]
 				: [])
 		]
 	};
