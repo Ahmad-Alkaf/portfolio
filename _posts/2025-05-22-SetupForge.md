@@ -20,17 +20,17 @@ screenshot:
   domain: setup-forge.com
 case:
   problem: To set up a Windows PC, you find, download, and install each app one by one.
-  built: A Next.js frontend over the WinGet catalog, server-side compilation of a C# WinForms installer on Linux with Mono MSBuild, and a C# runtime that runs the install actions.
+  built: A Next.js frontend over a 71,000+ app catalog (WinGet and the Microsoft Store), server-side compilation of a C# WinForms installer on Linux with Mono MSBuild, and a C# runtime that runs the install actions.
   result: Live at setup-forge.com, with a command-injection defence, build back-pressure, and health and readiness endpoints.
 ---
 
-SetupForge is a web app for setting up a Windows PC. You pick your apps from the WinGet catalog (15,000+ packages), and SetupForge generates a custom installer EXE. You run the EXE, and it installs all the apps unattended.
+SetupForge is a web app for setting up a Windows PC. You pick your apps from a catalog of 71,000+ apps (WinGet and the Microsoft Store), and SetupForge generates a custom installer EXE. You run the EXE, and it installs all the apps unattended.
 
 The project spans three layers: a web frontend, server-side EXE compilation on demand, and a native Windows installer runtime (.NET WinForms, C#).
 
 ## Features
 
-- **App catalog** — 15,207 verified WinGet package ids, shown in a responsive grid of 1 to 4 columns.
+- **App catalog** — 71,000+ apps from WinGet and the Microsoft Store, shown in a responsive grid of 1 to 4 columns.
 - **Fast search** over thousands of apps with `useDeferredValue` and memoized filtering; the grid is virtualized with TanStack Virtual.
 - **Shareable presets** — your app selection is synced to the URL, so you can share an installer preset as a link.
 - **Custom installer EXE** — generated on demand for your selection.
@@ -51,7 +51,7 @@ The project spans three layers: a web frontend, server-side EXE compilation on d
 
 A full-stack Windows setup tool: web app, server-side EXE build, and native installer.
 
-- Next.js + React frontend over a 15,000+ package WinGet catalog, with virtualized rendering and shareable presets.
+- Next.js + React frontend over a 71,000+ app catalog (WinGet and the Microsoft Store), with virtualized rendering and shareable presets.
 - Server-side compilation of a .NET Framework WinForms installer on Linux with Mono MSBuild, behind validation, an injection defence, and build back-pressure.
 - C# installer runtime that runs PowerShell install actions unattended.
 - Supervised startup with health, status, and readiness endpoints; 79 Vitest test cases; Docker.
