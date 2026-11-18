@@ -12,3 +12,9 @@
 # The browser must always get the newest service-worker file.
 /sw.min.js
   Cache-Control: no-cache
+
+# The share images have no file extension.
+/opengraph-image
+  Content-Type: image/png
+/posts/*/opengraph-image
+  Content-Type: image/png
