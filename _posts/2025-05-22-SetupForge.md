@@ -7,6 +7,21 @@ media_subpath: /assets/img/Projects/SetupForge
 image:
   path: /setupforge-logo.png
   alt: SetupForge logo
+summary: Pick Windows apps on the web and get one custom installer EXE that installs all of them unattended.
+kind: Personal product
+status: live
+featured: 4
+links:
+  live: https://setup-forge.com
+screenshot:
+  path: /setupforge-home.webp
+  small: /setupforge-home-640.webp
+  alt: The SetupForge home page with an installer preview
+  domain: setup-forge.com
+case:
+  problem: To set up a Windows PC, you find, download, and install each app one by one.
+  built: A Next.js frontend over the WinGet catalog, server-side compilation of a C# WinForms installer on Linux with Mono MSBuild, and a C# runtime that runs the install actions.
+  result: Live at setup-forge.com, with a command-injection defence, build back-pressure, and health and readiness endpoints.
 ---
 
 SetupForge is a web app for setting up a Windows PC. You pick your apps from the WinGet catalog (15,000+ packages), and SetupForge generates a custom installer EXE. You run the EXE, and it installs all the apps unattended.

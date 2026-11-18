@@ -7,6 +7,20 @@ media_subpath: /assets/img/Projects
 image: 
   path: /Schedule Maker/schedule maker icon 40-21.png
   alt: Schedule builder icon
+summary: Build lecture schedules with drag and drop, or generate collision-free lectures automatically.
+kind: Course project
+status: live
+links:
+  live: https://schedule-builder.kaflabs.com
+  source: https://github.com/Ahmad-Alkaf/Schedule-Builder
+screenshot:
+  path: /Schedule Maker/Level 4 table.webp
+  alt: A Level 4 lecture schedule with the tools panel
+  domain: schedule-builder.kaflabs.com
+case:
+  problem: Lecture schedules collide on rooms and teachers, and each change can break another schedule.
+  built: Angular and Angular Material, a backtracking generator for collision-free lectures, and collision cues that use no text.
+  result: Live at schedule-builder.kaflabs.com. Made for the Human-Computer Interaction course.
 ---
 
 Design and edit schedules without worrying about collisions between rooms or teachers. Also, you can build a schedule from scratch by generating lectures automatically you just have to provide the essential information such as how many hours in a week a subject needs to be lectured. However, you can add a subject in a pre-built schedule so that the lectures generator can place your lectures in collision-free places.

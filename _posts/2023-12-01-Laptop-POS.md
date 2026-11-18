@@ -7,6 +7,18 @@ media_subpath: /assets/img/Projects/Laptop POS
 image:
   path: /cornertill-logo.png
   alt: CornerTill logo
+summary: A cloud point-of-sale system for retail stores, with inventory, checkout, billing, and sales dashboards.
+kind: Personal product
+status: public repo
+links:
+  source: https://github.com/Ahmad-Alkaf/CornerTill
+screenshot:
+  path: /cornertill-dashboard.webp
+  alt: The CornerTill sales dashboard
+case:
+  problem: A retail store needs inventory, checkout, billing, and sales reports in one web app.
+  built: Laravel and Inertia with React and TypeScript, multi-role store accounts (Cashier, Maintainer, Owner), and Paddle subscription billing.
+  result: Was deployed end-to-end on AWS (S3, EC2, RDS, CodePipeline). The source is in a public repo on GitHub.
 ---
 
 > Laptop POS is now **CornerTill**. The project was renamed in November 2026, and the repository moved to [Ahmad-Alkaf/CornerTill](https://github.com/Ahmad-Alkaf/CornerTill) on GitHub. Old links to the repository still work.

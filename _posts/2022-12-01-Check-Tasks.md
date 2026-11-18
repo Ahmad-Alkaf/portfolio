@@ -7,6 +7,11 @@ media_subpath: /assets/img/Projects/Check Task
 image:
   path: /check-task-logo.png
   alt: Check Task logo
+summary: An Android app for tasks and goals, with reminders and cloud sync through Firebase.
+kind: Course project
+status: open source
+links:
+  source: https://github.com/Ahgaff-level4/Check-Task
 ---
 
 Check Task is an **Android** app for tracking your tasks and goals. You write tasks into categories ("Files"), and the app reminds you with notifications so nothing slips — with your data synced to the cloud so it follows you across devices.

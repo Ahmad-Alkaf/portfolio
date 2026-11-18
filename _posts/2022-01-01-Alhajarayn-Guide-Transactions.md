@@ -7,6 +7,8 @@ media_subpath: /assets/img/Projects/Alhajarayn Guide
 image:
   path: /alhajarayn-guide-logo.webp
   alt: Alhajarayn Guide logo
+summary: An Arabic (RTL) records system for a town, with a persons directory, requests, operations, and vCard export.
+kind: Web system
 ---
 
 Alhajarayn Guide ("دليل الهجرين") is a database-backed web system for managing the records of the town of Alhajarayn. It keeps a directory of **persons** — exportable as **vCard** contacts — and tracks the **requests** and **operations** (transactions) associated with them, all behind a login with user management. The interface is fully Arabic (right-to-left).

@@ -7,6 +7,11 @@ media_subpath: /assets/img/Projects/ImageForge
 image:
   path: /imageforge-logo.webp
   alt: ImageForge logo
+summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser.
+kind: Personal project
+status: public repo
+links:
+  source: https://github.com/Ahmad-Alkaf/image-utility
 ---
 
 > The source code is in a public repo on [GitHub](https://github.com/Ahmad-Alkaf/image-utility) (source-available, PolyForm Noncommercial license).
