@@ -200,10 +200,14 @@ function rehypeSite(options: RenderOptions) {
 
 			if (node.tagName === 'img' && typeof node.properties.src === 'string') {
 				node.properties.src = resolveImageSrc(node.properties.src, options.mediaSubpath);
-				// The intrinsic size reserves the space. A `{: w="200"}` width keeps the aspect ratio.
-				const size = node.properties.height === undefined ? localImageSize(node.properties.src) : undefined;
+				// A local WebP or PNG image gets its intrinsic size, which reserves the space. A `{: w="200"}`
+				// width keeps the aspect ratio. A width such as "50%" or "200px" stays as it is.
+				const givenWidth = node.properties.width;
+				const plainWidth = givenWidth === undefined || /^\d+(\.\d+)?$/.test(String(givenWidth));
+				const size =
+					node.properties.height === undefined && plainWidth ? localImageSize(node.properties.src) : undefined;
 				if (size) {
-					const width = Number(node.properties.width ?? size.width) || size.width;
+					const width = Number(givenWidth ?? size.width) || size.width;
 					node.properties.width = String(width);
 					node.properties.height = String(Math.round((width * size.height) / size.width));
 				}
