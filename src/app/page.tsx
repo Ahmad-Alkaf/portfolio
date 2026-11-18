@@ -41,7 +41,7 @@ export default function HomePage() {
 					</p>
 					<p className="hero-sub">
 						4 years of experience. Five products live today, from a multi-tenant SaaS built in a team to a cloud point-of-sale system and
-						browser-only tools that I run myself.
+						web tools that I run myself.
 					</p>
 					<div className="actions hero-actions">
 						<EmailLink user={user} domain={domain} className="button button-primary">
