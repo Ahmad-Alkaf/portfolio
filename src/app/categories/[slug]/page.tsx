@@ -1,9 +1,10 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { PostList } from '@/components/PostList';
-import { getCategoryPages } from '@/lib/content';
-import { plural } from '@/lib/format';
+import { RedirectPage } from '@/components/RedirectPage';
+import { categoryTarget, getCategoryPages } from '@/lib/content';
 import { pageMetadata } from '@/lib/seo';
+
+// The old Chirpy category pages. Each one goes to its project, or to the projects page.
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -13,30 +14,22 @@ export function generateStaticParams() {
 	return getCategoryPages().map((category) => ({ slug: category.slug }));
 }
 
-function findCategory(slug: string) {
-	return getCategoryPages().find((category) => category.slug === slug);
+function find(slug: string) {
+	const category = getCategoryPages().find((item) => item.slug === slug);
+	if (!category) return undefined;
+	const to = categoryTarget(category);
+	const label = to === '/projects/' ? 'Projects' : (category.posts[0]?.title ?? category.name);
+	return { to, label };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-	const category = findCategory((await params).slug);
-	if (!category) return {};
-	return pageMetadata({
-		title: category.name,
-		description: `Projects in the category ${category.name}.`,
-		path: category.url
-	});
+	const target = find((await params).slug);
+	if (!target) return {};
+	return pageMetadata({ title: target.label, path: target.to });
 }
 
 export default async function CategoryPage({ params }: Props) {
-	const category = findCategory((await params).slug);
-	if (!category) notFound();
-	return (
-		<>
-			<p className="meta">Category</p>
-			<h1 className="page-title">
-				{category.name} <span className="count">{plural(category.posts.length, 'post', 'posts')}</span>
-			</h1>
-			<PostList posts={category.posts} />
-		</>
-	);
+	const target = find((await params).slug);
+	if (!target) notFound();
+	return <RedirectPage to={target.to} label={target.label} />;
 }

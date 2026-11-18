@@ -1,0 +1,15 @@
+# Cloudflare Pages redirects. The old Chirpy pages moved.
+# Each URL also has a static page in out/ that sends the browser on (for other hosts).
+/timeline/ /projects/ 301
+/categories/ /projects/ 301
+/categories/projects/ /projects/ 301
+/categories/alhajarayn-guide/ /posts/Alhajarayn-Guide-Transactions/ 301
+/categories/autism-children-technical-system-acts/ /posts/ACTS/ 301
+/categories/check-task/ /posts/Check-Tasks/ 301
+/categories/etamyd/ /posts/Etamyd/ 301
+/categories/imageforge/ /posts/ImageForge/ 301
+/categories/laptop-pos/ /posts/Laptop-POS/ 301
+/categories/pdf-anvil/ /posts/PDF-Anvil/ 301
+/categories/qr-anvil/ /posts/QR-Anvil/ 301
+/categories/schedule-builder/ /posts/Schedule-Builder/ 301
+/categories/setupforge/ /posts/SetupForge/ 301
