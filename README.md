@@ -55,7 +55,7 @@ image:
   alt: My Project logo
 summary: One sentence that says what the project is.
 kind: Personal product                    # for example Team product, Course project
-status: live                              # live | public repo | open source | not deployed
+status: live                              # live (a product) | live demo (a course project online) | public repo | open source | not deployed
 featured: true                            # optional: also show it in "Products in production" on the home page (needs order)
 order: 6                                  # optional: the order on /projects/, the resume, and the home page (live products first)
 # more: true                              # optional, for a post with no featured: a card in "More projects" on the home page

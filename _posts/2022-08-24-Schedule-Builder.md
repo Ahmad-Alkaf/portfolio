@@ -9,8 +9,9 @@ image:
   alt: Schedule builder icon
 summary: Build lecture schedules with drag and drop, or generate collision-free lectures automatically.
 kind: Course project
-status: live
-order: 8
+status: live demo
+order: 7
+more: true
 links:
   live: https://schedule-builder.kaflabs.com
   source: https://github.com/Ahmad-Alkaf/Schedule-Builder

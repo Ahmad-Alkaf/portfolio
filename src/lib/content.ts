@@ -30,7 +30,7 @@ export type Post = {
 	summary: string;
 	/** For example "Personal product" or "Academic capstone". */
 	kind?: string;
-	/** For example "live", "public repo", "open source", or "not deployed". */
+	/** For example "live" (a product), "live demo" (a course project that is online), "open source", or "not deployed". */
 	status?: string;
 	/** Show the project in "Products in production" on the home page, in its `order`. */
 	featured: boolean;

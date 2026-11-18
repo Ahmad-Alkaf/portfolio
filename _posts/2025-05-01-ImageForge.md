@@ -10,7 +10,7 @@ image:
 summary: A web image toolkit with seven tools, batch processing, and AI background removal that runs in the browser. Not deployed; the source is in a public repo.
 kind: Personal project
 status: not deployed
-order: 7
+order: 8
 links:
   source: https://github.com/Ahmad-Alkaf/image-utility
 ---

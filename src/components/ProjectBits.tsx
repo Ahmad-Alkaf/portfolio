@@ -15,6 +15,7 @@ export function toProjectSummary(post: Post): ProjectSummary {
 
 const STATUS_LABEL: Record<string, string> = {
 	live: 'Live',
+	'live demo': 'Live demo',
 	'public repo': 'Public repo',
 	'open source': 'Open source',
 	'not deployed': 'Not deployed'
