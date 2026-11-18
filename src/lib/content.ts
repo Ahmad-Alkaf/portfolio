@@ -32,8 +32,8 @@ export type Post = {
 	kind?: string;
 	/** For example "live", "public repo", "open source", or "not deployed". */
 	status?: string;
-	/** The order on the home page. Empty: not featured. */
-	featured?: number;
+	/** Show the project in "Products in production" on the home page, in its `order`. */
+	featured: boolean;
 	/** The order on the projects page and the resume. Empty: after the ordered posts, newest first. */
 	order?: number;
 	/** Also show a card in "More projects" on the home page. */
@@ -172,6 +172,9 @@ export function getPosts(): Post[] {
 		const [, fileDate = '', slug = ''] = match;
 		const { data, content } = readMarkdownFile(path.join(POSTS_DIR, file));
 		if (data.published === false) continue;
+		if (data.featured !== undefined && typeof data.featured !== 'boolean') {
+			throw new Error(`${file}: featured is true or false; the order on the home page comes from order`);
+		}
 		const mediaSubpath = asString(data.media_subpath);
 		const rendered = renderMarkdown(content, { mediaSubpath });
 		const date = (asString(data.date) ?? fileDate).slice(0, 10);
@@ -190,7 +193,7 @@ export function getPosts(): Post[] {
 			summary,
 			kind: asString(data.kind),
 			status: asString(data.status),
-			featured: typeof data.featured === 'number' ? data.featured : undefined,
+			featured: data.featured === true,
 			order: typeof data.order === 'number' ? data.order : undefined,
 			more: data.more === true,
 			links: { live: asString(links.live), source: asString(links.source) },
@@ -278,11 +281,14 @@ export function getCategoryPages(): Term[] {
 	return [...pages.values()];
 }
 
-/** The featured projects, in their `featured` order. */
+/** The featured projects, in their `order` (the same order as on the projects page). */
 export function getFeaturedPosts(): Post[] {
-	return getPosts()
-		.filter((post) => post.featured !== undefined)
-		.sort((a, b) => (a.featured ?? 0) - (b.featured ?? 0));
+	const featured = getProjects().filter((post) => post.featured);
+	const unordered = featured.filter((post) => post.order === undefined);
+	if (unordered.length > 0) {
+		throw new Error(`A featured post needs an order: ${unordered.map((post) => post.slug).join(', ')}`);
+	}
+	return featured;
 }
 
 /** All posts in their `order` (live products first). Posts with no `order` come last, newest first. */
@@ -293,7 +299,7 @@ export function getProjects(): Post[] {
 
 /** The projects for the "More projects" cards on the home page, in their `order`. */
 export function getMorePosts(): Post[] {
-	return getProjects().filter((post) => post.more && post.featured === undefined);
+	return getProjects().filter((post) => post.more && !post.featured);
 }
 
 /** Where an old category URL goes now: the project of a one-project category, else the projects page. */

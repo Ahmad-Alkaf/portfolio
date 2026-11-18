@@ -10,7 +10,7 @@ image:
 summary: Pick Windows apps on the web and get one custom installer EXE that installs all of them unattended.
 kind: Personal product
 status: live
-featured: 4
+featured: true
 order: 4
 links:
   live: https://setup-forge.com

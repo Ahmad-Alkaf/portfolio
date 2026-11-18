@@ -11,7 +11,7 @@ image:
 summary: A cloud point-of-sale system for retail stores, live as a free beta, with inventory, checkout, bills, and sales dashboards in English and Arabic.
 kind: Personal product
 status: live
-featured: 2
+featured: true
 order: 2
 links:
   live: https://cornertill.com
