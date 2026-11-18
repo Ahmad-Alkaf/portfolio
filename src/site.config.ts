@@ -33,7 +33,7 @@ export const site = {
 	glance: [
 		{ label: 'Experience', value: '4 years, full-stack' },
 		{ label: 'Core stack', value: 'TypeScript · React · Next.js · Node.js · PostgreSQL' },
-		{ label: 'Live products', value: 'Etamyd · PDF Anvil · QR Anvil · SetupForge' },
+		{ label: 'Live products', value: '5: Etamyd · CornerTill · PDF Anvil · SetupForge · QR Anvil' },
 		{ label: 'Award', value: 'Gold Medal, RIPC 2023 (174 projects)' },
 		{ label: 'Education', value: 'B.Sc. CIS, GPA 4.12 / 5' }
 	]

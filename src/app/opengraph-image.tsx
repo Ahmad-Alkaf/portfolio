@@ -10,7 +10,7 @@ export default function Image() {
 	return ogImage({
 		eyebrow: 'Portfolio',
 		title: `${site.title}`,
-		text: 'Full-stack web products with TypeScript, React, Next.js, Node.js, and PostgreSQL. Four products live in production.',
+		text: 'Full-stack web products with TypeScript, React, Next.js, Node.js, and PostgreSQL. Five products live in production.',
 		chips: ['TypeScript', 'React', 'Next.js', 'Node.js', 'PostgreSQL']
 	});
 }
