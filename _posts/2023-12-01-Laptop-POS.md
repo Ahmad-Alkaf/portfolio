@@ -39,8 +39,8 @@ The first release was in December 2023. In November 2026, I renamed the product,
 ## Features
 
 - **Multi-role store accounts** — **Cashiers** ring up sales at checkout, **Maintainers** manage the inventory and the catalog, and **Owners** see the full picture on the dashboard.
-- **Inventory** — product names, descriptions, SKUs, prices, images, and stock.
-- **Checkout and bills** — barcode input, payment methods, change calculation, and a bill for each sale.
+- **Inventory** — product names, descriptions, barcodes, prices, images, and stock.
+- **Checkout and bills** — barcode input, cash or digital payment, change calculation, and a bill for each sale.
 - **Sales dashboard** — sales, bills, staff performance, and inventory status.
 - **English and Arabic** — a full Arabic right-to-left layout, a language switch, and localized server messages.
 - **Accounts** — owner and staff registration, email verification and password reset through Resend, and Google sign-in.
