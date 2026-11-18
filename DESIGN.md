@@ -12,8 +12,8 @@ Each page decision serves one of these two questions, or the next step: contact.
 ## Information order (home page)
 
 1. **First screen**: name, role, location, one sentence of value with the core stack, and the contact actions (Email, Resume, GitHub, LinkedIn). An "at a glance" panel gives the facts that a recruiter scans for: experience, core stack, live products, award, education.
-2. **Products in production**: the four live products first. Each has a real screenshot in a browser frame (the address bar shows the live domain), the case study in short (problem, what I built, result), the stack, and the links (case study, live site, source).
-3. **More projects**: compact cards for earlier and academic work, with a link to the full list.
+2. **Products in production**: the five live products first (Etamyd, CornerTill, PDF Anvil, SetupForge, QR Anvil). Each has a real screenshot in a browser frame (the address bar shows the live domain), the case study in short (problem, what I built, result), the stack, and the links (case study, live site, source).
+3. **More projects**: a compact card for the strongest earlier work (the ACTS capstone, Gold Medal), with a link to the full list. Projects that are not deployed, and small or course projects, are only on `/projects/`, after the live products.
 4. **Skills**: grouped by area. A skill that a project uses links to the projects that use it.
 5. **Contact**: one band with email, copy email, resume, GitHub, LinkedIn.
 
