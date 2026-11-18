@@ -128,18 +128,27 @@ export function CaseStudy({ caseStudy, headingLevel = 3 }: { caseStudy: NonNulla
 		['What I built', caseStudy.built],
 		['Result', caseStudy.result]
 	] as const;
-	const Heading = headingLevel === 2 ? 'h2' : 'h3';
-	return (
-		<section className="case" aria-label="Case study in short">
-			{headingLevel === 2 ? <Heading className="case-title">In short</Heading> : null}
-			<dl>
-				{rows.map(([term, text]) => (
-					<div key={term}>
-						<dt>{term}</dt>
-						<dd>{text}</dd>
-					</div>
-				))}
-			</dl>
-		</section>
+	const list = (
+		<dl>
+			{rows.map(([term, text]) => (
+				<div key={term}>
+					<dt>{term}</dt>
+					<dd>{text}</dd>
+				</div>
+			))}
+		</dl>
 	);
+	// On a post page the box is a section with its own heading. On the home page it is part of the
+	// project article, so it is not a landmark (four landmarks with one name would repeat).
+	if (headingLevel === 2) {
+		return (
+			<section className="case" aria-labelledby="case-title">
+				<h2 id="case-title" className="case-title">
+					In short
+				</h2>
+				{list}
+			</section>
+		);
+	}
+	return <div className="case">{list}</div>;
 }
