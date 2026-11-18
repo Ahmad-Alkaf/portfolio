@@ -1,61 +1,70 @@
 'use client';
 
-import { useSyncExternalStore } from 'react';
-import { MonitorIcon, MoonIcon, SunIcon } from './icons';
+import { useEffect } from 'react';
+import { MoonIcon, SunIcon } from './icons';
 
-type Theme = 'system' | 'light' | 'dark';
+// A two-state color scheme toggle. The page follows the system scheme until
+// the user selects the other scheme. Selecting the system scheme again
+// removes the stored value. The value lives in <meta name="color-scheme">,
+// and the CSS maps that value to the `color-scheme` property.
 
-const STORAGE_KEY = 'theme';
-const EVENT = 'themechange';
-const NEXT: Record<Theme, Theme> = { system: 'light', light: 'dark', dark: 'system' };
-const LABEL: Record<Theme, string> = { system: 'System', light: 'Light', dark: 'Dark' };
+const KEY = 'color-scheme';
+const OLD_KEY = 'theme';
 
-/** Runs in <head> before the first paint, so the page does not flash. */
-export const themeScript = `(function(){try{var t=localStorage.getItem('${STORAGE_KEY}');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t;}catch(e){}})();`;
+/** Runs in <head>, directly after the color-scheme meta, before the first paint. */
+export const themeScript = `(function(){try{var m=document.querySelector('meta[name="color-scheme"]');var t=localStorage.getItem('${KEY}')||localStorage.getItem('${OLD_KEY}');if(m&&(t==='light'||t==='dark'))m.content=t;}catch(e){}})();`;
 
-function readTheme(): Theme {
+function meta(): HTMLMetaElement | null {
+	return document.querySelector('meta[name="color-scheme"]');
+}
+
+function readStored(): string | null {
 	try {
-		const value = localStorage.getItem(STORAGE_KEY);
-		return value === 'light' || value === 'dark' ? value : 'system';
+		return localStorage.getItem(KEY) ?? localStorage.getItem(OLD_KEY);
 	} catch {
-		return 'system';
+		return null;
 	}
 }
 
-function subscribe(onChange: () => void): () => void {
-	window.addEventListener(EVENT, onChange);
-	window.addEventListener('storage', onChange);
-	return () => {
-		window.removeEventListener(EVENT, onChange);
-		window.removeEventListener('storage', onChange);
-	};
-}
-
-function applyTheme(theme: Theme) {
+function toggle() {
+	const element = meta();
+	if (!element) return;
+	const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+	const current = element.content === 'light' || element.content === 'dark' ? element.content : system;
+	const target = current === 'dark' ? 'light' : 'dark';
 	try {
-		if (theme === 'system') localStorage.removeItem(STORAGE_KEY);
-		else localStorage.setItem(STORAGE_KEY, theme);
+		localStorage.removeItem(OLD_KEY);
+		if (target === system) localStorage.removeItem(KEY);
+		else localStorage.setItem(KEY, target);
 	} catch {
-		// Storage can be blocked. The theme still changes for this page.
+		// Storage can be blocked. The scheme still changes on this page.
 	}
-	if (theme === 'system') delete document.documentElement.dataset.theme;
-	else document.documentElement.dataset.theme = theme;
-	window.dispatchEvent(new Event(EVENT));
+	element.content = target === system ? 'light dark' : target;
 }
 
 export function ThemeToggle() {
-	const theme = useSyncExternalStore(subscribe, readTheme, () => 'system' as Theme);
-	const next = NEXT[theme];
-	const Icon = theme === 'light' ? SunIcon : theme === 'dark' ? MoonIcon : MonitorIcon;
+	useEffect(() => {
+		// Another tab can change the stored value.
+		const onStorage = (event: StorageEvent) => {
+			if (event.key !== KEY && event.key !== OLD_KEY) return;
+			const element = meta();
+			const value = readStored();
+			if (element) element.content = value === 'light' || value === 'dark' ? value : 'light dark';
+		};
+		window.addEventListener('storage', onStorage);
+		return () => window.removeEventListener('storage', onStorage);
+	}, []);
+
 	return (
-		<button
-			type="button"
-			className="icon-button"
-			onClick={() => applyTheme(next)}
-			title={`Theme: ${LABEL[theme]}. Click for ${LABEL[next]}.`}
-			aria-label={`Theme: ${LABEL[theme]}. Switch to ${LABEL[next]}.`}
-		>
-			<Icon />
+		<button type="button" className="icon-button theme-toggle" onClick={toggle}>
+			<span className="to-dark">
+				<MoonIcon />
+				<span className="visually-hidden">Switch to dark theme</span>
+			</span>
+			<span className="to-light">
+				<SunIcon />
+				<span className="visually-hidden">Switch to light theme</span>
+			</span>
 		</button>
 	);
 }

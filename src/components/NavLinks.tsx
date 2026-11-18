@@ -5,12 +5,12 @@ import { usePathname } from 'next/navigation';
 
 export type NavItem = { href: string; label: string };
 
-export function NavLinks({ items }: { items: NavItem[] }) {
+export function NavLinks({ items }: { items: readonly NavItem[] }) {
 	const pathname = usePathname();
 	return (
 		<ul className="nav-links">
 			{items.map((item) => {
-				const active = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+				const active = pathname.startsWith(item.href) || (item.href === '/projects/' && pathname.startsWith('/posts/'));
 				return (
 					<li key={item.href}>
 						<Link href={item.href} aria-current={active ? 'page' : undefined}>

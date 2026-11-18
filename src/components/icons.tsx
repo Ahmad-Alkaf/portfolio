@@ -79,3 +79,95 @@ export function MonitorIcon(props: IconProps) {
 		</Stroke>
 	);
 }
+
+export function ArrowUpRightIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="M7 17 17 7M8 7h9v9" />
+		</Stroke>
+	);
+}
+
+export function ArrowRightIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="M5 12h14M13 6l6 6-6 6" />
+		</Stroke>
+	);
+}
+
+export function ArrowLeftIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="M19 12H5M11 18l-6-6 6-6" />
+		</Stroke>
+	);
+}
+
+export function CopyIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<rect x="9" y="9" width="12" height="12" rx="2" />
+			<path d="M5 15V5a2 2 0 0 1 2-2h10" />
+		</Stroke>
+	);
+}
+
+export function CheckIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="m5 12 5 5 9-10" />
+		</Stroke>
+	);
+}
+
+export function PrinterIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" />
+			<rect x="6" y="14" width="12" height="7" />
+		</Stroke>
+	);
+}
+
+export function CloseIcon(props: IconProps) {
+	return (
+		<Stroke {...props}>
+			<path d="M18 6 6 18M6 6l12 12" />
+		</Stroke>
+	);
+}
+
+export function ChevronLeftIcon(props: IconProps) {
+	return (
+		<Stroke {...props}>
+			<path d="m15 18-6-6 6-6" />
+		</Stroke>
+	);
+}
+
+export function ChevronRightIcon(props: IconProps) {
+	return (
+		<Stroke {...props}>
+			<path d="m9 18 6-6-6-6" />
+		</Stroke>
+	);
+}
+
+export function MapPinIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+			<circle cx="12" cy="10" r="3" />
+		</Stroke>
+	);
+}
+
+export function FileTextIcon(props: IconProps) {
+	return (
+		<Stroke width={16} height={16} {...props}>
+			<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z" />
+			<path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+		</Stroke>
+	);
+}

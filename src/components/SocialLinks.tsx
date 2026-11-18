@@ -4,6 +4,7 @@ import { site } from '@/site.config';
 
 const ICONS = { github: GitHubIcon, x: XIcon, linkedin: LinkedInIcon } as const;
 
+/** Icon links: GitHub, LinkedIn, X, and email. */
 export function SocialLinks() {
 	const [user, domain] = site.author.email;
 	return (
@@ -19,7 +20,7 @@ export function SocialLinks() {
 				);
 			})}
 			<li>
-				<EmailLink user={user} domain={domain} className="icon-button">
+				<EmailLink user={user} domain={domain} className="icon-button" label="Email">
 					<MailIcon />
 				</EmailLink>
 			</li>

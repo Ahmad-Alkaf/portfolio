@@ -1,26 +1,26 @@
 import Link from 'next/link';
-import { NavLinks, type NavItem } from './NavLinks';
+import { NavLinks } from './NavLinks';
 import { ThemeToggle } from './ThemeToggle';
-import { getTabs } from '@/lib/content';
 import { site } from '@/site.config';
 
 export function Header() {
-	const items: NavItem[] = [{ href: '/', label: 'Home' }, ...getTabs().map((tab) => ({ href: tab.url, label: tab.title }))];
 	return (
 		<header className="site-header">
 			<div className="container header-row">
 				<Link href="/" className="brand">
-					<img src={site.avatar} alt="" width={36} height={36} className="avatar" />
-					<span>
-						<span className="brand-name">{site.title}</span>
-						<span className="brand-tagline">{site.tagline}</span>
-					</span>
+					<img src={site.avatar} alt="" width={32} height={32} className="brand-avatar" />
+					<span className="brand-name">{site.title}</span>
 				</Link>
-				<ThemeToggle />
+				<nav aria-label="Main" className="site-nav">
+					<NavLinks items={site.nav} />
+				</nav>
+				<div className="header-actions">
+					<ThemeToggle />
+					<Link href="/#contact" className="button button-small button-primary header-contact">
+						Contact
+					</Link>
+				</div>
 			</div>
-			<nav className="container" aria-label="Main">
-				<NavLinks items={items} />
-			</nav>
 		</header>
 	);
 }
