@@ -19,10 +19,16 @@ export function ProjectFilter({ options, projects }: { options: FilterOption[]; 
 		// Read once after hydration, so the server HTML and the first client render are the same.
 		// eslint-disable-next-line react-hooks/set-state-in-effect
 		if (options.some((option) => option.slug === stack)) setActive(stack);
+		// The attribute that the inline script set is only for the first paint.
+		return () => {
+			delete document.documentElement.dataset.stack;
+		};
 	}, [options]);
 
 	function select(slug: string) {
 		setActive(slug);
+		if (slug) document.documentElement.dataset.stack = slug;
+		else delete document.documentElement.dataset.stack;
 		const url = new URL(window.location.href);
 		if (slug) url.searchParams.set('stack', slug);
 		else url.searchParams.delete('stack');
@@ -32,8 +38,17 @@ export function ProjectFilter({ options, projects }: { options: FilterOption[]; 
 	const shown = projects.filter((project) => !active || project.tagItems.some((tag) => tag.slug === active));
 	const activeLabel = options.find((option) => option.slug === active)?.label;
 
+	// Before hydration, a ?stack= link already hides the other projects (no jump):
+	// the script sets data-stack on <html>, and these rules hide the cards.
+	const firstPaintCss = options
+		.map((option) => `:root[data-stack='${option.slug}'] .filter-list > li:not([data-tags~='${option.slug}']){display:none}`)
+		.join('');
+	const firstPaintScript = `(function(){var s=new URLSearchParams(location.search).get('stack');if(s&&/^[a-z0-9-]+$/.test(s))document.documentElement.dataset.stack=s;})();`;
+
 	return (
 		<>
+			<style dangerouslySetInnerHTML={{ __html: firstPaintCss }} />
+			<script dangerouslySetInnerHTML={{ __html: firstPaintScript }} />
 			<div className="filter" role="group" aria-label="Filter projects by stack">
 				<button type="button" className="filter-button" aria-pressed={active === ''} onClick={() => select('')}>
 					All <span className="count">{projects.length}</span>
@@ -53,9 +68,9 @@ export function ProjectFilter({ options, projects }: { options: FilterOption[]; 
 			<p className="filter-status" role="status">
 				{activeLabel ? `${shown.length} of ${projects.length} projects use ${activeLabel}.` : `${projects.length} projects.`}
 			</p>
-			<ul className="cards">
+			<ul className="cards filter-list">
 				{projects.map((project) => (
-					<li key={project.slug} hidden={!shown.includes(project)}>
+					<li key={project.slug} hidden={!shown.includes(project)} data-tags={project.tagItems.map((tag) => tag.slug).join(' ')}>
 						<ProjectCard post={project} headingLevel={2} />
 					</li>
 				))}
