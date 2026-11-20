@@ -40,8 +40,9 @@ export default function HomePage() {
 						production.
 					</p>
 					<p className="hero-sub">
-						4 years of experience. Five products live today, from a multi-tenant SaaS built in a team to a cloud point-of-sale system and
-						web tools that I run myself.
+						4 years of experience. This site shows the public part of my work, from a multi-tenant SaaS built in a team to a cloud
+						point-of-sale system and web tools that I run myself. My other professional work is in private repositories and is not shown
+						here.
 					</p>
 					<div className="actions hero-actions">
 						<EmailLink user={user} domain={domain} className="button button-primary">

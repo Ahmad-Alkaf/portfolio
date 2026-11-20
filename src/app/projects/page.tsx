@@ -25,7 +25,7 @@ export default function ProjectsPage() {
 			<header className="page-head">
 				<p className="eyebrow">Projects</p>
 				<h1 className="page-title">Everything I have built</h1>
-				<p className="section-text">The five live products first, then earlier and course work. Select a stack to see only the projects that use it.</p>
+				<p className="section-text">The public live products first, then earlier and course work. Work in private repositories is not in this list. Select a stack to see only the projects that use it.</p>
 			</header>
 			<ProjectFilter options={options} projects={posts.map(toProjectSummary)} />
 		</>
