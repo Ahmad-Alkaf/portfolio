@@ -1,3 +1,4 @@
+import { Fragment, type ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowUpRightIcon, GitHubIcon } from './icons';
 import type { Post, TagItem } from '@/lib/content';
@@ -70,39 +71,85 @@ export function TagChips({ tags, link = true, limit }: { tags: TagItem[]; link?:
  * The project image: a screenshot in a browser frame (with the live domain in
  * the address bar), or the project logo on a plain panel.
  */
-export function Shot({ post, sizes, priority = false }: { post: ProjectSummary; sizes: string; priority?: boolean }) {
+export function Shot({ post, sizes, priority = false, href }: { post: ProjectSummary; sizes: string; priority?: boolean; href?: string }) {
 	const loading = priority ? undefined : 'lazy';
 	const fetchPriority = priority ? 'high' : undefined;
+	// With `href`, the image is a link to the post. The link is only on the image, because the
+	// address bar can have its own link to the live site (a link cannot be inside a link).
+	const media = (img: ReactNode) =>
+		href ? (
+			<Link href={href} className="shot-link" tabIndex={-1} aria-hidden="true">
+				{img}
+			</Link>
+		) : (
+			img
+		);
 	if (post.screenshot) {
 		const { src, small, alt, domain } = post.screenshot;
+		const live = post.links.live;
+		const label = domain ?? (post.links.source ? post.links.source.replace(/^https:\/\//, '') : post.name);
 		return (
 			<div className="shot">
-				<div className="shot-bar" aria-hidden="true">
-					<span className="shot-dots" />
-					<span className="shot-url">{domain ?? (post.links.source ? post.links.source.replace(/^https:\/\//, '') : post.name)}</span>
+				<div className="shot-bar" aria-hidden={live ? undefined : true}>
+					<span className="shot-dots" aria-hidden="true" />
+					{live ? (
+						<a className="shot-url" href={live} target="_blank" rel="noopener noreferrer">
+							<span className="shot-url-text">{label}</span>
+							<ArrowUpRightIcon width={11} height={11} />
+							<span className="visually-hidden"> (opens in a new tab)</span>
+						</a>
+					) : (
+						<span className="shot-url">
+							<span className="shot-url-text">{label}</span>
+						</span>
+					)}
 				</div>
-				<img
-					src={src}
-					srcSet={small ? `${small} 640w, ${src} 1280w` : undefined}
-					sizes={small ? sizes : undefined}
-					alt={alt}
-					width={1280}
-					height={720}
-					loading={loading}
-					fetchPriority={fetchPriority}
-					decoding="async"
-				/>
+				{media(
+					<img
+						src={src}
+						srcSet={small ? `${small} 640w, ${src} 1280w` : undefined}
+						sizes={small ? sizes : undefined}
+						alt={alt}
+						width={1280}
+						height={720}
+						loading={loading}
+						fetchPriority={fetchPriority}
+						decoding="async"
+					/>
+				)}
 			</div>
 		);
 	}
 	if (post.image) {
 		return (
 			<div className="shot shot-logo">
-				<img src={post.image.src} alt={post.image.alt} width={1200} height={630} loading={loading} fetchPriority={fetchPriority} decoding="async" />
+				{media(
+					<img src={post.image.src} alt={post.image.alt} width={1200} height={630} loading={loading} fetchPriority={fetchPriority} decoding="async" />
+				)}
 			</div>
 		);
 	}
 	return null;
+}
+
+/** The text with each mention of the live domain as a link to the live site (new tab, with the arrow icon). */
+function withLiveLink(text: string, live?: string): ReactNode {
+	if (!live) return text;
+	const host = new URL(live).hostname;
+	const parts = text.split(host);
+	if (parts.length === 1) return text;
+	return parts.map((part, i) => (
+		<Fragment key={i}>
+			{i > 0 ? (
+				<a className="ext-link" href={live} target="_blank" rel="noopener noreferrer">
+					{host}
+					<ArrowUpRightIcon width={13} height={13} />
+					<span className="visually-hidden"> (opens in a new tab)</span>
+				</a>
+			) : null}
+			{part}
+		</Fragment>
+	));
 }
 
 /** "Live site" and "Source" links. */
@@ -128,7 +175,16 @@ export function ProjectLinks({ post, compact = false }: { post: ProjectSummary; 
 	);
 }
 
-export function CaseStudy({ caseStudy, headingLevel = 3 }: { caseStudy: NonNullable<Post['caseStudy']>; headingLevel?: 2 | 3 }) {
+export function CaseStudy({
+	caseStudy,
+	headingLevel = 3,
+	live
+}: {
+	caseStudy: NonNullable<Post['caseStudy']>;
+	headingLevel?: 2 | 3;
+	/** The live site URL. Each mention of its domain in the text becomes a link. */
+	live?: string;
+}) {
 	const rows = [
 		['Problem', caseStudy.problem],
 		['What I built', caseStudy.built],
@@ -139,7 +195,7 @@ export function CaseStudy({ caseStudy, headingLevel = 3 }: { caseStudy: NonNulla
 			{rows.map(([term, text]) => (
 				<div key={term}>
 					<dt>{term}</dt>
-					<dd>{text}</dd>
+					<dd>{withLiveLink(text, live)}</dd>
 				</div>
 			))}
 		</dl>

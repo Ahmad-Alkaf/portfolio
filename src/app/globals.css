@@ -945,10 +945,48 @@ a.chip:hover {
 	color: var(--muted);
 	font-family: var(--font-mono);
 	font-size: 0.7rem;
-	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 4px;
+	text-decoration: none;
+}
+
+.shot-url-text {
+	min-width: 0;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.shot-url svg {
+	flex: none;
+}
+
+/* The address bar link to the live site. It is above the card link that covers a project card. */
+a.shot-url {
+	position: relative;
+	z-index: 1;
+}
+
+a.shot-url:hover {
+	color: var(--ink);
+	text-decoration: underline;
+}
+
+.shot-link {
+	display: block;
+}
+
+/* A link to a site in a new tab, in running text: the arrow stays on the line of the last word. */
+.ext-link {
+	white-space: nowrap;
+}
+
+.ext-link svg {
+	display: inline-block;
+	vertical-align: -0.08em;
+	margin-inline-start: 2px;
 }
 
 .shot img {
