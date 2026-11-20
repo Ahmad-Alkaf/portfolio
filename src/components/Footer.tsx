@@ -1,3 +1,4 @@
+import { ArrowUpRightIcon } from './icons';
 import { SocialLinks } from './SocialLinks';
 import { site } from '@/site.config';
 
@@ -11,10 +12,12 @@ export function Footer() {
 					</p>
 					<p className="muted">
 						Personal products published under{' '}
-						<a href={site.brand.url} target="_blank" rel="noopener noreferrer">
+						<a className="ext-link" href={site.brand.url} target="_blank" rel="noopener noreferrer">
 							{site.brand.name}
+							<ArrowUpRightIcon width={12} height={12} />
+							<span className="visually-hidden"> (opens in a new tab)</span>
 						</a>
-						. <a href="/feed.xml">Atom feed</a>.
+						.
 					</p>
 				</div>
 				<SocialLinks />
