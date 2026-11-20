@@ -929,10 +929,9 @@ a.chip:hover {
 	width: 36px;
 	height: 8px;
 	background:
-		radial-gradient(circle at 4px 4px, var(--line-strong) 3.5px, transparent 4px),
-		radial-gradient(circle at 18px 4px, var(--line-strong) 3.5px, transparent 4px),
-		radial-gradient(circle at 32px 4px, var(--line-strong) 3.5px, transparent 4px);
-	opacity: 0.6;
+		radial-gradient(circle at 4px 4px, #ff5f57 3.5px, transparent 4px),
+		radial-gradient(circle at 18px 4px, #febc2e 3.5px, transparent 4px),
+		radial-gradient(circle at 32px 4px, #28c840 3.5px, transparent 4px);
 }
 
 .shot-url {
