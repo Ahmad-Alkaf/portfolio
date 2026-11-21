@@ -23,6 +23,7 @@
 	src: local('Courier New'), local('CourierNewPSMT'), local('Liberation Mono'), local('LiberationMono'),
 		local('Cousine'), local('Cousine-Regular'), local('Droid Sans Mono'), local('DroidSansMono'), local('Menlo'),
 		local('Menlo-Regular'), local('DejaVu Sans Mono'), local('DejaVuSansMono');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 100%;
 	ascent-override: 100.5%;
 	descent-override: 29.5%;
@@ -44,6 +45,7 @@
 	font-weight: 100 549;
 	src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'), local('Arimo'),
 		local('Arimo-Regular');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 105.5%;
 	ascent-override: 95.26%;
 	descent-override: 27.96%;
@@ -55,6 +57,7 @@
 	font-weight: 550 900;
 	src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'),
 		local('Arimo Bold'), local('Arimo-Bold');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 100.0%;
 	ascent-override: 100.50%;
 	descent-override: 29.50%;
@@ -65,6 +68,7 @@
 	font-family: 'Geist Roboto Fallback';
 	font-weight: 100 549;
 	src: local('Roboto'), local('Roboto-Regular');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 105.5%;
 	ascent-override: 95.26%;
 	descent-override: 27.96%;
@@ -75,6 +79,7 @@
 	font-family: 'Geist Roboto Fallback';
 	font-weight: 550 900;
 	src: local('Roboto Bold'), local('Roboto-Bold');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 100.0%;
 	ascent-override: 100.50%;
 	descent-override: 29.50%;
@@ -86,6 +91,7 @@
 	font-weight: 100 599;
 	src: local('Arial'), local('ArialMT'), local('Liberation Sans'), local('LiberationSans'), local('Arimo'),
 		local('Arimo-Regular');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 108.5%;
 	ascent-override: 85.71%;
 	descent-override: 24.88%;
@@ -97,6 +103,7 @@
 	font-weight: 600 900;
 	src: local('Arial Bold'), local('Arial-BoldMT'), local('Liberation Sans Bold'), local('LiberationSans-Bold'),
 		local('Arimo Bold'), local('Arimo-Bold');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 102.0%;
 	ascent-override: 91.18%;
 	descent-override: 26.47%;
@@ -107,6 +114,7 @@
 	font-family: 'Bricolage Roboto Fallback';
 	font-weight: 100 599;
 	src: local('Roboto'), local('Roboto-Regular');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 108.5%;
 	ascent-override: 85.71%;
 	descent-override: 24.88%;
@@ -117,9 +125,32 @@
 	font-family: 'Bricolage Roboto Fallback';
 	font-weight: 600 900;
 	src: local('Roboto Bold'), local('Roboto-Bold');
+	unicode-range: U+0000-058F, U+1E00-1FFF, U+2000-22FF, U+2C60-2C7F, U+A720-A7FF;
 	size-adjust: 102.0%;
 	ascent-override: 91.18%;
 	descent-override: 26.47%;
+	line-gap-override: 0%;
+}
+
+/*
+ * Each fallback face above has a unicode-range with no Arabic. Arial and Courier New have
+ * Arabic letters: without the range, they would draw the Arabic text before the Arabic font
+ * gets its turn in the font list.
+ *
+ * The Arabic font (IBM Plex Sans Arabic) has this fallback. Until the font loads, a system
+ * Arabic font draws the text with the line metrics of the web font, so the baseline of a line
+ * does not move when the font arrives. The widths are not adjusted: each system has a
+ * different Arabic font. The Arabic pages preload the font files to keep this time short.
+ */
+@font-face {
+	font-family: 'Plex Arabic Fallback';
+	font-weight: 100 900;
+	src: local('Segoe UI'), local('Tahoma'), local('Arial'), local('ArialMT'), local('SF Arabic'), local('Geeza Pro'),
+		local('GeezaPro'), local('Noto Sans Arabic'), local('NotoSansArabic-Regular'), local('Noto Naskh Arabic'),
+		local('NotoNaskhArabic-Regular'), local('DejaVu Sans'), local('DejaVuSans');
+	unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+	ascent-override: 108.5%;
+	descent-override: 41.5%;
 	line-gap-override: 0%;
 }
 
@@ -178,9 +209,13 @@
 	--danger: var(--danger-l);
 	--shadow-color: var(--shadow-color-l);
 
-	--font-sans: var(--font-body), system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans Arabic', sans-serif;
+	/*
+	 * The Latin fonts are first and have no Arabic letters. So in each list a Latin letter comes
+	 * from the Latin font, and an Arabic letter comes from the Arabic font (--font-arabic).
+	 */
+	--font-sans: var(--font-body), var(--font-arabic), system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Sans Arabic', sans-serif;
 	--font-heading: var(--font-display), var(--font-sans);
-	--font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	--font-mono: var(--font-code), var(--font-arabic), ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
 	--radius: 12px;
 	--radius-small: 8px;
@@ -358,7 +393,7 @@ strong {
 
 .skip-link {
 	position: absolute;
-	left: var(--gutter);
+	inset-inline-start: var(--gutter);
 	top: -100px;
 	z-index: 100;
 	padding: 10px 16px;
@@ -490,7 +525,9 @@ strong {
 	margin: 0;
 }
 
+/* A chip has a technology name: it is left-to-right in each language (C#, Next.js). */
 .chip {
+	direction: ltr;
 	display: inline-flex;
 	align-items: center;
 	gap: 6px;
@@ -614,6 +651,15 @@ a.chip:hover {
 	text-decoration: underline;
 }
 
+/*
+ * The arrows and chevrons that show a direction ("All projects", "Case study", older and newer)
+ * point the other way on a right-to-left page. The external-link arrow, the logos, the
+ * browser frame, the screenshots, and the code are not mirrored.
+ */
+[dir='rtl'] .icon-dir {
+	transform: scaleX(-1);
+}
+
 .back-link {
 	display: inline-flex;
 	align-items: center;
@@ -710,6 +756,27 @@ a.chip:hover {
 	display: flex;
 	align-items: center;
 	gap: 6px;
+}
+
+/* The link to the same page in the other language. Its label is the name of that language. */
+.lang-switch {
+	display: inline-flex;
+	align-items: center;
+	min-height: 36px;
+	padding: 0 12px;
+	border: 1px solid var(--line-strong);
+	border-radius: 10px;
+	color: var(--ink);
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.lang-switch:hover {
+	border-color: var(--accent);
+	color: var(--ink);
 }
 
 /* The theme toggle shows the action that it does: moon in light mode, sun in dark mode. */
@@ -914,6 +981,7 @@ a.chip:hover {
 	background: var(--surface);
 }
 
+/* The browser frame is left-to-right in each language, as a real browser window is (dir="ltr" in the HTML). */
 .shot-bar {
 	display: flex;
 	align-items: center;
@@ -1078,8 +1146,8 @@ a.shot-url:hover {
 	display: grid;
 	gap: 12px;
 	margin: 0;
-	padding-left: 16px;
-	border-left: 2px solid var(--accent);
+	padding-inline-start: 16px;
+	border-inline-start: 2px solid var(--accent);
 }
 
 .case dt {
@@ -1464,7 +1532,7 @@ a.shot-url:hover {
 }
 
 .post-nav-next {
-	text-align: right;
+	text-align: end;
 }
 
 .post-nav-next .eyebrow {
@@ -1510,7 +1578,7 @@ a.shot-url:hover {
 
 .prose ul,
 .prose ol {
-	padding-left: 1.4em;
+	padding-inline-start: 1.4em;
 }
 
 .prose li + li {
@@ -1551,11 +1619,18 @@ a.shot-url:hover {
 	background: var(--sunken);
 }
 
+/* Code is left-to-right in each language (the Markdown renderer sets dir="ltr"). */
 .prose pre {
+	text-align: left;
 	overflow-x: auto;
 	padding: 16px;
 	border-radius: var(--radius-small);
 	background: var(--sunken);
+}
+
+/* A short code name in a sentence stays on one line (Retry-After). */
+.prose :not(pre) > code {
+	white-space: nowrap;
 }
 
 .prose pre code {
@@ -1566,8 +1641,9 @@ a.shot-url:hover {
 .prose blockquote {
 	margin-inline: 0;
 	padding: 14px 18px;
-	border-left: 4px solid var(--line-strong);
-	border-radius: 0 var(--radius-small) var(--radius-small) 0;
+	border-inline-start: 4px solid var(--line-strong);
+	border-start-end-radius: var(--radius-small);
+	border-end-end-radius: var(--radius-small);
 	background: var(--surface);
 }
 
@@ -1576,19 +1652,19 @@ a.shot-url:hover {
 }
 
 .prose blockquote.prompt-tip {
-	border-left-color: var(--live);
+	border-inline-start-color: var(--live);
 }
 
 .prose blockquote.prompt-info {
-	border-left-color: var(--info);
+	border-inline-start-color: var(--info);
 }
 
 .prose blockquote.prompt-warning {
-	border-left-color: var(--warn);
+	border-inline-start-color: var(--warn);
 }
 
 .prose blockquote.prompt-danger {
-	border-left-color: var(--danger);
+	border-inline-start-color: var(--danger);
 }
 
 .prose blockquote p img {
@@ -1611,7 +1687,7 @@ a.shot-url:hover {
 .prose td {
 	padding: 8px 12px;
 	border-bottom: 1px solid var(--line);
-	text-align: left;
+	text-align: start;
 }
 
 .prose th {
@@ -1696,7 +1772,8 @@ a.shot-url:hover {
 	align-items: center;
 	justify-content: space-between;
 	gap: 12px;
-	padding: 6px 6px 6px 16px;
+	padding-block: 6px;
+	padding-inline: 16px 6px;
 	border-bottom: 1px solid var(--line);
 }
 
@@ -1708,7 +1785,7 @@ a.shot-url:hover {
 .lightbox-count {
 	font-family: var(--font-mono);
 	font-size: 0.8rem;
-	margin-left: 8px;
+	margin-inline-start: 8px;
 }
 
 .lightbox-image {
@@ -1875,6 +1952,48 @@ a.shot-url:hover {
 	font-size: 0.78rem;
 }
 
+/* ---------- Arabic ---------- */
+
+/*
+ * Arabic letters join, and they have marks above and below the line. So Arabic text gets
+ * more line height, no letter spacing (spacing breaks the joins), and no uppercase. The
+ * small labels are mono, uppercase, and spaced in English: in Arabic they use the text
+ * font at a larger size and a heavier weight. :is() gives these rules the specificity
+ * of the most specific rule that they replace.
+ */
+html:lang(ar) body {
+	line-height: 1.85;
+}
+
+html:lang(ar) :is(h1, h2, h3, h4) {
+	line-height: 1.4;
+}
+
+html:lang(ar) .hero-title {
+	line-height: 1.25;
+}
+
+html:lang(ar) .hero-lead {
+	line-height: 1.7;
+}
+
+html:lang(ar) :is(h1, h2, h3, h4, .brand, .hero-lead, .post-nav-title, .resume-project-title) {
+	letter-spacing: 0;
+}
+
+html:lang(ar) :is(.eyebrow, .glance-list dt, .case dt, .case-title, .skill-group-title, .prose th, .resume-role, .resume-project-head .status) {
+	font-family: var(--font-sans);
+	font-size: 0.875rem;
+	font-weight: 600;
+	letter-spacing: 0;
+	text-transform: none;
+}
+
+/* The label of the language switch on an English page ("العربية"). */
+.lang-switch:lang(ar) {
+	font-size: 0.95rem;
+}
+
 /* ---------- Motion and color modes ---------- */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1904,7 +2023,7 @@ a.shot-url:hover {
 		color: HighlightText;
 	}
 	.case dl {
-		border-left-color: CanvasText;
+		border-inline-start-color: CanvasText;
 	}
 }
 
@@ -2009,6 +2128,13 @@ a.shot-url:hover {
 	.status::before {
 		display: none;
 	}
+	/* Arabic: less line height than on the screen, so the resume has the same number of pages as in English. */
+	html:lang(ar) body {
+		line-height: 1.6;
+	}
+	html:lang(ar) :is(.skill-group-title, .resume-role, .resume-project-head .status) {
+		font-size: 9.5pt;
+	}
 }
 
 /* Inside the dialog, keep focus rings inside its clipped edges. */
@@ -2030,8 +2156,23 @@ a.shot-url:hover {
 	white-space: nowrap;
 }
 
+/* Narrow phones: the header has the name, the language switch, the theme toggle, and "Contact". */
+@media (width < 400px) {
+	.header-row {
+		column-gap: 12px;
+	}
+	.lang-switch {
+		padding: 0 9px;
+	}
+	.header-contact {
+		padding: 0 10px;
+	}
+}
+
+/* The narrowest phones: no small photo, and no "Contact" button (the contact band is on each main page, and the email link is in the footer). */
 @media (width < 360px) {
-	.brand-avatar {
+	.brand-avatar,
+	.header-contact {
 		display: none;
 	}
 }
