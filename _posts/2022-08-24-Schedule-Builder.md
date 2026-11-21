@@ -22,7 +22,7 @@ screenshot:
 case:
   problem: Lecture schedules collide on rooms and teachers, and each change can break another schedule.
   built: Angular and Angular Material, a backtracking generator for collision-free lectures, and collision cues that use no text.
-  result: Live at schedule-builder.kaflabs.com. Made for the Human-Computer Interaction course.
+  result: Live at schedule-builder.kaflabs.com as a demo. A user builds a schedule by drag and drop, or the generator makes one with no collisions. Made for the Human-Computer Interaction course.
 ---
 
 Design and edit schedules without worrying about collisions between rooms or teachers. Also, you can build a schedule from scratch by generating lectures automatically you just have to provide the essential information such as how many hours in a week a subject needs to be lectured. However, you can add a subject in a pre-built schedule so that the lectures generator can place your lectures in collision-free places.

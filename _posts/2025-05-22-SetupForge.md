@@ -22,7 +22,7 @@ screenshot:
 case:
   problem: To set up a Windows PC, you find, download, and install each app one by one.
   built: A Next.js frontend over a 71,000+ app catalog (WinGet and the Microsoft Store), server-side compilation of a C# WinForms installer on Linux with Mono MSBuild, and a C# runtime that runs the install actions.
-  result: Live at setup-forge.com, with a command-injection defence, build back-pressure, and health and readiness endpoints.
+  result: Live at setup-forge.com. One EXE installs up to 200 apps with no user input, each from its official source, and a link shares the same app selection.
 ---
 
 SetupForge is a web app for setting up a Windows PC. You pick your apps from a catalog of 71,000+ apps (WinGet and the Microsoft Store), and SetupForge generates a custom installer EXE. You run the EXE, and it installs all the apps unattended.
