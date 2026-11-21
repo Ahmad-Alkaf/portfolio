@@ -7,7 +7,16 @@ import { CheckIcon, CopyIcon } from './icons';
  * Copies the email address. The address is put together only in the browser.
  * When the browser blocks the copy, the address shows as text that the reader can select.
  */
-export function CopyEmail({ user, domain }: { user: string; domain: string }) {
+export function CopyEmail({
+	user,
+	domain,
+	labels
+}: {
+	user: string;
+	domain: string;
+	/** `copyFailed` is the text before the address. */
+	labels: { copy: string; copied: string; copyFailed: string };
+}) {
 	const [state, setState] = useState<'idle' | 'copied' | 'failed'>('idle');
 	const [message, setMessage] = useState('');
 	const [showAddress, setShowAddress] = useState(false);
@@ -25,7 +34,7 @@ export function CopyEmail({ user, domain }: { user: string; domain: string }) {
 		setState(ok ? 'copied' : 'failed');
 		if (!ok) setShowAddress(true);
 		setMessage('');
-		requestAnimationFrame(() => setMessage(ok ? 'Email address copied' : `Copy failed. The address is ${address}`));
+		requestAnimationFrame(() => setMessage(ok ? labels.copied : `${labels.copyFailed}${address}`));
 		timer.current = setTimeout(() => {
 			setState('idle');
 			setMessage('');
@@ -36,12 +45,16 @@ export function CopyEmail({ user, domain }: { user: string; domain: string }) {
 		<span className="copy">
 			<button type="button" className="button button-ghost" onClick={copy} data-state={state}>
 				{state === 'copied' ? <CheckIcon /> : <CopyIcon />}
-				Copy email
+				{labels.copy}
 			</button>
 			<span className="copy-tip" role="status">
 				{message}
 			</span>
-			{showAddress ? <span className="copy-address">{address}</span> : null}
+			{showAddress ? (
+				<span className="copy-address" dir="ltr">
+					{address}
+				</span>
+			) : null}
 		</span>
 	);
 }

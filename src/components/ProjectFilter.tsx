@@ -1,17 +1,28 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { ProjectCard } from './ProjectCard';
-import type { ProjectSummary } from './ProjectBits';
+import { useEffect, useState, type ReactNode } from 'react';
 
-export type FilterOption = { slug: string; label: string; count: number };
+/** `status`: the text under the filter when this stack is selected. */
+export type FilterOption = { slug: string; label: string; count: number; status: string };
+
+/** One project: its tag slugs, and its card (drawn on the server). */
+export type FilterItem = { slug: string; tags: string[]; card: ReactNode };
 
 /**
  * All projects with a filter by stack. The selected stack is kept in the URL
  * (?stack=react), so a filtered list can be shared. Without JavaScript, all
- * projects show.
+ * projects show. The text comes from the page (the dictionary stays on the server).
  */
-export function ProjectFilter({ options, projects }: { options: FilterOption[]; projects: ProjectSummary[] }) {
+export function ProjectFilter({
+	options,
+	items,
+	labels
+}: {
+	options: FilterOption[];
+	items: FilterItem[];
+	/** `status` is the text under the filter when no stack is selected. */
+	labels: { group: string; all: string; status: string };
+}) {
 	const [active, setActive] = useState<string>('');
 
 	useEffect(() => {
@@ -35,8 +46,7 @@ export function ProjectFilter({ options, projects }: { options: FilterOption[]; 
 		window.history.replaceState(null, '', url);
 	}
 
-	const shown = projects.filter((project) => !active || project.tagItems.some((tag) => tag.slug === active));
-	const activeLabel = options.find((option) => option.slug === active)?.label;
+	const activeOption = options.find((option) => option.slug === active);
 
 	// Before hydration, a ?stack= link already hides the other projects (no jump):
 	// the script sets data-stack on <html>, and these rules hide the cards.
@@ -49,9 +59,9 @@ export function ProjectFilter({ options, projects }: { options: FilterOption[]; 
 		<>
 			<style dangerouslySetInnerHTML={{ __html: firstPaintCss }} />
 			<script dangerouslySetInnerHTML={{ __html: firstPaintScript }} />
-			<div className="filter" role="group" aria-label="Filter projects by stack">
+			<div className="filter" role="group" aria-label={labels.group}>
 				<button type="button" className="filter-button" aria-pressed={active === ''} onClick={() => select('')}>
-					All <span className="count">{projects.length}</span>
+					{labels.all} <span className="count">{items.length}</span>
 				</button>
 				{options.map((option) => (
 					<button
@@ -61,17 +71,18 @@ export function ProjectFilter({ options, projects }: { options: FilterOption[]; 
 						aria-pressed={active === option.slug}
 						onClick={() => select(option.slug)}
 					>
-						{option.label} <span className="count">{option.count}</span>
+						{/* A technology name: left-to-right in each language (C#, Next.js). */}
+						<bdi dir="ltr">{option.label}</bdi> <span className="count">{option.count}</span>
 					</button>
 				))}
 			</div>
 			<p className="filter-status" role="status">
-				{activeLabel ? `${shown.length} of ${projects.length} projects use ${activeLabel}.` : `${projects.length} projects.`}
+				{activeOption ? activeOption.status : labels.status}
 			</p>
 			<ul className="cards filter-list">
-				{projects.map((project) => (
-					<li key={project.slug} hidden={!shown.includes(project)} data-tags={project.tagItems.map((tag) => tag.slug).join(' ')}>
-						<ProjectCard post={project} headingLevel={2} />
+				{items.map((item) => (
+					<li key={item.slug} hidden={active !== '' && !item.tags.includes(active)} data-tags={item.tags.join(' ')}>
+						{item.card}
 					</li>
 				))}
 			</ul>

@@ -11,6 +11,9 @@ const nextConfig: NextConfig = {
 	images: { unoptimized: true },
 	reactStrictMode: true,
 	poweredByHeader: false,
+	// The site has one root layout for each language (src/app/(ar)/ and src/app/en/), so the
+	// "not found" page is a complete document: src/app/global-not-found.tsx.
+	experimental: { globalNotFound: true },
 	// Development only: the devbox Tailscale IP. Without it, Next.js blocks the HMR socket.
 	allowedDevOrigins: ['100.72.19.82']
 };

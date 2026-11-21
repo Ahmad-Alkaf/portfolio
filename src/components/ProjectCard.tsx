@@ -15,7 +15,7 @@ export function ProjectCard({ post, headingLevel = 3 }: { post: ProjectSummary; 
 					</Link>
 				</Heading>
 				<p className="card-summary">{post.summary}</p>
-				<TagChips tags={post.tagItems} link={false} limit={4} />
+				<TagChips tags={post.tagItems} lang={post.lang} link={false} limit={4} />
 				<p className="card-links">
 					<ProjectLinks post={post} compact />
 				</p>

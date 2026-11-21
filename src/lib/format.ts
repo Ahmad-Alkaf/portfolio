@@ -1,24 +1,18 @@
+import type { Lang } from '@/i18n/config';
+
+// Arabic dates use the Gregorian calendar and Western digits (2 سبتمبر 2026), as the rest of the site does.
+const DATE_LOCALE: Record<Lang, string> = { en: 'en-US', ar: 'ar-u-ca-gregory-nu-latn' };
+
 function toDate(date: string): Date {
 	return new Date(`${date}T00:00:00Z`);
 }
 
-/** "Sep 2, 2026" */
-export function formatDate(date: string): string {
-	return toDate(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
-}
-
-/** "02 Sep" (for the timeline) */
-export function formatDayMonth(date: string): string {
-	const d = toDate(date);
-	const month = d.toLocaleDateString('en-US', { month: 'short', timeZone: 'UTC' });
-	return `${String(d.getUTCDate()).padStart(2, '0')} ${month}`;
+/** "Sep 2, 2026", or "2 سبتمبر 2026" in Arabic. */
+export function formatDate(date: string, lang: Lang): string {
+	return toDate(date).toLocaleDateString(DATE_LOCALE[lang], { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' });
 }
 
 /** The date at midnight in the site time zone (Asia/Riyadh, +03:00), as Jekyll wrote it. */
 export function isoDate(date: string): string {
 	return `${date}T00:00:00+03:00`;
-}
-
-export function plural(count: number, one: string, many: string): string {
-	return `${count} ${count === 1 ? one : many}`;
 }

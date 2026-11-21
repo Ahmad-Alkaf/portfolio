@@ -1,11 +1,13 @@
 import { EmailLink } from './EmailLink';
 import { GitHubIcon, LinkedInIcon, MailIcon, XIcon } from './icons';
+import { getDict, localePath, type Lang } from '@/i18n';
 import { site } from '@/site.config';
 
 const ICONS = { github: GitHubIcon, x: XIcon, linkedin: LinkedInIcon } as const;
 
 /** Icon links: GitHub, LinkedIn, X, and email. */
-export function SocialLinks() {
+export function SocialLinks({ lang }: { lang: Lang }) {
+	const t = getDict(lang);
 	const [user, domain] = site.author.email;
 	return (
 		<ul className="social">
@@ -20,7 +22,7 @@ export function SocialLinks() {
 				);
 			})}
 			<li>
-				<EmailLink user={user} domain={domain} className="icon-button" label="Email">
+				<EmailLink user={user} domain={domain} fallbackHref={localePath(lang, '/#contact')} className="icon-button" label={t.common.email}>
 					<MailIcon />
 				</EmailLink>
 			</li>

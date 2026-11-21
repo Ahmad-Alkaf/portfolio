@@ -2,31 +2,24 @@ import { Fragment, type ReactNode } from 'react';
 import Link from 'next/link';
 import { ArrowUpRightIcon, GitHubIcon } from './icons';
 import type { Post, TagItem } from '@/lib/content';
+import { getDict, plainText, type Lang } from '@/i18n';
 
-/** The fields that the project cards need (no HTML body), so the client filter gets a small payload. */
+/** The fields that the project cards need (no HTML body). `lang` gives the language of the labels. */
 export type ProjectSummary = Pick<
 	Post,
-	'slug' | 'url' | 'name' | 'date' | 'summary' | 'kind' | 'status' | 'links' | 'screenshot' | 'image' | 'tagItems'
+	'lang' | 'slug' | 'url' | 'name' | 'date' | 'summary' | 'kind' | 'status' | 'links' | 'screenshot' | 'image' | 'tagItems'
 >;
 
 export function toProjectSummary(post: Post): ProjectSummary {
-	const { slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems } = post;
-	return { slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems };
+	const { lang, slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems } = post;
+	return { lang, slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems };
 }
 
-const STATUS_LABEL: Record<string, string> = {
-	live: 'Live',
-	'live demo': 'Live demo',
-	'public repo': 'Public repo',
-	'open source': 'Open source',
-	'not deployed': 'Not deployed'
-};
-
-export function StatusBadge({ status }: { status?: string }) {
+export function StatusBadge({ status, lang }: { status?: string; lang: Lang }) {
 	if (!status) return null;
 	return (
 		<span className="status" data-status={status}>
-			{STATUS_LABEL[status] ?? status}
+			{getDict(lang).project.status[status] ?? status}
 		</span>
 	);
 }
@@ -36,17 +29,17 @@ export function Eyebrow({ post }: { post: ProjectSummary }) {
 	return (
 		<p className="eyebrow">
 			<span>{[post.kind, post.date.slice(0, 4)].filter(Boolean).join(' · ')}</span>
-			<StatusBadge status={post.status} />
+			<StatusBadge status={post.status} lang={post.lang} />
 		</p>
 	);
 }
 
-/** The stack chips. Links go to the skill pages. */
-export function TagChips({ tags, link = true, limit }: { tags: TagItem[]; link?: boolean; limit?: number }) {
+/** The stack chips. Links go to the skill pages. A chip is left-to-right in each language (a technology name). */
+export function TagChips({ tags, lang, link = true, limit }: { tags: TagItem[]; lang: Lang; link?: boolean; limit?: number }) {
 	const shown = limit ? tags.slice(0, limit) : tags;
 	const rest = tags.length - shown.length;
 	return (
-		<ul className="chips" aria-label="Stack">
+		<ul className="chips" aria-label={getDict(lang).project.stack}>
 			{shown.map((tag) => (
 				<li key={tag.slug}>
 					{link ? (
@@ -69,9 +62,11 @@ export function TagChips({ tags, link = true, limit }: { tags: TagItem[]; link?:
 
 /**
  * The project image: a screenshot in a browser frame (with the live domain in
- * the address bar), or the project logo on a plain panel.
+ * the address bar), or the project logo on a plain panel. The browser frame is
+ * left-to-right in each language, as a real browser window is.
  */
 export function Shot({ post, sizes, priority = false, href }: { post: ProjectSummary; sizes: string; priority?: boolean; href?: string }) {
+	const newTab = getDict(post.lang).common.newTab;
 	const loading = priority ? undefined : 'lazy';
 	const fetchPriority = priority ? 'high' : undefined;
 	// With `href`, the image is a link to the post. The link is only on the image, because the
@@ -87,16 +82,16 @@ export function Shot({ post, sizes, priority = false, href }: { post: ProjectSum
 	if (post.screenshot) {
 		const { src, small, alt, domain } = post.screenshot;
 		const live = post.links.live;
-		const label = domain ?? (post.links.source ? post.links.source.replace(/^https:\/\//, '') : post.name);
+		const label = domain ?? (post.links.source ? post.links.source.replace(/^https:\/\//, '') : plainText(post.name));
 		return (
 			<div className="shot">
-				<div className="shot-bar" aria-hidden={live ? undefined : true}>
+				<div className="shot-bar" dir="ltr" aria-hidden={live ? undefined : true}>
 					<span className="shot-dots" aria-hidden="true" />
 					{live ? (
 						<a className="shot-url" href={live} target="_blank" rel="noopener noreferrer">
 							<span className="shot-url-text">{label}</span>
 							<ArrowUpRightIcon width={11} height={11} />
-							<span className="visually-hidden"> (opens in a new tab)</span>
+							<span className="visually-hidden">{newTab}</span>
 						</a>
 					) : (
 						<span className="shot-url">
@@ -133,10 +128,11 @@ export function Shot({ post, sizes, priority = false, href }: { post: ProjectSum
 }
 
 /** The text with each mention of the live domain as a link to the live site (new tab, with the arrow icon). */
-function withLiveLink(text: string, live?: string): ReactNode {
+function withLiveLink(text: string, live: string | undefined, newTab: string): ReactNode {
 	if (!live) return text;
 	const host = new URL(live).hostname;
-	const parts = text.split(host);
+	// In Arabic text the domain is inside an isolate (see src/i18n/bidi.ts). The link takes the place of both.
+	const parts = text.split(new RegExp(`\u2066?${host.replace(/\./g, '\\.')}\u2069?`));
 	if (parts.length === 1) return text;
 	return parts.map((part, i) => (
 		<Fragment key={i}>
@@ -144,7 +140,7 @@ function withLiveLink(text: string, live?: string): ReactNode {
 				<a className="ext-link" href={live} target="_blank" rel="noopener noreferrer">
 					{host}
 					<ArrowUpRightIcon width={13} height={13} />
-					<span className="visually-hidden"> (opens in a new tab)</span>
+					<span className="visually-hidden">{newTab}</span>
 				</a>
 			) : null}
 			{part}
@@ -156,19 +152,21 @@ function withLiveLink(text: string, live?: string): ReactNode {
 export function ProjectLinks({ post, compact = false }: { post: ProjectSummary; compact?: boolean }) {
 	const { live, source } = post.links;
 	if (!live && !source) return null;
+	const t = getDict(post.lang).project;
+	const name = plainText(post.name);
 	return (
 		<>
 			{live ? (
 				<a className={compact ? 'text-link' : 'button button-ghost'} href={live} target="_blank" rel="noopener noreferrer">
-					Live site <ArrowUpRightIcon />
-					<span className="visually-hidden"> of {post.name} (opens in a new tab)</span>
+					{t.live} <ArrowUpRightIcon />
+					<span className="visually-hidden">{t.liveOf(name)}</span>
 				</a>
 			) : null}
 			{source ? (
 				<a className={compact ? 'text-link' : 'button button-ghost'} href={source} target="_blank" rel="noopener noreferrer">
 					{compact ? null : <GitHubIcon width={16} height={16} />}
-					Source <ArrowUpRightIcon />
-					<span className="visually-hidden"> of {post.name} on GitHub (opens in a new tab)</span>
+					{t.source} <ArrowUpRightIcon />
+					<span className="visually-hidden">{t.sourceOf(name)}</span>
 				</a>
 			) : null}
 		</>
@@ -177,25 +175,28 @@ export function ProjectLinks({ post, compact = false }: { post: ProjectSummary; 
 
 export function CaseStudy({
 	caseStudy,
+	lang,
 	headingLevel = 3,
 	live
 }: {
 	caseStudy: NonNullable<Post['caseStudy']>;
+	lang: Lang;
 	headingLevel?: 2 | 3;
 	/** The live site URL. Each mention of its domain in the text becomes a link. */
 	live?: string;
 }) {
+	const t = getDict(lang);
 	const rows = [
-		['Problem', caseStudy.problem],
-		['What I built', caseStudy.built],
-		['Result', caseStudy.result]
+		[t.project.problem, caseStudy.problem],
+		[t.project.built, caseStudy.built],
+		[t.project.result, caseStudy.result]
 	] as const;
 	const list = (
 		<dl>
 			{rows.map(([term, text]) => (
 				<div key={term}>
 					<dt>{term}</dt>
-					<dd>{withLiveLink(text, live)}</dd>
+					<dd>{withLiveLink(text, live, t.common.newTab)}</dd>
 				</div>
 			))}
 		</dl>
@@ -206,7 +207,7 @@ export function CaseStudy({
 		return (
 			<section className="case" aria-labelledby="case-title">
 				<h2 id="case-title" className="case-title">
-					In short
+					{t.project.inShort}
 				</h2>
 				{list}
 			</section>

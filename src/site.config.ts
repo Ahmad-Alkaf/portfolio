@@ -1,18 +1,11 @@
-// Site settings: identity, contact links, navigation, skills, and tag labels.
+// Site settings that are the same in each language: the URL, contact links, skills, and tag labels.
+// The text of the site (name, role, navigation, ...) is in src/i18n/en.ts and src/i18n/ar.ts.
 
 export const site = {
-	title: 'Ahmed Alkaf',
-	role: 'Full-stack software engineer',
-	location: 'Jeddah, Saudi Arabia',
-	description:
-		'Ahmed Alkaf is a full-stack software engineer with 4 years of experience. He builds web products with TypeScript, React, Next.js, Node.js, and PostgreSQL. Projects, case studies, and resume.',
 	url: 'https://ahmed.kaflabs.com',
-	lang: 'en',
 	timezone: 'Asia/Riyadh',
 	avatar: '/assets/img/avatar.jpg',
 	author: {
-		name: 'Ahmed Alkaf',
-		url: 'https://ahmed.kaflabs.com/',
 		// Split so that simple scrapers do not find it in the HTML.
 		email: ['ahmad.h.alkaf', 'gmail.com'] as const
 	},
@@ -23,28 +16,22 @@ export const site = {
 		{ type: 'x', label: 'X', handle: '@Ahmad_Alkaf_', url: 'https://x.com/Ahmad_Alkaf_' }
 	],
 	// KafLabs is the brand of Ahmed's own web products.
-	brand: { name: 'KafLabs', url: 'https://kaflabs.com' },
-	nav: [
-		{ href: '/projects/', label: 'Projects' },
-		{ href: '/tags/', label: 'Skills' },
-		{ href: '/resume/', label: 'Resume' }
-	],
-	// Facts for the "at a glance" panel (from the resume and the posts).
-	glance: [
-		{ label: 'Experience', value: '4 years, full-stack' },
-		{ label: 'Core stack', value: 'TypeScript · React · Next.js · Node.js · PostgreSQL' },
-		{ label: 'Public products', value: 'Etamyd · CornerTill · PDF Anvil · SetupForge · QR Anvil' },
-		{ label: 'Other work', value: 'Internal systems in private repositories, not shown here' },
-		{ label: 'Education', value: 'B.Sc. CIS, GPA 4.12 / 5' }
-	]
+	brand: { name: 'KafLabs', url: 'https://kaflabs.com' }
 } as const;
 
-/** A skill in the grouped skills list. `tag` links it to /tags/<tag>/ when a project uses it. */
+/**
+ * A skill in the grouped skills list. `tag` links it to /tags/<tag>/ when a project uses it.
+ * The label is a technology name, so it is the same in each language. A skill that is a
+ * concept can have an Arabic label in `skills.labels` of src/i18n/ar.ts.
+ */
 export type Skill = { label: string; tag?: string };
 
-export const skillGroups: { name: string; skills: Skill[] }[] = [
+/** The group names are in the dictionaries (`skills.groups`). */
+export type SkillGroupId = 'frontend' | 'backend' | 'testing' | 'devops' | 'product';
+
+export const skillGroups: { id: SkillGroupId; skills: Skill[] }[] = [
 	{
-		name: 'Frontend',
+		id: 'frontend',
 		skills: [
 			{ label: 'TypeScript', tag: 'typescript' },
 			{ label: 'JavaScript', tag: 'javascript' },
@@ -59,7 +46,7 @@ export const skillGroups: { name: string; skills: Skill[] }[] = [
 		]
 	},
 	{
-		name: 'Backend & data',
+		id: 'backend',
 		skills: [
 			{ label: 'Node.js', tag: 'node.js' },
 			{ label: 'tRPC' },
@@ -74,7 +61,7 @@ export const skillGroups: { name: string; skills: Skill[] }[] = [
 		]
 	},
 	{
-		name: 'Testing & quality',
+		id: 'testing',
 		skills: [
 			{ label: 'Vitest', tag: 'vitest' },
 			{ label: 'Playwright', tag: 'playwright' },
@@ -83,7 +70,7 @@ export const skillGroups: { name: string; skills: Skill[] }[] = [
 		]
 	},
 	{
-		name: 'DevOps & cloud',
+		id: 'devops',
 		skills: [
 			{ label: 'Docker', tag: 'docker' },
 			{ label: 'Cloudflare Workers', tag: 'cloudflare workers' },
@@ -94,7 +81,7 @@ export const skillGroups: { name: string; skills: Skill[] }[] = [
 		]
 	},
 	{
-		name: 'Product',
+		id: 'product',
 		skills: [
 			{ label: 'Arabic RTL + English (i18n)', tag: 'i18n' },
 			{ label: 'Multi-tenancy', tag: 'multi-tenancy' },

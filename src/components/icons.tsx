@@ -88,9 +88,11 @@ export function ArrowUpRightIcon(props: IconProps) {
 	);
 }
 
+// The arrows and chevrons that show a direction have the class "icon-dir": the CSS mirrors
+// them on a right-to-left page. The up-right arrow (an external link) is never mirrored.
 export function ArrowRightIcon(props: IconProps) {
 	return (
-		<Stroke width={16} height={16} {...props}>
+		<Stroke width={16} height={16} className="icon-dir" {...props}>
 			<path d="M5 12h14M13 6l6 6-6 6" />
 		</Stroke>
 	);
@@ -98,7 +100,7 @@ export function ArrowRightIcon(props: IconProps) {
 
 export function ArrowLeftIcon(props: IconProps) {
 	return (
-		<Stroke width={16} height={16} {...props}>
+		<Stroke width={16} height={16} className="icon-dir" {...props}>
 			<path d="M19 12H5M11 18l-6-6 6-6" />
 		</Stroke>
 	);
@@ -140,7 +142,7 @@ export function CloseIcon(props: IconProps) {
 
 export function ChevronLeftIcon(props: IconProps) {
 	return (
-		<Stroke {...props}>
+		<Stroke className="icon-dir" {...props}>
 			<path d="m15 18-6-6 6-6" />
 		</Stroke>
 	);
@@ -148,7 +150,7 @@ export function ChevronLeftIcon(props: IconProps) {
 
 export function ChevronRightIcon(props: IconProps) {
 	return (
-		<Stroke {...props}>
+		<Stroke className="icon-dir" {...props}>
 			<path d="m9 18 6-6-6-6" />
 		</Stroke>
 	);

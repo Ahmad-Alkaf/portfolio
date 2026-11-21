@@ -13,3 +13,17 @@
 /categories/qr-anvil/ /posts/QR-Anvil/ 301
 /categories/schedule-builder/ /posts/Schedule-Builder/ 301
 /categories/setupforge/ /posts/SetupForge/ 301
+# The same old pages under /en/ (the language switch can go to them).
+/en/timeline/ /en/projects/ 301
+/en/categories/ /en/projects/ 301
+/en/categories/projects/ /en/projects/ 301
+/en/categories/alhajarayn-guide/ /en/posts/Alhajarayn-Guide-Transactions/ 301
+/en/categories/autism-children-technical-system-acts/ /en/posts/ACTS/ 301
+/en/categories/check-task/ /en/posts/Check-Tasks/ 301
+/en/categories/etamyd/ /en/posts/Etamyd/ 301
+/en/categories/imageforge/ /en/posts/ImageForge/ 301
+/en/categories/laptop-pos/ /en/posts/Laptop-POS/ 301
+/en/categories/pdf-anvil/ /en/posts/PDF-Anvil/ 301
+/en/categories/qr-anvil/ /en/posts/QR-Anvil/ 301
+/en/categories/schedule-builder/ /en/posts/Schedule-Builder/ 301
+/en/categories/setupforge/ /en/posts/SetupForge/ 301

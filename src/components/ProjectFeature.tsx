@@ -2,10 +2,12 @@ import Link from 'next/link';
 import { ArrowRightIcon } from './icons';
 import { CaseStudy, Eyebrow, ProjectLinks, Shot, TagChips, toProjectSummary } from './ProjectBits';
 import type { Post } from '@/lib/content';
+import { getDict, plainText } from '@/i18n';
 
 /** A featured project on the home page: a large image, the case study in short, and the links. */
 export function ProjectFeature({ post, priority = false }: { post: Post; priority?: boolean }) {
 	const summary = toProjectSummary(post);
+	const t = getDict(post.lang).project;
 	return (
 		<article className="feature" aria-labelledby={`feature-${post.slug}`}>
 			<div className="feature-media">
@@ -17,12 +19,12 @@ export function ProjectFeature({ post, priority = false }: { post: Post; priorit
 					<Link href={post.url}>{post.name}</Link>
 				</h3>
 				<p className="feature-summary">{post.summary}</p>
-				{post.caseStudy ? <CaseStudy caseStudy={post.caseStudy} live={post.links.live} /> : null}
-				<TagChips tags={post.tagItems} limit={6} />
+				{post.caseStudy ? <CaseStudy caseStudy={post.caseStudy} lang={post.lang} live={post.links.live} /> : null}
+				<TagChips tags={post.tagItems} lang={post.lang} limit={6} />
 				<div className="actions">
 					<Link href={post.url} className="button button-primary">
-						Case study <ArrowRightIcon />
-						<span className="visually-hidden">: {post.name}</span>
+						{t.caseStudy} <ArrowRightIcon />
+						<span className="visually-hidden">{t.caseStudyOf(plainText(post.name))}</span>
 					</Link>
 					<ProjectLinks post={summary} />
 				</div>

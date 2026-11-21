@@ -13,6 +13,11 @@
 // - `<i class="fas fa-map-marker-alt">`: a map pin icon.
 // - External links open in a new tab (as jekyll-target-blank did).
 //
+// For the two languages of the site:
+// - A link to a page of the site gets the language prefix (/posts/ACTS -> /en/posts/ACTS/ in English).
+// - Code is always left-to-right (dir="ltr").
+// - In Arabic text, each Latin name gets a left-to-right isolate (see src/i18n/bidi.ts).
+//
 // Local images get their intrinsic width and height, so a lazy image does not
 // move the text when it loads.
 
@@ -30,11 +35,14 @@ import remarkRehype from 'remark-rehype';
 import remarkSmartypants from 'remark-smartypants';
 import { unified } from 'unified';
 import { SKIP, visit } from 'unist-util-visit';
+import { getDict, isolateLatin, localePath, plainText, type Lang } from '@/i18n';
 import { site } from '@/site.config';
 
 export type RenderOptions = {
 	/** Folder for relative image paths (Chirpy `media_subpath`). */
 	mediaSubpath?: string;
+	/** The language of the text. */
+	lang: Lang;
 };
 
 export type Rendered = {
@@ -48,12 +56,13 @@ const YOUTUBE_INCLUDE = /\{%\s*include\s+embed\/youtube\.html\s+id=['"]([\w-]+)[
 // An image whose path has a space: CommonMark needs the path in <...>.
 const IMAGE_WITH_SPACE = /!\[([^\]]*)\]\(([^)<>"]*\s[^)<>"]*)\)/g;
 
-function preprocess(source: string): string {
+function preprocess(source: string, lang: Lang): string {
+	const title = plainText(getDict(lang).post.video);
 	return source
 		.replace(
 			YOUTUBE_INCLUDE,
 			(_match, id: string) =>
-				`\n\n<div class="video"><iframe src="https://www.youtube.com/embed/${id}" title="YouTube video player" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n\n`
+				`\n\n<div class="video"><iframe src="https://www.youtube.com/embed/${id}" title="${title}" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>\n\n`
 		)
 		.replace(IMAGE_WITH_SPACE, (_match, alt: string, dest: string) => `![${alt}](<${dest.trim()}>)`);
 }
@@ -221,10 +230,20 @@ function rehypeSite(options: RenderOptions) {
 				if (isExternal(href)) {
 					node.properties.target = '_blank';
 					node.properties.rel = ['noopener', 'noreferrer'];
-				} else if (/^\/[^?#]*[^/?#]$/.test(href) && !/\.[a-z0-9]+$/i.test(href)) {
-					// An internal page link: add the trailing slash of the site URLs (/posts/ACTS -> /posts/ACTS/).
-					node.properties.href = `${href}/`;
+				} else if (href.startsWith('/') && !href.startsWith('//')) {
+					const [, pagePath = '', rest = ''] = href.match(/^([^?#]*)(.*)$/) ?? [];
+					if (!/\.[a-z0-9]+$/i.test(pagePath)) {
+						// An internal page link: add the trailing slash of the site URLs and the language
+						// prefix (/posts/ACTS -> /posts/ACTS/ in Arabic, /en/posts/ACTS/ in English).
+						node.properties.href = localePath(options.lang, pagePath.endsWith('/') ? pagePath : `${pagePath}/`) + rest;
+					}
 				}
+				return;
+			}
+
+			// Code is left-to-right in each language. The attribute also isolates it from the text around it.
+			if (node.tagName === 'pre' || (node.tagName === 'code' && !(parent.type === 'element' && parent.tagName === 'pre'))) {
+				node.properties.dir = 'ltr';
 				return;
 			}
 
@@ -266,7 +285,22 @@ function rehypeSite(options: RenderOptions) {
 	};
 }
 
-export function renderMarkdown(source: string, options: RenderOptions = {}): Rendered {
+const NO_ISOLATE = new Set(['code', 'pre', 'script', 'style', 'svg', 'iframe']);
+
+/** Arabic text: each Latin name in the text gets a left-to-right isolate. Code stays as it is. */
+function rehypeIsolateLatin(lang: Lang) {
+	const walk = (node: HastRoot | Element) => {
+		for (const child of node.children) {
+			if (child.type === 'text') child.value = isolateLatin(child.value);
+			else if (child.type === 'element' && !NO_ISOLATE.has(child.tagName)) walk(child);
+		}
+	};
+	return (tree: HastRoot) => {
+		if (lang === 'ar') walk(tree);
+	};
+}
+
+export function renderMarkdown(source: string, options: RenderOptions): Rendered {
 	const processor = unified()
 		.use(remarkParse)
 		.use(remarkGfm)
@@ -276,12 +310,13 @@ export function renderMarkdown(source: string, options: RenderOptions = {}): Ren
 		.use(rehypeRaw)
 		.use(rehypeSlug)
 		.use(rehypeSite, options)
+		.use(rehypeIsolateLatin, options.lang)
 		.use(rehypeStringify);
 
-	const hast = processor.runSync(processor.parse(preprocess(source)));
+	const hast = processor.runSync(processor.parse(preprocess(source, options.lang)));
 	const html = processor.stringify(hast);
 
-	const text = toString(hast).replace(/\s+/g, ' ').trim();
+	const text = plainText(toString(hast)).replace(/\s+/g, ' ').trim();
 
 	return { html, text, words: text ? text.split(' ').length : 0 };
 }

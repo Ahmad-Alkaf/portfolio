@@ -53,7 +53,7 @@ function toggle() {
 	applyScheme(target === system ? null : target);
 }
 
-export function ThemeToggle() {
+export function ThemeToggle({ labels }: { labels: { toDark: string; toLight: string } }) {
 	useEffect(() => {
 		// The head script set the attribute. Make the browser bar color match it.
 		applyScheme(readStored());
@@ -69,11 +69,11 @@ export function ThemeToggle() {
 		<button type="button" className="icon-button theme-toggle" onClick={toggle}>
 			<span className="to-dark">
 				<MoonIcon />
-				<span className="visually-hidden">Switch to dark theme</span>
+				<span className="visually-hidden">{labels.toDark}</span>
 			</span>
 			<span className="to-light">
 				<SunIcon />
-				<span className="visually-hidden">Switch to light theme</span>
+				<span className="visually-hidden">{labels.toLight}</span>
 			</span>
 		</button>
 	);

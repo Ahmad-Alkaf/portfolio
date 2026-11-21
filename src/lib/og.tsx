@@ -1,9 +1,16 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { ImageResponse } from 'next/og';
+import { getDict } from '@/i18n';
 import { site } from '@/site.config';
 
 // The share images (Open Graph and Twitter), drawn at build time.
+//
+// The images are in English for both languages. The renderer of next/og (Satori) has no
+// right-to-left support: it draws the words of an Arabic sentence from left to right, in
+// the wrong order. An English image is better than an Arabic image with wrong text.
+
+const t = getDict('en');
 
 export const ogSize = { width: 1200, height: 630 };
 
@@ -38,8 +45,8 @@ export function ogImage({ eyebrow, title, text, chips }: { eyebrow: string; titl
 				<div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
 					<img src={avatarDataUri()} width={64} height={64} style={{ borderRadius: 999 }} alt="" />
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
-						<div style={{ fontSize: 30, color: INK }}>{site.title}</div>
-						<div style={{ fontSize: 22, color: MUTED }}>{site.role}</div>
+						<div style={{ fontSize: 30, color: INK }}>{t.site.name}</div>
+						<div style={{ fontSize: 22, color: MUTED }}>{t.site.role}</div>
 					</div>
 				</div>
 				<div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>

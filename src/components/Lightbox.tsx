@@ -10,7 +10,9 @@ type Item = { src: string; alt: string; caption: string };
  * <dialog>. The dialog gives focus containment, Esc, and focus return. Arrow
  * keys and the buttons move between the images of the post.
  */
-export function Lightbox({ scope }: { scope: string }) {
+export type LightboxLabels = { enlarge: string; viewer: string; close: string; previous: string; next: string };
+
+export function Lightbox({ scope, labels }: { scope: string; labels: LightboxLabels }) {
 	const dialog = useRef<HTMLDialogElement>(null);
 	const [items, setItems] = useState<Item[]>([]);
 	const [index, setIndex] = useState(0);
@@ -39,7 +41,7 @@ export function Lightbox({ scope }: { scope: string }) {
 			const button = document.createElement('button');
 			button.type = 'button';
 			button.className = 'zoom';
-			button.setAttribute('aria-label', `Enlarge image${img.alt ? `: ${img.alt}` : ''}`);
+			button.setAttribute('aria-label', `${labels.enlarge}${img.alt ? `: ${img.alt}` : ''}`);
 			img.replaceWith(button);
 			button.append(img);
 			button.addEventListener('click', () => open(i));
@@ -54,7 +56,7 @@ export function Lightbox({ scope }: { scope: string }) {
 				if (img) button.replaceWith(img);
 			}
 		};
-	}, [scope, open]);
+	}, [scope, open, labels.enlarge]);
 
 	useEffect(() => {
 		const element = dialog.current;
@@ -78,30 +80,37 @@ export function Lightbox({ scope }: { scope: string }) {
 		<dialog
 			ref={dialog}
 			className="lightbox"
-			aria-label="Image viewer"
+			aria-label={labels.viewer}
 			{...({ closedby: 'any' } as object)}
 			onKeyDown={(event) => {
 				if (count < 2) return;
-				if (event.key === 'ArrowRight') step(1);
-				if (event.key === 'ArrowLeft') step(-1);
+				// On a right-to-left page, the next image is to the left.
+				const forward = getComputedStyle(event.currentTarget).direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight';
+				const back = forward === 'ArrowLeft' ? 'ArrowRight' : 'ArrowLeft';
+				if (event.key === forward) step(1);
+				if (event.key === back) step(-1);
 			}}
 		>
 			<div className="lightbox-bar">
 				<p className="lightbox-caption">
 					{item?.caption}
-					{count > 1 ? <span className="lightbox-count"> {index + 1} / {count}</span> : null}
+					{count > 1 ? (
+						<span className="lightbox-count" dir="ltr">
+							{index + 1} / {count}
+						</span>
+					) : null}
 				</p>
-				<button type="button" className="icon-button" onClick={() => dialog.current?.close()} aria-label="Close image viewer">
+				<button type="button" className="icon-button" onClick={() => dialog.current?.close()} aria-label={labels.close}>
 					<CloseIcon />
 				</button>
 			</div>
 			{item ? <img className="lightbox-image" src={item.src} alt={item.alt} /> : null}
 			{count > 1 ? (
 				<div className="lightbox-nav">
-					<button type="button" className="icon-button" onClick={() => step(-1)} aria-label="Previous image">
+					<button type="button" className="icon-button" onClick={() => step(-1)} aria-label={labels.previous}>
 						<ChevronLeftIcon />
 					</button>
-					<button type="button" className="icon-button" onClick={() => step(1)} aria-label="Next image">
+					<button type="button" className="icon-button" onClick={() => step(1)} aria-label={labels.next}>
 						<ChevronRightIcon />
 					</button>
 				</div>
