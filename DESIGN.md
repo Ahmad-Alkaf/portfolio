@@ -21,7 +21,7 @@ Each page decision serves one of these two questions, or the next step: contact.
 
 A warm "workshop" look that fits the Anvil / Forge product names and the KafLabs orange. It is not a theme copy.
 
-- **Type**: Bricolage Grotesque (headings, tight tracking), Geist (body text), Geist Mono (labels, stack chips, metadata). All self-hosted through `next/font`.
+- **Type**: Bricolage Grotesque (headings, tight tracking), Geist (body text), Geist Mono (labels, stack chips, metadata), and IBM Plex Sans Arabic (all Arabic text; see "Languages"). All self-hosted through `next/font`.
 - **Color tokens** (`src/app/globals.css`, `light-dark()` with a `prefers-color-scheme` fallback):
 
   | Token | Light | Dark | Use |
@@ -37,6 +37,24 @@ A warm "workshop" look that fits the Anvil / Forge product names and the KafLabs
 - **Spacing**: a 16 px side gutter on phones, a 1120 px content width, 72 to 120 px between sections, 12 px radius on panels.
 - **Motion**: small hover lifts only. All motion is off with `prefers-reduced-motion`.
 
+## Languages
+
+The owner is in Jeddah, and some of the products are Arabic-first. So **Arabic is the default language**, and English is the second language.
+
+- **URLs**: Arabic has the URLs with no prefix (`/projects/`), which are also the URLs of the old site. English has the same paths under `/en/`. The site is a static export, so there is no redirect by browser language: the reader selects the language with the switch in the header. The switch shows the name of the other language in that language ("English", "العربية"), goes to the same page, and keeps the project filter (`?stack=`).
+- **Where the text is**: the interface text is in two typed dictionaries (`src/i18n/en.ts`, `src/i18n/ar.ts`). A post has one Markdown file for each language (`<name>.md`, `<name>.ar.md`). The facts of a post (date, tags, links, images) are only in the English file, so the two languages cannot disagree. The build stops if an Arabic text is missing.
+- **What stays in English**: product names, technology names, tag names, domains, and code. The stack chips, the browser frame, and the code blocks are left-to-right in each language.
+- **Arabic tone**: first person, direct, a little informal, as an engineer writes to a peer. Clear modern Arabic with a light conversational touch ("شغّال", "يقدر"), no heavy dialect. The English technical term stays where Arab developers use it (middleware, transaction, rate limit).
+- **Right-to-left**: the Arabic pages have `<html lang="ar" dir="rtl">`. The styles use logical properties (inline-start, inline-end), so one stylesheet serves the two directions. The arrows that show a direction ("All projects", "Case study", newer and older, the lightbox arrows) are mirrored. The external-link arrow, the logos, the browser frame with its window dots, the screenshots, and the code are not mirrored.
+- **Mixed direction**: a Latin name in an Arabic sentence can show in the wrong order (`C#` as `#C`, `.NET` as `NET.`, a list of names from left to right). At build time, `src/i18n/bidi.ts` puts each Latin name in a Unicode left-to-right isolate. The Markdown files and the dictionary stay plain text. The metadata, the feeds, and the structured data get the text with no isolate characters.
+- **Arabic typeface: IBM Plex Sans Arabic.** It is the Arabic member of a grotesque family, so its low-contrast strokes and open shapes agree with Geist in running text, and at 700 it has enough weight next to the Bricolage Grotesque headings. It is common in Arabic technical products, so it reads as "engineering", not as a newspaper or a calligraphy face. Noto Sans Arabic is more neutral and has less character. Readex Pro is wider and rounder than the two Latin faces. The font has no variable file, so the site loads four weights (400, 500, 600, 700). The Latin fonts are first in each font list and have no Arabic letters, so each Latin letter still comes from Bricolage Grotesque, Geist, or Geist Mono.
+- **Arabic type rules**: more line height (1.85 for text, 1.4 for headings), no letter spacing, and no uppercase. Letter spacing breaks the joins between Arabic letters. The small labels are mono, uppercase, and spaced in English; in Arabic they use the text font at 14 px and weight 600. Numbers are Western digits, and dates use the Gregorian calendar (2 سبتمبر 2026).
+- **Font loading**: the Arabic pages preload the Arabic font files, and `font-display: swap` shows the text at once. The fallback face has the line metrics of IBM Plex Sans Arabic, so the baseline does not move when the font arrives. The widths are not adjusted (each system has a different Arabic font): in a test with the web fonts blocked, the desktop hero keeps its height, and the phone hero changes by one line of text. The English pages do not preload the Arabic font.
+- **Share images**: English for the two languages. The renderer of `next/og` (Satori) has no right-to-left support and draws the words of an Arabic sentence in the wrong order. An English image is better than an Arabic image with wrong text.
+- **Feeds**: `/feed.xml` (the feed URL of the old site) is the Arabic feed, because Arabic is the default language at the default URLs. `/en/feed.xml` is the English feed. Each page links to the feed of its language.
+- **Search engines**: each page has a canonical URL for its language and `hreflang` links (`ar`, `en`, and `x-default` to Arabic). The sitemap has each page in the two languages. Open Graph has the locale (`ar_SA`, `en_US`), and the structured data has `inLanguage`.
+- **Not found**: `/404.html` is Arabic. `/en/404.html` is English: Cloudflare Pages serves the nearest `404.html` of a path. The old Chirpy URLs (`/categories/...`, `/timeline/`) also exist under `/en/`.
+
 ## Features (and why)
 
 | Feature | Why |
@@ -48,7 +66,8 @@ A warm "workshop" look that fits the Anvil / Forge product names and the KafLabs
 | Stack chips that link to skill pages | The reader can check one technology across all projects. |
 | Project filter by stack (`?stack=` in the URL) | A recruiter can look at "React" projects only, and share that link. |
 | Image lightbox (native `<dialog>`) | Screenshots are readable at full size. Esc, arrow keys, focus return. |
-| Resume page with a print style | "Print or save as PDF" gives a clean one-column resume. No CV file with private data is in the repo. |
+| Resume page with a print style | "Print or save as PDF" gives a clean one-column resume in each language. No CV file with private data is in the repo. |
+| Arabic (default) and English, with a language switch | The reader in the Gulf gets Arabic first, and each page has the same content in English at the same path under `/en/`. |
 | Copy email button | Some readers use web mail. The address is put together only in the browser. |
 | Share image for each page, JSON-LD (Person, WebSite, Article) | Good link previews in LinkedIn, Slack, and email, and good search results. |
 | Light and dark mode (system, plus a toggle) | Reader comfort. The toggle shows only the other scheme, and returns to "system". |
