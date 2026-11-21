@@ -35,7 +35,6 @@ export const site = {
 		{ label: 'Core stack', value: 'TypeScript · React · Next.js · Node.js · PostgreSQL' },
 		{ label: 'Public products', value: 'Etamyd · CornerTill · PDF Anvil · SetupForge · QR Anvil' },
 		{ label: 'Other work', value: 'Internal systems in private repositories, not shown here' },
-		{ label: 'Award', value: 'Gold Medal, RIPC 2023 (174 projects)' },
 		{ label: 'Education', value: 'B.Sc. CIS, GPA 4.12 / 5' }
 	]
 } as const;
