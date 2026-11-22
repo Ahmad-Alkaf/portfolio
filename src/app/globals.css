@@ -1046,9 +1046,15 @@ a.shot-url:hover {
 	display: block;
 }
 
-/* A link to a site in a new tab, in running text: the arrow stays on the line of the last word. */
+/*
+ * A link to a site in a new tab, in running text: the arrow stays on the line of the last word.
+ * The link text is a Latin name or a domain, so the link is left-to-right also on an Arabic page.
+ * Thus the arrow is after the name (on its right), as on the English page.
+ */
 .ext-link {
 	white-space: nowrap;
+	direction: ltr;
+	unicode-bidi: isolate;
 }
 
 .ext-link svg {
