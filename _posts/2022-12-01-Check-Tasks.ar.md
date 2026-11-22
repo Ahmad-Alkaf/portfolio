@@ -7,7 +7,7 @@ image:
 
 Check Task تطبيق **Android** لمتابعة مهامك وأهدافك. تكتب المهام في تصنيفات ("Files")، والتطبيق يذكّرك بالإشعارات فلا يفوتك شيء — وبياناتك تتزامن مع السحابة فتجدها على كل أجهزتك.
 
-> التطبيق مفتوح المصدر على [GitHub](https://github.com/Ahgaff-level4/Check-Task)، ومعه [إصدار APK](https://github.com/Ahgaff-level4/Check-Task/releases) تقدر تثبّته.
+> التطبيق مفتوح المصدر على [GitHub](https://github.com/Ahgaff-level4/Check-Task)، ومعه [إصدار APK](https://github.com/Ahgaff-level4/Check-Task/releases) يمكنك تثبيته.
 {: .prompt-tip}
 
 ## الميزات
