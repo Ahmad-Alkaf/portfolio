@@ -22,7 +22,7 @@ GPA: **4.12 / 5**. Excellence Certificate for the second-highest GPA among my pe
 
 ## Certifications & Memberships
 
-- **Saudi Engineers Association**: registered member, Allied Engineering Specialist.
+- **Saudi Council of Engineers**: registered member, Specialist category, Information Systems.
 - **Research and Innovation Poster Competition (RIPC), 2023**: a poster competition with 174 projects from different countries. The poster of the [ACTS](/posts/ACTS) project got a gold medal.
 - **AI ERA NEON Bootcamp, Artificial Intelligence Path** (Neon with IBM SkillsBuild): participant, 2026.
 
