@@ -89,12 +89,13 @@ export const ar: Dictionary = {
 		using: (shown, total, stack) => `المشاريع التي تستخدم ${stack}: ${shown} من ${total}.`
 	},
 	project: {
+		// The status labels stay in English on the Arabic pages (the same words as in en.ts).
 		status: {
-			live: 'شغّال',
-			'live demo': 'ديمو شغّال',
-			'public repo': 'مستودع عام',
-			'open source': 'مفتوح المصدر',
-			'not deployed': 'غير منشور'
+			live: 'Live',
+			'live demo': 'Live demo',
+			'public repo': 'Public repo',
+			'open source': 'Open source',
+			'not deployed': 'Not deployed'
 		},
 		stack: 'التقنيات',
 		live: 'زيارة الموقع',

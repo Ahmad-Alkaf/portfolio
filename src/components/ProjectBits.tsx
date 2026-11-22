@@ -15,11 +15,12 @@ export function toProjectSummary(post: Post): ProjectSummary {
 	return { lang, slug, url, name, date, summary, kind, status, links, screenshot, image, tagItems };
 }
 
+/** The status label is English in each language ("Live"), so it is marked as English and left-to-right. */
 export function StatusBadge({ status, lang }: { status?: string; lang: Lang }) {
 	if (!status) return null;
 	return (
-		<span className="status" data-status={status}>
-			{getDict(lang).project.status[status] ?? status}
+		<span className="status" data-status={status} lang="en" dir="ltr">
+			{plainText(getDict(lang).project.status[status] ?? status)}
 		</span>
 	);
 }

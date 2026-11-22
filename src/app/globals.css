@@ -1981,12 +1981,21 @@ html:lang(ar) :is(h1, h2, h3, h4, .brand, .hero-lead, .post-nav-title, .resume-p
 	letter-spacing: 0;
 }
 
-html:lang(ar) :is(.eyebrow, .glance-list dt, .case dt, .case-title, .skill-group-title, .prose th, .resume-role, .resume-project-head .status) {
+html:lang(ar) :is(.eyebrow, .glance-list dt, .case dt, .case-title, .skill-group-title, .prose th, .resume-role) {
 	font-family: var(--font-sans);
 	font-size: 0.875rem;
 	font-weight: 600;
 	letter-spacing: 0;
 	text-transform: none;
+}
+
+/* The status label is English on the Arabic pages ("Live"), so it keeps the Latin label style. */
+html:lang(ar) .eyebrow .status {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
 }
 
 /* The label of the language switch on an English page ("العربية"). */
@@ -2132,7 +2141,7 @@ html:lang(ar) :is(.eyebrow, .glance-list dt, .case dt, .case-title, .skill-group
 	html:lang(ar) body {
 		line-height: 1.6;
 	}
-	html:lang(ar) :is(.skill-group-title, .resume-role, .resume-project-head .status) {
+	html:lang(ar) :is(.skill-group-title, .resume-role) {
 		font-size: 9.5pt;
 	}
 }
